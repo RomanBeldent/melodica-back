@@ -25,9 +25,9 @@
 | Agenda      | User           | d'accéder à mon agenda                                      | voir mes évènements à venir                                                           | Accessibilité | 2      | 1      |
 
 
-| Thème     | En tant que... | j'ai besoin de ....                                            | afin de ....                                                                                | Domaine                   | Points | Sprint |
-| --------- | -------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------- | ------ | ------ |
-| Profil    | Artiste        | de pouvoir lier mes comptes pro / réseaux sociaux à mon profil | pouvoir directement accéder à mes clips / morceau de musique depuis ma page de présentation | Interface / Communication | 6      | 1      |
+| Thème  | En tant que... | j'ai besoin de ....                                            | afin de ....                                                                                | Domaine                   | Points | Sprint |
+| ------ | -------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------- | ------ | ------ |
+| Profil | Artiste        | de pouvoir lier mes comptes pro / réseaux sociaux à mon profil | pouvoir directement accéder à mes clips / morceau de musique depuis ma page de présentation | Interface / Communication | 6      | 1      |
 
 | Thème  | En tant que... | j'ai besoin de ....                                            | afin de ....                                                      | Domaine                   | Points | Sprint |
 | ------ | -------------- | -------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------------- | ------ | ------ |
