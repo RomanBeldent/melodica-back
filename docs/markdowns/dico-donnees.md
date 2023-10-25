@@ -54,8 +54,8 @@
 | adress      | varchar   | 50           | NOT NULL                            | artist adress so it can match with area of action  |
 | zipcode     | int       | 10           | NOT NULL                            | artist zipcode so it can match with area of action |
 | city        | varchar   | 50           | NOT NULL                            | artist city so it can match with area of action    |
-| date_start  | datetime  |              | NOT NULL                            | event's starting date                              |
-| date_end    | datetime  |              | NULL                                | event's ending date                                |
+| date_start  | date  |              | NOT NULL                            | event's starting date                              |
+| date_end    | date  |              | NULL                                | event's ending date                                |
 | hour_start  | int       | 10           | NOT NULL                            | event's time date start                            |
 | hour_end    | int       | 10           | NULL                                | event's time date end                              |
 | picture     | varchar   | 255          | NULL                                | event's picture                                    |
@@ -69,13 +69,6 @@
 | county_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | event ID      |
 | name        | varchar   | 50           | NOT NULL                     | county name   |
 | number      | int       | 10           | NOT NULL                     | county number |
-
-# Role
-
-| Table_name | Data type | Field Length | Constraint                   | Description |
-| ---------- | --------- | ------------ | ---------------------------- | ----------- |
-| role_code  | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | role ID     |
-| name       | varchar   | 50           | NOT NULL                     | role name   |
 
 # Genre
 

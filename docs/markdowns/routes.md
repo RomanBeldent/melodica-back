@@ -164,18 +164,6 @@
 | /back/genre/create      | POST      | Back\Genre | create |            | genre create : manage form  |
 | /back/genre/{id}/delete | DELETE    | Back\Genre | delete | id = \d+   | genre delete                |
 
-### Role
-
-| url                    | Verb HTTP | Controller | Method | constraint | comment                    |
-| ---------------------- | --------- | ---------- | ------ | ---------- | -------------------------- |
-| /back/role/            | GET       | Back\Role  | list   |            | role list                  |
-| /back/role/{id}        | GET       | Back\Role  | read   | id = \d+   | role read                  |
-| /back/role/{id}/edit   | GET       | Back\Role  | edit   | id = \d+   | role edit : display form   |
-| /back/role/{id}/edit   | PUT       | Back\Role  | edit   | id = \d+   | role edit : manage form    |
-| /back/role/create      | GET       | Back\Role  | create |            | role create : display form |
-| /back/role/create      | POST      | Back\Role  | create |            | role create : manage form  |
-| /back/role/{id}/delete | DELETE    | Back\Role  | delete | id = \d+   | role delete                |
-
 ### Tag
 
 | url                   | Verb HTTP | Controller | Method | constraint | comment                   |
