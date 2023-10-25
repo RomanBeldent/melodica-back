@@ -80,16 +80,6 @@
 | /api/genre/{id} | PUT       | Api\Genre  | edit   | id = \d+   | update a genre      |
 | /api/genre/{id} | DELETE    | Api\Genre  | delete | id = \d+   | delete a genre      |
 
-### Role
-
-| url            | Verb HTTP | Controller | Method | constraint | comment            |
-| -------------- | --------- | ---------- | ------ | ---------- | ------------------ |
-| /api/role/     | GET       | Api\Role   | list   |            | role list          |
-| /api/role/{id} | GET       | Api\Role   | show   | id = \d+   | show specific role |
-| /api/role/     | POST      | Api\Role   | create |            | create a new role  |
-| /api/role/{id} | PUT       | Api\Role   | edit   | id = \d+   | update a role      |
-| /api/role/{id} | DELETE    | Api\Role   | delete | id = \d+   | delete a role      |
-
 ### Tag
 
 | url           | Verb HTTP | Controller | Method | constraint | comment           |
