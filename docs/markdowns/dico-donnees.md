@@ -45,7 +45,7 @@
 | ----------- | --------- | ------------ | ----------------------------------- | ----------------------- |
 | event_code  | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT        | event ID                |
 | title       | varchar   | 50           | NOT NULL                            | event's name            |
-| description | text      | 255          | NULL                            | event's description     |
+| description | text      | 255          | NULL                                | event's description     |
 | date_start  | date      |              | NOT NULL                            | event's starting date   |
 | date_end    | date      |              | NULL                                | event's ending date     |
 | hour_start  | datetime  |              | NOT NULL                            | event's time date start |
@@ -56,12 +56,13 @@
 
 # Address
 
-| Table_name | Data type | Field Length | Constraint | Description                                                         |
-| ---------- | --------- | ------------ | ---------- | ------------------------------------------------------------------- |
-| address    | varchar   | 50           | NOT NULL   | event address so it can match with area of action                   |
-| zipcode    | int       | 10           | NOT NULL   | event zipcode so it can match with area of action                   |
-| county     | int       | 10           | NOT NULL   | event zipcode address 2 first numbers to match with interactice map |
-| city       | varchar   | 50           | NOT NULL   | event city so it can match with area of action                      |
+| Table_name | Data type | Field Length | Constraint | Description                                       |
+| ---------- | --------- | ------------ | ---------- | ------------------------------------------------- |
+| street     | varchar   | 50           | NOT NULL   | event street so it can match with area of action  |
+| zipcode    | int       | 10           | NOT NULL   | event zipcode so it can match with area of action |
+| city       | varchar   | 50           | NOT NULL   | event city so it can match with area of action    |
+| department | int       | 10           | NOT NULL   | event department 2 (first numbers of zipcode)      |
+
 
 # Genre
 
@@ -72,10 +73,10 @@
 
 # Type
 
-| Table_name | Data type | Field Length | Constraint                   | Description |
-| ---------- | --------- | ------------ | ---------------------------- | ----------- |
-| genre_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | genre ID    |
-| name       | varchar   | 50           | NOT NULL                     | type of the organizer (bar, festival...)  |
+| Table_name | Data type | Field Length | Constraint                   | Description                              |
+| ---------- | --------- | ------------ | ---------------------------- | ---------------------------------------- |
+| genre_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | genre ID                                 |
+| name       | varchar   | 50           | NOT NULL                     | type of the organizer (bar, festival...) |
 
 # Tag
 
