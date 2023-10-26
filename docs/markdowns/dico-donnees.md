@@ -61,7 +61,7 @@
 | street     | varchar   | 50           | NOT NULL   | event street so it can match with area of action  |
 | zipcode    | int       | 10           | NOT NULL   | event zipcode so it can match with area of action |
 | city       | varchar   | 50           | NOT NULL   | event city so it can match with area of action    |
-| department | int       | 10           | NOT NULL   | event department 2 (first numbers of zipcode)      |
+| department | int       | 10           | NOT NULL   | event department 2 (first numbers of zipcode)     |
 
 
 # Genre
