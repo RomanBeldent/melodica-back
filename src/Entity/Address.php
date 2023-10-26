@@ -37,6 +37,11 @@ class Address
      */
     private $department;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Organizer::class, mappedBy="address", cascade={"persist", "remove"})
+     */
+    private $organizer;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,23 @@ class Address
     public function setDepartment(int $department): self
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?Organizer
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(Organizer $organizer): self
+    {
+        // set the owning side of the relation if necessary
+        if ($organizer->getAddress() !== $this) {
+            $organizer->setAddress($this);
+        }
+
+        $this->organizer = $organizer;
 
         return $this;
     }

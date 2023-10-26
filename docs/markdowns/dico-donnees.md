@@ -81,7 +81,6 @@
 # Tag
 
 
-
 | Table_name | Data type | Field Length | Constraint                   | Description |
 | ---------- | --------- | ------------ | ---------------------------- | ----------- |
 | tag_code   | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | tag ID      |

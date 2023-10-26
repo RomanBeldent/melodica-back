@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,22 @@ class User
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Organizer::class, inversedBy="users")
+     */
+    private $organizer;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Band::class, inversedBy="users")
+     */
+    private $band;
+
+    public function __construct()
+    {
+        $this->organizer = new ArrayCollection();
+        $this->band = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +189,54 @@ class User
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Organizer>
+     */
+    public function getOrganizer(): Collection
+    {
+        return $this->organizer;
+    }
+
+    public function addOrganizer(Organizer $organizer): self
+    {
+        if (!$this->organizer->contains($organizer)) {
+            $this->organizer[] = $organizer;
+        }
+
+        return $this;
+    }
+
+    public function removeOrganizer(Organizer $organizer): self
+    {
+        $this->organizer->removeElement($organizer);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Band>
+     */
+    public function getBand(): Collection
+    {
+        return $this->band;
+    }
+
+    public function addBand(Band $band): self
+    {
+        if (!$this->band->contains($band)) {
+            $this->band[] = $band;
+        }
+
+        return $this;
+    }
+
+    public function removeBand(Band $band): self
+    {
+        $this->band->removeElement($band);
 
         return $this;
     }
