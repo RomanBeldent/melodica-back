@@ -45,7 +45,7 @@
 | ----------- | --------- | ------------ | ----------------------------------- | ----------------------- |
 | event_code  | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT        | event ID                |
 | title       | varchar   | 50           | NOT NULL                            | event's name            |
-| description | text      | 255          | NOT NULL                            | event's description     |
+| description | text      | 255          | NULL                            | event's description     |
 | date_start  | date      |              | NOT NULL                            | event's starting date   |
 | date_end    | date      |              | NULL                                | event's ending date     |
 | hour_start  | datetime  |              | NOT NULL                            | event's time date start |
