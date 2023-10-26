@@ -64,10 +64,16 @@ class Band
      */
     private $events;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, mappedBy="band")
+     */
+    private $tags;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -208,6 +214,33 @@ class Band
     {
         if ($this->events->removeElement($event)) {
             $event->removeBand($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+            $tag->addBand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->removeElement($tag)) {
+            $tag->removeBand($this);
         }
 
         return $this;
