@@ -59,9 +59,15 @@ class Band
      */
     private $users;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="band")
+     */
+    private $events;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +181,33 @@ class Band
     {
         if ($this->users->removeElement($user)) {
             $user->removeBand($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->addBand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            $event->removeBand($this);
         }
 
         return $this;

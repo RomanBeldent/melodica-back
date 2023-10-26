@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -61,6 +63,28 @@ class Event
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="events")
+     */
+    private $tag;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Band::class, inversedBy="events")
+     */
+    private $band;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="events")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $address;
+
+    public function __construct()
+    {
+        $this->tag = new ArrayCollection();
+        $this->band = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,6 +195,66 @@ class Event
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTag(): Collection
+    {
+        return $this->tag;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tag->contains($tag)) {
+            $this->tag[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        $this->tag->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Band>
+     */
+    public function getBand(): Collection
+    {
+        return $this->band;
+    }
+
+    public function addBand(Band $band): self
+    {
+        if (!$this->band->contains($band)) {
+            $this->band[] = $band;
+        }
+
+        return $this;
+    }
+
+    public function removeBand(Band $band): self
+    {
+        $this->band->removeElement($band);
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
