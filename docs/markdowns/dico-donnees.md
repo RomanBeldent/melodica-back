@@ -19,7 +19,7 @@
 | Table_name     | Data type | Field Length | Constraint                          | Description                                            |
 | -------------- | --------- | ------------ | ----------------------------------- | ------------------------------------------------------ |
 | organizer_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT        | organizer ID                                           |
-| organizer_name | varchar   | 50           | NOT NULL                            | organiser's name                                       |
+| name           | varchar   | 50           | NOT NULL                            | organiser's name                                       |
 | description    | text      |              | NOT NULL                            | whatever the organizer wants to write about themselves |
 | website        | varchar   | 255          | NULL                                | organizer's website                                    |
 | picture        | varchar   | 255          | NULL                                | organizer's picture                                    |
@@ -70,7 +70,16 @@
 | genre_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | genre ID    |
 | name       | varchar   | 50           | NOT NULL                     | genre name  |
 
+# Type
+
+| Table_name | Data type | Field Length | Constraint                   | Description |
+| ---------- | --------- | ------------ | ---------------------------- | ----------- |
+| genre_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | genre ID    |
+| name       | varchar   | 50           | NOT NULL                     | type of the organizer (bar, festival...)  |
+
 # Tag
+
+
 
 | Table_name | Data type | Field Length | Constraint                   | Description |
 | ---------- | --------- | ------------ | ---------------------------- | ----------- |
