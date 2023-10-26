@@ -49,6 +49,11 @@ class Address
      */
     private $events;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Band::class, mappedBy="address", cascade={"persist", "remove"})
+     */
+    private $band;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -150,6 +155,23 @@ class Address
                 $event->setAddress(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBand(): ?Band
+    {
+        return $this->band;
+    }
+
+    public function setBand(Band $band): self
+    {
+        // set the owning side of the relation if necessary
+        if ($band->getAddress() !== $this) {
+            $band->setAddress($this);
+        }
+
+        $this->band = $band;
 
         return $this;
     }
