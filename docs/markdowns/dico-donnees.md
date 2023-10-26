@@ -1,18 +1,18 @@
 # User
 
-| Table_name   | Data type | Field Length | Constraint                          | Description             |
-| ------------ | --------- | ------------ | ----------------------------------- | ----------------------- |
-| user_code    | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT        | user ID                 |
-| firstname    | varchar   | 50           | NOT NULL                            | user's firstname        |
-| lastname     | varchar   | 50           | NOT NULL                            | user's lastname         |
-| role         | varchar   | 50           | NOT NULL                            | user role (admin..)     |
-| birthday     | date      |              | NOT NULL                            | user's birthday         |
-| email        | text      | 255          | NOT NULL                            | user's email            |
-| password     | datetime  |              | NOT NULL                            | user's account password |
-| phone_number | datetime  |              | NULL                                | user's phone number     |
-| picture      | varchar   | 255          | NULL                                | user's picture          |
-| created_at   | timestamp |              | NOT NULL, DEFAULT CURRENT_TIMESTAMP | creation date           |
-| updated_at   | timestamp |              | NULL, DEFAULT CURRENT_TIMESTAMP     | last update             |
+| Table_name   | Data type           | Field Length | Constraint                          | Description             |
+| ------------ | ------------------- | ------------ | ----------------------------------- | ----------------------- |
+| user_code    | int                 | 10           | PRIMAREY KEY, AUTO_INCREMENT        | user ID                 |
+| firstname    | varchar             | 50           | NOT NULL                            | user's firstname        |
+| lastname     | varchar             | 50           | NOT NULL                            | user's lastname         |
+| role         | varchar             | 50           | NOT NULL                            | user role (admin..)     |
+| birthday     | date                |              | NOT NULL                            | user's birthday         |
+| email        | string              | 100          | NOT NULL                            | user's email            |
+| password     | string              | 50           | NOT NULL                            | user's account password |
+| phone_number | int                 | 10           | NOT NULL                            | user's phone number     |
+| picture      | varchar             | 255          | NULL                                | user's picture          |
+| created_at   | timestamp_immutable |              | NOT NULL, DEFAULT CURRENT_TIMESTAMP | creation date           |
+| updated_at   | timestamp_immutable |              | NULL, DEFAULT CURRENT_TIMESTAMP     | last update             |
 
 # Organizer
 
