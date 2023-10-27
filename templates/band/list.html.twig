@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des groupes
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des groupes</h1>
+
+	<table class="table table-dark table-striped">
+		<a href="{{ path('back_band_create')}}" class="btn btn-secondary btn-lg active " role="button" aria-pressed="true">Ajouter un nouveau groupe</a>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Area</th>
+				<th>Sample</th>
+				<th>Picture</th>
+				<th>Created_at</th>
+				<th>Updated_at</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for band in bands %}
+				<tr>
+					<td>{{ band.id }}</td>
+					<td>{{ band.name }}</td>
+					<td>{{ band.description }}</td>
+					<td>{{ band.area }}</td>
+					<td>{{ band.sample }}</td>
+					<td>{{ band.picture }}</td>
+					<td>{{ band.createdAt ? band.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ band.updatedAt ? band.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('back_band_show', {'id': band.id}) }}" class="mr-3 btn btn-outline-info">Read
+							<a href="{{ path('back_band_edit', {'id': band.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
+								<a href="{{ path('back_band_delete', {'id': band.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="9">no records found</td>
+						</tr>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</tbody>
+	</table>
+{% endblock %}
