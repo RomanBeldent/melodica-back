@@ -71,10 +71,16 @@ class Organizer
      */
     private $favorites;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
+     */
+    private $events;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,6 +235,36 @@ class Organizer
             // set the owning side to null (unless already changed)
             if ($favorite->getOrganizer() === $this) {
                 $favorite->setOrganizer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvents(): Collection
+    {
+        return $this->events;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->events->contains($event)) {
+            $this->events[] = $event;
+            $event->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->events->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getOrganizer() === $this) {
+                $event->setOrganizer(null);
             }
         }
 
