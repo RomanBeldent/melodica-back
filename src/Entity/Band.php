@@ -300,33 +300,33 @@ class Band
         return $this;
     }
 
-    /**
-     * @return Collection<int, Favorite>
-     */
-    public function getFavorites(): Collection
-    {
-        return $this->favorites;
-    }
+    // /**
+    //  * @return Collection<int, Favorite>
+    //  */
+    // public function getFavorites(): Collection
+    // {
+    //     return $this->favorites;
+    // }
 
-    public function addFavorite(Favorite $favorite): self
-    {
-        if (!$this->favorites->contains($favorite)) {
-            $this->favorites[] = $favorite;
-            $favorite->setBand($this);
-        }
+    // public function addFavorite(Favorite $favorite): self
+    // {
+    //     if (!$this->favorites->contains($favorite)) {
+    //         $this->favorites[] = $favorite;
+    //         $favorite->setBand($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeFavorite(Favorite $favorite): self
-    {
-        if ($this->favorites->removeElement($favorite)) {
-            // set the owning side to null (unless already changed)
-            if ($favorite->getBand() === $this) {
-                $favorite->setBand(null);
-            }
-        }
+    // public function removeFavorite(Favorite $favorite): self
+    // {
+    //     if ($this->favorites->removeElement($favorite)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($favorite->getBand() === $this) {
+    //             $favorite->setBand(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

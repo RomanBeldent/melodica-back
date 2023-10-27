@@ -211,35 +211,35 @@ class Organizer
         return $this;
     }
 
-    /**
-     * @return Collection<int, Favorite>
-     */
-    public function getFavorites(): Collection
-    {
-        return $this->favorites;
-    }
+    // /**
+    //  * @return Collection<int, Favorite>
+    //  */
+    // public function getFavorites(): Collection
+    // {
+    //     return $this->favorites;
+    // }
 
-    public function addFavorite(Favorite $favorite): self
-    {
-        if (!$this->favorites->contains($favorite)) {
-            $this->favorites[] = $favorite;
-            $favorite->setOrganizer($this);
-        }
+    // public function addFavorite(Favorite $favorite): self
+    // {
+    //     if (!$this->favorites->contains($favorite)) {
+    //         $this->favorites[] = $favorite;
+    //         $favorite->setOrganizer($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeFavorite(Favorite $favorite): self
-    {
-        if ($this->favorites->removeElement($favorite)) {
-            // set the owning side to null (unless already changed)
-            if ($favorite->getOrganizer() === $this) {
-                $favorite->setOrganizer(null);
-            }
-        }
+    // public function removeFavorite(Favorite $favorite): self
+    // {
+    //     if ($this->favorites->removeElement($favorite)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($favorite->getOrganizer() === $this) {
+    //             $favorite->setOrganizer(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * @return Collection<int, Event>
