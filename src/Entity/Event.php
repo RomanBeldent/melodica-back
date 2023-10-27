@@ -81,10 +81,9 @@ class Event
     private $address;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Organizer::class, inversedBy="event")
+     * @ORM\ManyToOne(targetEntity=Organizer::class, inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
-
     private $organizer;
 
     public function __construct()
