@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\FavoriteRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,24 +19,19 @@ class Favorite
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="favorites")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Band::class, mappedBy="favorite")
+     * @ORM\ManyToOne(targetEntity=Band::class, inversedBy="favorites")
      */
     private $band;
 
     /**
-     * @ORM\OneToMany(targetEntity=Organizer::class, mappedBy="favorite")
+     * @ORM\ManyToOne(targetEntity=Organizer::class, inversedBy="favorites")
      */
     private $organizer;
-
-    public function __construct()
-    {
-        $this->band = new ArrayCollection();
-        $this->organizer = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -57,62 +50,26 @@ class Favorite
         return $this;
     }
 
-    /**
-     * @return Collection<int, Band>
-     */
-    public function getBand(): Collection
+    public function getBand(): ?Band
     {
         return $this->band;
     }
 
-    public function addBand(Band $band): self
+    public function setBand(?Band $band): self
     {
-        if (!$this->band->contains($band)) {
-            $this->band[] = $band;
-            $band->setFavorite($this);
-        }
+        $this->band = $band;
 
         return $this;
     }
 
-    public function removeBand(Band $band): self
-    {
-        if ($this->band->removeElement($band)) {
-            // set the owning side to null (unless already changed)
-            if ($band->getFavorite() === $this) {
-                $band->setFavorite(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Organizer>
-     */
-    public function getOrganizer(): Collection
+    public function getOrganizer(): ?Organizer
     {
         return $this->organizer;
     }
 
-    public function addOrganizer(Organizer $organizer): self
+    public function setOrganizer(?Organizer $organizer): self
     {
-        if (!$this->organizer->contains($organizer)) {
-            $this->organizer[] = $organizer;
-            $organizer->setFavorite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrganizer(Organizer $organizer): self
-    {
-        if ($this->organizer->removeElement($organizer)) {
-            // set the owning side to null (unless already changed)
-            if ($organizer->getFavorite() === $this) {
-                $organizer->setFavorite(null);
-            }
-        }
+        $this->organizer = $organizer;
 
         return $this;
     }

@@ -67,13 +67,14 @@ class Organizer
     private $address;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Favorite::class, inversedBy="organizer")
+     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="organizer")
      */
-    private $favorite;
+    private $favorites;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -204,14 +205,32 @@ class Organizer
         return $this;
     }
 
-    public function getFavorite(): ?Favorite
+    /**
+     * @return Collection<int, Favorite>
+     */
+    public function getFavorites(): Collection
     {
-        return $this->favorite;
+        return $this->favorites;
     }
 
-    public function setFavorite(?Favorite $favorite): self
+    public function addFavorite(Favorite $favorite): self
     {
-        $this->favorite = $favorite;
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): self
+    {
+        if ($this->favorites->removeElement($favorite)) {
+            // set the owning side to null (unless already changed)
+            if ($favorite->getOrganizer() === $this) {
+                $favorite->setOrganizer(null);
+            }
+        }
 
         return $this;
     }

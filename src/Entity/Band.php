@@ -81,9 +81,9 @@ class Band
     private $address;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Favorite::class, inversedBy="band")
+     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="band")
      */
-    private $favorite;
+    private $favorites;
 
     public function __construct()
     {
@@ -91,6 +91,7 @@ class Band
         $this->events = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->genre = new ArrayCollection();
+        $this->favorites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -299,14 +300,32 @@ class Band
         return $this;
     }
 
-    public function getFavorite(): ?Favorite
+    /**
+     * @return Collection<int, Favorite>
+     */
+    public function getFavorites(): Collection
     {
-        return $this->favorite;
+        return $this->favorites;
     }
 
-    public function setFavorite(?Favorite $favorite): self
+    public function addFavorite(Favorite $favorite): self
     {
-        $this->favorite = $favorite;
+        if (!$this->favorites->contains($favorite)) {
+            $this->favorites[] = $favorite;
+            $favorite->setBand($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Favorite $favorite): self
+    {
+        if ($this->favorites->removeElement($favorite)) {
+            // set the owning side to null (unless already changed)
+            if ($favorite->getBand() === $this) {
+                $favorite->setBand(null);
+            }
+        }
 
         return $this;
     }

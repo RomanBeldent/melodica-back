@@ -75,7 +75,7 @@ class User
     private $band;
 
     /**
-     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user", orphanRemoval=true)
      */
     private $favorites;
 
