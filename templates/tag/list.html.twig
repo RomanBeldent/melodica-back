@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des tags
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des tags</h1>
+
+	<table class="table table-dark table-striped">
+		<a href="{{ path('back_tag_create')}}" class="btn btn-secondary btn-lg active " role="button" aria-pressed="true">Ajouter un nouveau tag</a>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for tag in tags %}
+				<tr>
+					<td>{{ tag.id }}</td>
+					<td>{{ tag.name }}</td>
+					<td>
+						<a href="{{ path('back_user_show', {'id': user.id}) }}" class="mr-3 btn btn-outline-info">Read
+							<a href="{{ path('back_user_edit', {'id': user.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
+								<a href="{{ path('back_user_delete', {'id': user.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">no records found</td>
+						</tr>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</tbody>
+	</table>
+{% endblock %}
