@@ -95,73 +95,73 @@
 
 ### User
 
-| url                    | Verb HTTP | Controller | Method | constraint | comment                    |
-| ---------------------- | --------- | ---------- | ------ | ---------- | -------------------------- |
-| /back/user/            | GET       | Back\User  | list   |            | user list                  |
-| /back/user/{id}        | GET       | Back\User  | read   | id = \d+   | user read                  |
-| /back/user/{id}/edit   | GET       | Back\User  | edit   | id = \d+   | user edit : display form   |
-| /back/user/{id}/edit   | PUT       | Back\User  | edit   | id = \d+   | user edit : manage form    |
-| /back/user/create      | GET       | Back\User  | create |            | user create : display form |
-| /back/user/create      | POST      | Back\User  | create |            | user create : manage form  |
-| /back/user/{id}/delete | DELETE    | Back\User  | delete | id = \d+   | user delete                |
+| url                  | Verb HTTP | Controller | Method | constraint | comment                    |
+| -------------------- | --------- | ---------- | ------ | ---------- | -------------------------- |
+| /back/user/          | GET       | Back\User  | list   |            | user list                  |
+| /back/user/{id}      | GET       | Back\User  | read   | id = \d+   | user read                  |
+| /back/user/{id}/edit | GET       | Back\User  | edit   | id = \d+   | user edit : display form   |
+| /back/user/{id}/edit | PUT       | Back\User  | edit   | id = \d+   | user edit : manage form    |
+| /back/user/create    | GET       | Back\User  | create |            | user create : display form |
+| /back/user/create    | POST      | Back\User  | create |            | user create : manage form  |
+| /back/user/{id}      | DELETE    | Back\User  | delete | id = \d+   | user delete                |
 
 ### Band
 
-| url                    | Verb HTTP | Controller | Method | constraint | comment                                                |
-| ---------------------- | --------- | ---------- | ------ | ---------- | ------------------------------------------------------ |
-| /back/                 | GET       | Back\Main  | home   |            | home where you can choose between different categories |
-| /back/band/            | GET       | Back\Band  | list   |            | band list                                              |
-| /back/band/{id}        | GET       | Back\Band  | read   | id = \d+   | band read                                              |
-| /back/band/{id}/edit   | GET       | Back\Band  | edit   | id = \d+   | band edit : display form                               |
-| /back/band/{id}/edit   | PUT       | Back\Band  | edit   | id = \d+   | band edit : manage form                                |
-| /back/band/create      | GET       | Back\Band  | create |            | band create : display form                             |
-| /back/band/create      | POST      | Back\Band  | create |            | band create : manage form                              |
-| /back/band/{id}/delete | DELETE    | Back\Band  | delete | id = \d+   | band delete                                            |
+| url                  | Verb HTTP | Controller | Method | constraint | comment                                                |
+| -------------------- | --------- | ---------- | ------ | ---------- | ------------------------------------------------------ |
+| /back/               | GET       | Back\Main  | home   |            | home where you can choose between different categories |
+| /back/band/          | GET       | Back\Band  | list   |            | band list                                              |
+| /back/band/{id}      | GET       | Back\Band  | read   | id = \d+   | band read                                              |
+| /back/band/{id}/edit | GET       | Back\Band  | edit   | id = \d+   | band edit : display form                               |
+| /back/band/{id}/edit | PUT       | Back\Band  | edit   | id = \d+   | band edit : manage form                                |
+| /back/band/create    | GET       | Back\Band  | create |            | band create : display form                             |
+| /back/band/create    | POST      | Back\Band  | create |            | band create : manage form                              |
+| /back/band/{id}      | DELETE    | Back\Band  | delete | id = \d+   | band delete                                            |
 
 ### Organizer
 
-| url                         | Verb HTTP | Controller     | Method | constraint | comment                         |
-| --------------------------- | --------- | -------------- | ------ | ---------- | ------------------------------- |
-| /back/organizer/            | GET       | Back\Organizer | list   |            | organizer list                  |
-| /back/organizer/{id}        | GET       | Back\Organizer | read   | id = \d+   | organizer read                  |
-| /back/organizer/{id}/edit   | GET       | Back\Organizer | edit   | id = \d+   | organizer edit : display form   |
-| /back/organizer/{id}/edit   | PUT       | Back\Organizer | edit   | id = \d+   | organizer edit : manage form    |
-| /back/organizer/create      | GET       | Back\Organizer | create |            | organizer create : display form |
-| /back/organizer/create      | POST      | Back\Organizer | create |            | organizer create : manage form  |
-| /back/organizer/{id}/delete | DELETE    | Back\Organizer | delete | id = \d+   | organizer delete                |
+| url                       | Verb HTTP | Controller     | Method | constraint | comment                         |
+| ------------------------- | --------- | -------------- | ------ | ---------- | ------------------------------- |
+| /back/organizer/          | GET       | Back\Organizer | list   |            | organizer list                  |
+| /back/organizer/{id}      | GET       | Back\Organizer | read   | id = \d+   | organizer read                  |
+| /back/organizer/{id}/edit | GET       | Back\Organizer | edit   | id = \d+   | organizer edit : display form   |
+| /back/organizer/{id}/edit | PUT       | Back\Organizer | edit   | id = \d+   | organizer edit : manage form    |
+| /back/organizer/create    | GET       | Back\Organizer | create |            | organizer create : display form |
+| /back/organizer/create    | POST      | Back\Organizer | create |            | organizer create : manage form  |
+| /back/organizer/{id}      | DELETE    | Back\Organizer | delete | id = \d+   | organizer delete                |
 
 ### Event
 
-| url                     | Verb HTTP | Controller | Method | constraint | comment                     |
-| ----------------------- | --------- | ---------- | ------ | ---------- | --------------------------- |
-| /back/event/            | GET       | Back\Event | list   |            | event list                  |
-| /back/event/{id}        | GET       | Back\Event | read   | id = \d+   | event read                  |
-| /back/event/{id}/edit   | GET       | Back\Event | edit   | id = \d+   | event edit : display form   |
-| /back/event/{id}/edit   | PUT       | Back\Event | edit   | id = \d+   | event edit : manage form    |
-| /back/event/create      | GET       | Back\Event | create |            | event create : display form |
-| /back/event/create      | POST      | Back\Event | create |            | event create : manage form  |
-| /back/event/{id}/delete | DELETE    | Back\Event | delete | id = \d+   | event delete                |
+| url                   | Verb HTTP | Controller | Method | constraint | comment                     |
+| --------------------- | --------- | ---------- | ------ | ---------- | --------------------------- |
+| /back/event/          | GET       | Back\Event | list   |            | event list                  |
+| /back/event/{id}      | GET       | Back\Event | read   | id = \d+   | event read                  |
+| /back/event/{id}/edit | GET       | Back\Event | edit   | id = \d+   | event edit : display form   |
+| /back/event/{id}/edit | PUT       | Back\Event | edit   | id = \d+   | event edit : manage form    |
+| /back/event/create    | GET       | Back\Event | create |            | event create : display form |
+| /back/event/create    | POST      | Back\Event | create |            | event create : manage form  |
+| /back/event/{id}      | DELETE    | Back\Event | delete | id = \d+   | event delete                |
 
 ### Genre
 
-| url                     | Verb HTTP | Controller | Method | constraint | comment                     |
-| ----------------------- | --------- | ---------- | ------ | ---------- | --------------------------- |
-| /back/genre/            | GET       | Back\Genre | list   |            | genre list                  |
-| /back/genre/{id}        | GET       | Back\Genre | read   | id = \d+   | genre read                  |
-| /back/genre/{id}/edit   | GET       | Back\Genre | edit   | id = \d+   | genre edit : display form   |
-| /back/genre/{id}/edit   | PUT       | Back\Genre | edit   | id = \d+   | genre edit : manage form    |
-| /back/genre/create      | GET       | Back\Genre | create |            | genre create : display form |
-| /back/genre/create      | POST      | Back\Genre | create |            | genre create : manage form  |
-| /back/genre/{id}/delete | DELETE    | Back\Genre | delete | id = \d+   | genre delete                |
+| url                   | Verb HTTP | Controller | Method | constraint | comment                     |
+| --------------------- | --------- | ---------- | ------ | ---------- | --------------------------- |
+| /back/genre/          | GET       | Back\Genre | list   |            | genre list                  |
+| /back/genre/{id}      | GET       | Back\Genre | read   | id = \d+   | genre read                  |
+| /back/genre/{id}/edit | GET       | Back\Genre | edit   | id = \d+   | genre edit : display form   |
+| /back/genre/{id}/edit | PUT       | Back\Genre | edit   | id = \d+   | genre edit : manage form    |
+| /back/genre/create    | GET       | Back\Genre | create |            | genre create : display form |
+| /back/genre/create    | POST      | Back\Genre | create |            | genre create : manage form  |
+| /back/genre/{id}      | DELETE    | Back\Genre | delete | id = \d+   | genre delete                |
 
 ### Tag
 
-| url                   | Verb HTTP | Controller | Method | constraint | comment                   |
-| --------------------- | --------- | ---------- | ------ | ---------- | ------------------------- |
-| /back/tag/            | GET       | Back\Tag   | list   |            | tag list                  |
-| /back/tag/{id}        | GET       | Back\Tag   | read   | id = \d+   | tag read                  |
-| /back/tag/{id}/edit   | GET       | Back\Tag   | edit   | id = \d+   | tag edit : display form   |
-| /back/tag/{id}/edit   | PUT       | Back\Tag   | edit   | id = \d+   | tag edit : manage form    |
-| /back/tag/create      | GET       | Back\Tag   | create |            | tag create : display form |
-| /back/tag/create      | POST      | Back\Tag   | create |            | tag create : manage form  |
-| /back/tag/{id}/delete | DELETE    | Back\Tag   | delete | id = \d+   | tag delete                |
+| url                 | Verb HTTP | Controller | Method | constraint | comment                   |
+| ------------------- | --------- | ---------- | ------ | ---------- | ------------------------- |
+| /back/tag/          | GET       | Back\Tag   | list   |            | tag list                  |
+| /back/tag/{id}      | GET       | Back\Tag   | read   | id = \d+   | tag read                  |
+| /back/tag/{id}/edit | GET       | Back\Tag   | edit   | id = \d+   | tag edit : display form   |
+| /back/tag/{id}/edit | PUT       | Back\Tag   | edit   | id = \d+   | tag edit : manage form    |
+| /back/tag/create    | GET       | Back\Tag   | create |            | tag create : display form |
+| /back/tag/create    | POST      | Back\Tag   | create |            | tag create : manage form  |
+| /back/tag/{id}      | DELETE    | Back\Tag   | delete | id = \d+   | tag delete                |
