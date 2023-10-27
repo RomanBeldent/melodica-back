@@ -66,9 +66,15 @@ class Organizer
      */
     private $address;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
+     */
+    private $event;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->event = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +201,36 @@ class Organizer
     public function setAddress(Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getEvent(): Collection
+    {
+        return $this->event;
+    }
+
+    public function addEvent(Event $event): self
+    {
+        if (!$this->event->contains($event)) {
+            $this->event[] = $event;
+            $event->setOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvent(Event $event): self
+    {
+        if ($this->event->removeElement($event)) {
+            // set the owning side to null (unless already changed)
+            if ($event->getOrganizer() === $this) {
+                $event->setOrganizer(null);
+            }
+        }
 
         return $this;
     }

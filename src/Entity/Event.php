@@ -80,6 +80,13 @@ class Event
      */
     private $address;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Organizer::class, inversedBy="event")
+     * @ORM\JoinColumn(nullable=false)
+     */
+
+    private $organizer;
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
@@ -255,6 +262,18 @@ class Event
     public function setAddress(?Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getOrganizer(): ?Organizer
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(?Organizer $organizer): self
+    {
+        $this->organizer = $organizer;
 
         return $this;
     }
