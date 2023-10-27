@@ -80,6 +80,11 @@ class Band
      */
     private $address;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Favorite::class, inversedBy="band")
+     */
+    private $favorite;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -290,6 +295,18 @@ class Band
     public function setAddress(Address $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function getFavorite(): ?Favorite
+    {
+        return $this->favorite;
+    }
+
+    public function setFavorite(?Favorite $favorite): self
+    {
+        $this->favorite = $favorite;
 
         return $this;
     }
