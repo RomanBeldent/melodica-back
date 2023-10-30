@@ -63,7 +63,7 @@ class User
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @NotBlank
+     * @Assert\NotBlank
      */
     private $created_at;
 
