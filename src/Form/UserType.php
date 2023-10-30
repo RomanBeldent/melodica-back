@@ -4,14 +4,22 @@ namespace App\Form;
 
 use App\Entity\User;
 use DateTimeImmutable;
+use Doctrine\DBAL\Types\StringType;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Unique;
 
 class UserType extends AbstractType
@@ -27,25 +35,32 @@ class UserType extends AbstractType
                 'label' => 'Nom',
                 'required' => true
             ])
-            ->add('birthday', DateType::class, [
-                'label' => 'Date de naissance ',
+            ->add('birthday', BirthdayType::class, [
+                'label' => 'Date de naissance',
                 'widget' => 'single_text',
-                'input' => 'datetime_immutable',
-                'data_class' => Date::class,
-                'required' => false,
-                'mapped' => false, // ne pas enregistrer la valeur dans l'objet
-                // 'empty_data' => "",
-
             ])
-            ->add('email', EmailType::class, [
-                'constraints'=> [
-                    new Unique()
-                ]
-            ] )
+            ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
-            ->add('phone_number')
+            ->add('phone_number', TelType::class, [
+                'label' => 'Numéro de téléphone',
+                'constraints' => [
+            new Length([
+                'min' => 10,
+                'minMessage' => 'Veuillez rentrer un téléphone valide'
+            ])
+            ]])
+            ->add('role', ChoiceType::class, [
+                'label' => 'Droits de l\'utilisateur',
+                'choices' => [
+                   'User' => 'ROLE_USER',
+                   'Moderator' => 'ROLE_MODERATOR',
+                   'Admin' => 'ROLE_ADMIN',
+                ],
+            ])
             ->add('picture')
-            ->add('created_at')
+            ->add('created_at', DateTimeType::class,[
+                'input' => 'datetime_immutable'
+            ])
             ->add('updated_at')
         ;
     }
@@ -53,7 +68,12 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
+            'attr' => [
+                // 'novalidate' => 'novalidate',
+                // comment me to reactivate the html5 validation!  🚥
+            ],
             'data_class' => User::class,
+
         ]);
     }
 }
