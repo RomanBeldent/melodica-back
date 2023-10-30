@@ -25,29 +25,30 @@
 		</thead>
 		<tbody>
 			{% for user in users %}
-			<tr>
-				<td>{{ user.id }}</td>
-				<td>{{ user.firstname }}</td>
-				<td>{{ user.lastname }}</td>
-				<td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
-				<td>{{ user.email }}</td>
-				<td>{{ user.password }}</td>
-				<td>{{ user.phoneNumber }}</td>
-				<td>{{ user.picture }}</td>
-				<td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-				<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-				<td>
-					<a href="{{ path('back_user_show', {'id': user.id}) }}" class="mr-3 btn btn-outline-info">Read
-						<a href="{{ path('back_user_edit', {'id': user.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
-							<a href="{{ path('back_user_delete', {'id': user.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="11">no records found</td>
-					</tr>
-				{% endfor %}
-			</tr>
+				<tr>
+					<td>{{ user.id }}</td>
+					<td>{{ user.firstname }}</td>
+					<td>{{ user.lastname }}</td>
+					<td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.password }}</td>
+					<td>{{ user.phoneNumber }}</td>
+					<td>{{ user.picture }}</td>
+					<td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('back_user_show', {'id': user.id}) }}" class="mr-3 btn btn-outline-info">Read
+							<a href="{{ path('back_user_edit', {'id': user.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
+								<a href="{{ path('back_user_delete', {'id': user.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="11">no records found</td>
+						</tr>
+					{% endfor %}
+				</tr>
+			</tbody>
 		</tbody>
 	</table>
 {% endblock %}
