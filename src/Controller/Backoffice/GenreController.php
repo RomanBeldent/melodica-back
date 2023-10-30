@@ -57,7 +57,7 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Genre $genre, GenreRepository $genreRepository): Response
     {
@@ -77,7 +77,7 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Genre $genre, GenreRepository $genreRepository): Response
     {

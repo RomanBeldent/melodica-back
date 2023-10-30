@@ -31,7 +31,7 @@ class UserType extends AbstractType
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
-                
+
             ])
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
@@ -51,13 +51,17 @@ class UserType extends AbstractType
                    'Admin' => 'ROLE_ADMIN',
                 ],
             ])
-            ->add('picture')
-            ->add('created_at', DateTimeType::class,[
+            ->add('picture', TextType::class, [
+                'label' => 'Photo de profil'
+            ])
+            ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
-                'disabled'=> true,
+                'disabled' => true,
                 ])
-            ->add('updated_at')
-        ;
+            ->add('updated_at', DateTimeType::class, [
+                'input' => 'datetime_immutable',
+                'disabled' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

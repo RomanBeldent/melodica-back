@@ -57,7 +57,7 @@ class OrganizerController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Organizer $organizer, OrganizerRepository $organizerRepository): Response
     {
@@ -77,7 +77,7 @@ class OrganizerController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Organizer $organizer, OrganizerRepository $organizerRepository): Response
     {
