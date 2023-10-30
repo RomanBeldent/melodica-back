@@ -51,7 +51,7 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
      */
     private $phone_number;
@@ -62,7 +62,7 @@ class User
     private $picture;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
      * @Assert\NotBlank
      */
     private $created_at;
@@ -164,12 +164,12 @@ class User
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumber(): ?string
     {
         return $this->phone_number;
     }
 
-    public function setPhoneNumber(int $phone_number): self
+    public function setPhoneNumber(string $phone_number): self
     {
         $this->phone_number = $phone_number;
 

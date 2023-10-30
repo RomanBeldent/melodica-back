@@ -32,6 +32,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+        // ->setMethod('');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -57,16 +58,18 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
+     *
      */
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->add($user, true);
-
+            // dd($request->request);
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -77,11 +80,11 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
         }
 

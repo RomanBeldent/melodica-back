@@ -3,24 +3,17 @@
 namespace App\Form;
 
 use App\Entity\User;
-use DateTimeImmutable;
-use Doctrine\DBAL\Types\StringType;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\Unique;
 
 class UserType extends AbstractType
 {
@@ -38,10 +31,11 @@ class UserType extends AbstractType
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
+                
             ])
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
-            ->add('phone_number', TelType::class, [
+            ->add('phone_number', TextType::class, [
                 'label' => 'Numéro de téléphone',
                 'constraints' => [
             new Length([
@@ -59,8 +53,9 @@ class UserType extends AbstractType
             ])
             ->add('picture')
             ->add('created_at', DateTimeType::class,[
-                'input' => 'datetime_immutable'
-            ])
+                'input' => 'datetime_immutable',
+                'disabled'=> true,
+                ])
             ->add('updated_at')
         ;
     }
