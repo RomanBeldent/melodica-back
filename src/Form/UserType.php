@@ -68,10 +68,6 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'attr' => [
-                // 'novalidate' => 'novalidate',
-                // comment me to reactivate the html5 validation!  🚥
-            ],
             'data_class' => User::class,
 
         ]);
