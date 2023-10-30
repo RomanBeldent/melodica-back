@@ -6,6 +6,8 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -47,6 +49,7 @@ class User
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @var string The hashed password
      * @Assert\NotBlank
      */
     private $password;
@@ -161,6 +164,18 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
@@ -291,15 +306,5 @@ class User
         return $this;
     }
 
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
 
-    public function setRole(string $role): self
-    {
-        $this->role = $role;
-
-        return $this;
-    }
 }
