@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,9 +34,9 @@ class UserController extends AbstractController
     public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
-        $user->setCreatedAt(new DateTimeImmutable());
-        
         $form = $this->createForm(UserType::class, $user);
+
+        $user->setCreatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,8 +70,14 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $user->setUpdatedAt(new DateTimeImmutable());
         $form = $this->createForm(UserType::class, $user);
+        $user->setUpdatedAt(new DateTimeImmutable());
+
+        // on démappe le champ mdp car on a une gestion spécifique à faire
+        $form->add('password', PasswordType::class, [
+            'mapped' => false,
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

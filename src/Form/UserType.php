@@ -31,8 +31,6 @@ class UserType extends AbstractType
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
-                
-
             ])
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
