@@ -5,10 +5,12 @@ namespace App\Controller\Backoffice;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @Route("back/user", name="back_user_")
@@ -28,16 +30,20 @@ class UserController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, UserRepository $userRepository): Response
+    public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
+        $user->setCreatedAt(new DateTimeImmutable());
+        
         $form = $this->createForm(UserType::class, $user);
-        // ->setMethod('');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $clearPassword = $user->getPassword();
+            $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
+            $user->setPassword($hashedPassword);
             $userRepository->add($user, true);
-
+            $this->addFlash('success', 'user ajouté !');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -63,7 +69,7 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
-
+        $user->setUpdatedAt(new DateTimeImmutable());
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 

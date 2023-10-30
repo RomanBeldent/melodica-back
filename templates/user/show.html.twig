@@ -3,56 +3,58 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <h1>Profil utilisateur de {{ user.firstname }} {{ user.lastname }}</h1>
 
-    <table class="table">
+  	<table class="table table-dark table-striped">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Firstname</th>
+                <th>Prénom</th>
                 <td>{{ user.firstname }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Nom</th>
                 <td>{{ user.lastname }}</td>
             </tr>
             <tr>
-                <th>Birthday</th>
-                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
+                <th>Date de naissance</th>
+                <td>{{ user.birthday ? user.birthday|date('d M Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Password</th>
+                <th>Mot de passe</th>
                 <td>{{ user.password }}</td>
             </tr>
             <tr>
-                <th>Phone_number</th>
+                <th>Numéro de téléphone</th>
                 <td>{{ user.phoneNumber }}</td>
             </tr>
             <tr>
-                <th>Picture</th>
+                <th>Image</th>
                 <td>{{ user.picture }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Créé le</th>
+                <td>{{ user.createdAt ? user.createdAt|date('d M Y à H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Updated_at</th>
-                <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Mis à jour le</th>
+                <td>{{ user.updatedAt ? user.updatedAt|date('d M Y à H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('back_user_list') }}">back to list</a>
-
-    <a href="{{ path('back_user_edit', {'id': user.id}) }}">edit</a>
+    
+</br>
+    <a href="{{ path('back_user_edit', {'id': user.id}) }}" class='mb-3 btn btn-warning'>Mettre à jour</a>
 
     {{ include('user/_delete_form.html.twig') }}
+
+    <a href="{{ path('back_user_list') }}" class='mb-3 btn btn-secondary'>Retour</a>
 {% endblock %}

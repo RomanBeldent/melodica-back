@@ -31,6 +31,7 @@ class UserType extends AbstractType
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
+                
 
             ])
             ->add('email', EmailType::class)
@@ -52,8 +53,8 @@ class UserType extends AbstractType
                 ],
             ])
             ->add('picture', TextType::class, [
-                'label' => 'Photo de profil'
-            ])
+                'label' => 'Photo de profil',
+                ])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
