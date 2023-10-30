@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,9 +34,9 @@ class UserController extends AbstractController
     public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
-        $user->setCreatedAt(new DateTimeImmutable());
-        
         $form = $this->createForm(UserType::class, $user);
+
+        $user->setCreatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -67,15 +68,30 @@ class UserController extends AbstractController
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      *
      */
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(UserPasswordHasherInterface $passwordHasher, Request $request, User $user, UserRepository $userRepository): Response
     {
-        $user->setUpdatedAt(new DateTimeImmutable());
         $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $user->setUpdatedAt(new DateTimeImmutable());
 
+        // on démappe le champ mdp car on a une gestion spécifique à faire
+        $form->add('password', PasswordType::class, [
+            'mapped' => false,
+        ]);
+
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+                        $newPassword = $form->get('password')->getData();
+
+            if (! is_null($newPassword))
+            {
+                //('hashage du mot de passe en clair ' . $newPassword);
+                $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
+                $user->setPassword($hashedPassword);
+            } else {
+                // on ne fait rien et l'ancien mot qui était en BDD est conservé
+            }
             $userRepository->add($user, true);
-            // dd($request->request);
+            $this->addFlash('success', 'User modifié');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
         }
 

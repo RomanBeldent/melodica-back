@@ -31,8 +31,6 @@ class UserType extends AbstractType
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
-                
-
             ])
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
@@ -44,13 +42,14 @@ class UserType extends AbstractType
                 'minMessage' => 'Veuillez rentrer un téléphone valide'
             ])
             ]])
-            ->add('role', ChoiceType::class, [
-                'label' => 'Droits de l\'utilisateur',
+            ->add('roles', ChoiceType::class, [
                 'choices' => [
-                   'User' => 'ROLE_USER',
-                   'Moderator' => 'ROLE_MODERATOR',
-                   'Admin' => 'ROLE_ADMIN',
+                    'Admin' => "ROLE_ADMIN",
+                    'Moderator' => "ROLE_MODERATOR",
+                    'User' => "ROLE_USER",
                 ],
+                'multiple' => true,
+                'expanded' => true,
             ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo de profil',
