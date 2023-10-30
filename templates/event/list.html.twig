@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des évènements{% endblock %}
+
+{% block body %}
+    <h1>Liste des évènements</h1>
+
+	<table class="table table-dark table-striped">
+		<a href="{{ path('back_event_create')}}" class="btn btn-secondary btn-lg active " role="button" aria-pressed="true">Ajouter un nouvel évènement</a>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date_start</th>
+                <th>Date_end</th>
+                <th>Hour_start</th>
+                <th>Hour_end</th>
+                <th>Picture</th>
+                <th>Created_at</th>
+                <th>Updated_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.id }}</td>
+                <td>{{ event.title }}</td>
+                <td>{{ event.description }}</td>
+                <td>{{ event.dateStart ? event.dateStart|date('Y-m-d') : '' }}</td>
+                <td>{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
+                <td>{{ event.hourStart ? event.hourStart|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.picture }}</td>
+                <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
