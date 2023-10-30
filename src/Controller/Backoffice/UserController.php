@@ -68,7 +68,7 @@ class UserController extends AbstractController
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      *
      */
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+    public function edit(UserPasswordHasherInterface $passwordHasher, Request $request, User $user, UserRepository $userRepository): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $user->setUpdatedAt(new DateTimeImmutable());
@@ -79,10 +79,19 @@ class UserController extends AbstractController
         ]);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+                        $newPassword = $form->get('password')->getData();
+
+            if (! is_null($newPassword))
+            {
+                //('hashage du mot de passe en clair ' . $newPassword);
+                $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
+                $user->setPassword($hashedPassword);
+            } else {
+                // on ne fait rien et l'ancien mot qui était en BDD est conservé
+            }
             $userRepository->add($user, true);
-            // dd($request->request);
+            $this->addFlash('success', 'User modifié');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
         }
 
