@@ -2,9 +2,12 @@
 
 namespace App\Controller\Backoffice;
 
+use App\Entity\Address;
 use App\Entity\Organizer;
 use App\Form\OrganizerType;
+use App\Repository\AddressRepository;
 use App\Repository\OrganizerRepository;
+use App\Repository\TypeRepository;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,9 +32,10 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, OrganizerRepository $organizerRepository): Response
+    public function create(Request $request, AddressRepository $addressRepository , OrganizerRepository $organizerRepository, TypeRepository $typeRepository): Response
     {
         $organizer = new Organizer();
+
         $form = $this->createForm(OrganizerType::class, $organizer);
 
         $organizer->setCreatedAt(new DateTimeImmutable());
@@ -39,6 +43,11 @@ class OrganizerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $organizerRepository->add($organizer, true);
+            foreach($form->get('type')->getData() as $currentType)
+            {
+                // on modifie les relations entre movie et genre
+                $currentType->addOrganizer($organizer);
+            }
             $this->addFlash('success', 'Organisateur ajouté !');
             return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
         }
