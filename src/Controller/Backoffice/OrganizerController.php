@@ -5,6 +5,7 @@ namespace App\Controller\Backoffice;
 use App\Entity\Organizer;
 use App\Form\OrganizerType;
 use App\Repository\OrganizerRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,8 @@ class OrganizerController extends AbstractController
     {
         $organizer = new Organizer();
         $form = $this->createForm(OrganizerType::class, $organizer);
+
+        $organizer->setCreatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,6 +65,8 @@ class OrganizerController extends AbstractController
     public function edit(Request $request, Organizer $organizer, OrganizerRepository $organizerRepository): Response
     {
         $form = $this->createForm(OrganizerType::class, $organizer);
+
+        $organizer->setUpdatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
