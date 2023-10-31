@@ -6,11 +6,16 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity("email", message = "Cet email existe déjà")  
  */
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -21,31 +26,39 @@ class User
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date")
+     * @Assert\NotBlank
      */
     private $birthday;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, unique=true)
+     * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string")
+     * @var string The hashed password
+     * @Assert\NotBlank
      */
     private $password;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
      */
     private $phone_number;
 
@@ -55,7 +68,8 @@ class User
     private $picture;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
+     * @Assert\NotBlank
      */
     private $created_at;
 
@@ -78,6 +92,11 @@ class User
      * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user", orphanRemoval=true)
      */
     private $favorites;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     public function __construct()
     {
@@ -139,7 +158,10 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+        * @see PasswordAuthenticatedUserInterface
+        */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -151,12 +173,12 @@ class User
         return $this;
     }
 
-    public function getPhoneNumber(): ?int
+    public function getPhoneNumber(): ?string
     {
         return $this->phone_number;
     }
 
-    public function setPhoneNumber(int $phone_number): self
+    public function setPhoneNumber(string $phone_number): self
     {
         $this->phone_number = $phone_number;
 
@@ -275,5 +297,62 @@ class User
         }
 
         return $this;
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+    * Returning a salt is only needed, if you are not using a modern
+    * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+    *
+    * @see UserInterface
+    */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }

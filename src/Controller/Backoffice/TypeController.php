@@ -39,7 +39,7 @@ class TypeController extends AbstractController
 
             return $this->redirectToRoute('back_type_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Type ajouté !');
         return $this->renderForm('type/create.html.twig', [
             'type' => $type,
             'form' => $form,
@@ -57,7 +57,7 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Type $type, TypeRepository $typeRepository): Response
     {
@@ -69,7 +69,7 @@ class TypeController extends AbstractController
 
             return $this->redirectToRoute('back_type_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Type modifié !');
         return $this->renderForm('type/edit.html.twig', [
             'type' => $type,
             'form' => $form,
@@ -77,14 +77,14 @@ class TypeController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Type $type, TypeRepository $typeRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$type->getId(), $request->request->get('_token'))) {
             $typeRepository->remove($type, true);
         }
-
+        $this->addFlash('success', 'Type supprimé !');
         return $this->redirectToRoute('back_type_list', [], Response::HTTP_SEE_OTHER);
     }
 }

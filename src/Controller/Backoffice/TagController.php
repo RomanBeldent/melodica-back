@@ -39,7 +39,7 @@ class TagController extends AbstractController
 
             return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Tag ajouté !');
         return $this->renderForm('tag/create.html.twig', [
             'tag' => $tag,
             'form' => $form,
@@ -57,7 +57,7 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Tag $tag, TagRepository $tagRepository): Response
     {
@@ -69,7 +69,7 @@ class TagController extends AbstractController
 
             return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Tag modifié !');
         return $this->renderForm('tag/edit.html.twig', [
             'tag' => $tag,
             'form' => $form,
@@ -77,14 +77,14 @@ class TagController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Tag $tag, TagRepository $tagRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $tagRepository->remove($tag, true);
         }
-
+        $this->addFlash('success', 'Tag supprimé !');
         return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
     }
 }

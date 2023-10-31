@@ -39,7 +39,7 @@ class GenreController extends AbstractController
 
             return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Genre ajouté !');
         return $this->renderForm('genre/create.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -57,7 +57,7 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Genre $genre, GenreRepository $genreRepository): Response
     {
@@ -69,7 +69,7 @@ class GenreController extends AbstractController
 
             return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Genre modifié !');
         return $this->renderForm('genre/edit.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -77,14 +77,14 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Genre $genre, GenreRepository $genreRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->request->get('_token'))) {
             $genreRepository->remove($genre, true);
         }
-
+        $this->addFlash('success', 'Genre supprimé !');
         return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
     }
 }

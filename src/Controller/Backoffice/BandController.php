@@ -4,11 +4,13 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Band;
 use App\Form\BandType;
+use DateTimeImmutable;
+use App\Entity\Address;
 use App\Repository\BandRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("back/band", name="back_band_")
@@ -31,6 +33,8 @@ class BandController extends AbstractController
     public function create(Request $request, BandRepository $bandRepository): Response
     {
         $band = new Band();
+        
+        $band->setCreatedAt(new DateTimeImmutable());
         $form = $this->createForm(BandType::class, $band);
         $form->handleRequest($request);
 
@@ -39,7 +43,7 @@ class BandController extends AbstractController
 
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Groupe ajouté !');
         return $this->renderForm('band/create.html.twig', [
             'band' => $band,
             'form' => $form,
@@ -57,7 +61,7 @@ class BandController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Band $band, BandRepository $bandRepository): Response
     {
@@ -69,7 +73,7 @@ class BandController extends AbstractController
 
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Groupe modifié !');
         return $this->renderForm('band/edit.html.twig', [
             'band' => $band,
             'form' => $form,
@@ -77,14 +81,14 @@ class BandController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Band $band, BandRepository $bandRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$band->getId(), $request->request->get('_token'))) {
             $bandRepository->remove($band, true);
         }
-
+        $this->addFlash('success', 'Groupe supprimé !');
         return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
     }
 }

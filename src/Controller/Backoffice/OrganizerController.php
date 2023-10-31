@@ -5,6 +5,7 @@ namespace App\Controller\Backoffice;
 use App\Entity\Organizer;
 use App\Form\OrganizerType;
 use App\Repository\OrganizerRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +33,8 @@ class OrganizerController extends AbstractController
     {
         $organizer = new Organizer();
         $form = $this->createForm(OrganizerType::class, $organizer);
+
+        $organizer->setCreatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -39,7 +42,7 @@ class OrganizerController extends AbstractController
 
             return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Organisateur ajouté !');
         return $this->renderForm('organizer/create.html.twig', [
             'organizer' => $organizer,
             'form' => $form,
@@ -57,11 +60,13 @@ class OrganizerController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Organizer $organizer, OrganizerRepository $organizerRepository): Response
     {
         $form = $this->createForm(OrganizerType::class, $organizer);
+
+        $organizer->setUpdatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -69,7 +74,7 @@ class OrganizerController extends AbstractController
 
             return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Organisateur modifié !');
         return $this->renderForm('organizer/edit.html.twig', [
             'organizer' => $organizer,
             'form' => $form,
@@ -77,14 +82,14 @@ class OrganizerController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Organizer $organizer, OrganizerRepository $organizerRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$organizer->getId(), $request->request->get('_token'))) {
             $organizerRepository->remove($organizer, true);
         }
-
+        $this->addFlash('success', 'Organisateur supprimé !');
         return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
     }
 }

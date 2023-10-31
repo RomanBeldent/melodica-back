@@ -39,7 +39,7 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Évènement ajouté !');
         return $this->renderForm('event/create.html.twig', [
             'event' => $event,
             'form' => $form,
@@ -57,7 +57,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "PUT"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Event $event, EventRepository $eventRepository): Response
     {
@@ -69,7 +69,7 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Évènement ajouté !');
         return $this->renderForm('event/edit.html.twig', [
             'event' => $event,
             'form' => $form,
@@ -77,14 +77,14 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"DELETE"})
+     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
      */
     public function delete(Request $request, Event $event, EventRepository $eventRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $eventRepository->remove($event, true);
         }
-
+        $this->addFlash('success', 'Évènement supprimé !');
         return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
     }
 }
