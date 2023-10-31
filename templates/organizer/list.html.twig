@@ -41,16 +41,17 @@
 						<td>{{ organizer.picture }}</td>
 						<td>{{ organizer.createdAt ? organizer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ organizer.updatedAt ? organizer.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-						<td></td>
-						<a href="{{ path('back_organizer_show', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-info">Read
-							<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
-								<a href="{{ path('back_organizer_delete', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
-							</tr>
-						{% else %}
-							<tr>
-								<td colspan="8">no records found</td>
-							</tr>
-						{% endfor %}
+						<td>
+							<a href="{{ path('back_organizer_show', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-info">Read
+								<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
+									<a href="{{ path('back_organizer_delete', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="8">no records found</td>
+								</tr>
+							{% endfor %}
+						</td>
 					</tr>
 				</tbody>
 			</tbody>

@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +29,13 @@ class OrganizerType extends AbstractType
             ->add('website', TextType::class, [
                 'label' => 'Site internet'
             ])
-            ->add('picture')
+            ->add('picture', FileType::class, [
+                'label' => 'Photo du groupe (png, jpeg..)',
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false])
             ->add('type', EntityType::class, [
                 'class' => Type::class,
                 'choice_label' => 'name',
