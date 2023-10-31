@@ -39,7 +39,7 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Évènement ajouté !');
         return $this->renderForm('event/create.html.twig', [
             'event' => $event,
             'form' => $form,
@@ -69,7 +69,7 @@ class EventController extends AbstractController
 
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Évènement ajouté !');
         return $this->renderForm('event/edit.html.twig', [
             'event' => $event,
             'form' => $form,
@@ -84,7 +84,7 @@ class EventController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $eventRepository->remove($event, true);
         }
-
+        $this->addFlash('success', 'Évènement supprimé !');
         return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
     }
 }

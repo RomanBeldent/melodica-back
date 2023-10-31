@@ -36,10 +36,10 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->add($address, true);
-
+            
             return $this->redirectToRoute('back_address_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Adresse ajouté !');
         return $this->renderForm('address/create.html.twig', [
             'address' => $address,
             'form' => $form,
@@ -69,7 +69,7 @@ class AddressController extends AbstractController
 
             return $this->redirectToRoute('back_address_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Adresse modifié !');
         return $this->renderForm('address/edit.html.twig', [
             'address' => $address,
             'form' => $form,
@@ -84,7 +84,7 @@ class AddressController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$address->getId(), $request->request->get('_token'))) {
             $addressRepository->remove($address, true);
         }
-
+        $this->addFlash('success', 'Adresse supprimé !');
         return $this->redirectToRoute('back_address_list', [], Response::HTTP_SEE_OTHER);
     }
 }

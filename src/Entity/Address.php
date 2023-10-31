@@ -6,6 +6,7 @@ use App\Repository\AddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AddressRepository::class)
@@ -21,21 +22,25 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $street;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=85)
+     * @Assert\NotBlank
      */
     private $city;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank
      */
     private $department;
 
@@ -76,12 +81,12 @@ class Address
         return $this;
     }
 
-    public function getZipcode(): ?int
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(int $zipcode): self
+    public function setZipcode(string $zipcode): self
     {
         $this->zipcode = $zipcode;
 
@@ -100,12 +105,12 @@ class Address
         return $this;
     }
 
-    public function getDepartment(): ?int
+    public function getDepartment(): ?string
     {
         return $this->department;
     }
 
-    public function setDepartment(int $department): self
+    public function setDepartment(string $department): self
     {
         $this->department = $department;
 

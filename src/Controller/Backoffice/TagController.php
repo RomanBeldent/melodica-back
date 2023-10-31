@@ -39,7 +39,7 @@ class TagController extends AbstractController
 
             return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Tag ajouté !');
         return $this->renderForm('tag/create.html.twig', [
             'tag' => $tag,
             'form' => $form,
@@ -69,7 +69,7 @@ class TagController extends AbstractController
 
             return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Tag modifié !');
         return $this->renderForm('tag/edit.html.twig', [
             'tag' => $tag,
             'form' => $form,
@@ -84,7 +84,7 @@ class TagController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $tagRepository->remove($tag, true);
         }
-
+        $this->addFlash('success', 'Tag supprimé !');
         return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
     }
 }

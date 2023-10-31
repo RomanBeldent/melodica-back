@@ -39,7 +39,7 @@ class BandController extends AbstractController
 
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Groupe ajouté !');
         return $this->renderForm('band/create.html.twig', [
             'band' => $band,
             'form' => $form,
@@ -69,7 +69,7 @@ class BandController extends AbstractController
 
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Groupe modifié !');
         return $this->renderForm('band/edit.html.twig', [
             'band' => $band,
             'form' => $form,
@@ -84,7 +84,7 @@ class BandController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$band->getId(), $request->request->get('_token'))) {
             $bandRepository->remove($band, true);
         }
-
+        $this->addFlash('success', 'Groupe supprimé !');
         return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
     }
 }
