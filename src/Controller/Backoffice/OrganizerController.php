@@ -39,10 +39,10 @@ class OrganizerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $organizerRepository->add($organizer, true);
-
+            $this->addFlash('success', 'Organisateur ajouté !');
             return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Organisateur ajouté !');
+        
         return $this->renderForm('organizer/create.html.twig', [
             'organizer' => $organizer,
             'form' => $form,
@@ -71,10 +71,10 @@ class OrganizerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $organizerRepository->add($organizer, true);
-
+            $this->addFlash('success', 'Organisateur modifié !');
             return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Organisateur modifié !');
+       
         return $this->renderForm('organizer/edit.html.twig', [
             'organizer' => $organizer,
             'form' => $form,

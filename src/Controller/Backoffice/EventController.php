@@ -36,10 +36,10 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eventRepository->add($event, true);
-
+            $this->addFlash('success', 'Évènement ajouté !');
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Évènement ajouté !');
+        
         return $this->renderForm('event/create.html.twig', [
             'event' => $event,
             'form' => $form,
@@ -66,10 +66,10 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eventRepository->add($event, true);
-
+            $this->addFlash('success', 'Évènement ajouté !');
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Évènement ajouté !');
+        
         return $this->renderForm('event/edit.html.twig', [
             'event' => $event,
             'form' => $form,

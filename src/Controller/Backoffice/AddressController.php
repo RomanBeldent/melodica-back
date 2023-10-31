@@ -36,10 +36,10 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->add($address, true);
-            
+            $this->addFlash('success', 'Adresse ajouté !');
             return $this->redirectToRoute('back_address_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Adresse ajouté !');
+      
         return $this->renderForm('address/create.html.twig', [
             'address' => $address,
             'form' => $form,
@@ -66,10 +66,10 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->add($address, true);
-
+            $this->addFlash('success', 'Adresse modifié !');
             return $this->redirectToRoute('back_address_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Adresse modifié !');
+
         return $this->renderForm('address/edit.html.twig', [
             'address' => $address,
             'form' => $form,

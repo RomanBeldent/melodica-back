@@ -36,10 +36,10 @@ class TypeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $typeRepository->add($type, true);
-
+            $this->addFlash('success', 'Type ajouté !');
             return $this->redirectToRoute('back_type_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Type ajouté !');
+       
         return $this->renderForm('type/create.html.twig', [
             'type' => $type,
             'form' => $form,
@@ -66,10 +66,10 @@ class TypeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $typeRepository->add($type, true);
-
+            $this->addFlash('success', 'Type modifié !');
             return $this->redirectToRoute('back_type_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Type modifié !');
+        
         return $this->renderForm('type/edit.html.twig', [
             'type' => $type,
             'form' => $form,
