@@ -39,7 +39,7 @@ class GenreController extends AbstractController
 
             return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Genre ajouté !');
         return $this->renderForm('genre/create.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -69,7 +69,7 @@ class GenreController extends AbstractController
 
             return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Genre modifié !');
         return $this->renderForm('genre/edit.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -84,7 +84,7 @@ class GenreController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->request->get('_token'))) {
             $genreRepository->remove($genre, true);
         }
-
+        $this->addFlash('success', 'Genre supprimé !');
         return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -39,7 +39,7 @@ class OrganizerController extends AbstractController
 
             return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Organisateur ajouté !');
         return $this->renderForm('organizer/create.html.twig', [
             'organizer' => $organizer,
             'form' => $form,
@@ -69,7 +69,7 @@ class OrganizerController extends AbstractController
 
             return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Organisateur modifié !');
         return $this->renderForm('organizer/edit.html.twig', [
             'organizer' => $organizer,
             'form' => $form,
@@ -84,7 +84,7 @@ class OrganizerController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$organizer->getId(), $request->request->get('_token'))) {
             $organizerRepository->remove($organizer, true);
         }
-
+        $this->addFlash('success', 'Organisateur supprimé !');
         return $this->redirectToRoute('back_organizer_list', [], Response::HTTP_SEE_OTHER);
     }
 }

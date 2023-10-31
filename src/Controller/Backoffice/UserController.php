@@ -44,10 +44,10 @@ class UserController extends AbstractController
             $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
             $user->setPassword($hashedPassword);
             $userRepository->add($user, true);
-            $this->addFlash('success', 'user ajouté !');
+            
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
         }
-
+        $this->addFlash('success', 'Utilisateur ajouté !');
         return $this->renderForm('user/create.html.twig', [
             'user' => $user,
             'form' => $form,
@@ -91,7 +91,7 @@ class UserController extends AbstractController
                 // on ne fait rien et l'ancien mot qui était en BDD est conservé
             }
             $userRepository->add($user, true);
-            $this->addFlash('success', 'User modifié');
+            $this->addFlash('success', 'Utilisateur modifié');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -109,7 +109,7 @@ class UserController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
         }
-
+        $this->addFlash('success', 'Utilisateur supprimé !');
         return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -4,45 +4,54 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Liste des organisateurs</h1>
-
+	<h1 align='center'>Liste des organisateurs</h1>
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+				{{ message }}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		{% endfor %}
+	{% endfor %}
 	<table class="table table-dark table-striped">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Website</th>
-				<th>Picture</th>
-				<th>Created_at</th>
-				<th>Updated_at</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for organizer in organizers %}
+		<div class='d-flex justify-content-between'>
+			<a href="{{ path('back_index') }}" class="btn btn-secondary btn-lg active">Accueil back
+				<a href="{{ path('back_user_create')}}" class="btn btn-success btn-lg active " role="button" aria-pressed="true">Ajouter un nouvel utilisateur</a>
+			</div>
+			<thead>
 				<tr>
-					<td>{{ organizer.id }}</td>
-					<td>{{ organizer.name }}</td>
-					<td>{{ organizer.description }}</td>
-					<td>{{ organizer.website }}</td>
-					<td>{{ organizer.picture }}</td>
-					<td>{{ organizer.createdAt ? organizer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ organizer.updatedAt ? organizer.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td></td>
-					<a href="{{ path('back_organizer_show', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-info">Read
-						<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
-							<a href="{{ path('back_organizer_delete', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
-						</tr>
-					{% else %}
-						<tr>
-							<td colspan="8">no records found</td>
-						</tr>
-					{% endfor %}
+					<th>Id</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Website</th>
+					<th>Picture</th>
+					<th>Created_at</th>
+					<th>Updated_at</th>
+					<th>actions</th>
 				</tr>
+			</thead>
+			<tbody>
+				{% for organizer in organizers %}
+					<tr>
+						<td>{{ organizer.id }}</td>
+						<td>{{ organizer.name }}</td>
+						<td>{{ organizer.description }}</td>
+						<td>{{ organizer.website }}</td>
+						<td>{{ organizer.picture }}</td>
+						<td>{{ organizer.createdAt ? organizer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td>{{ organizer.updatedAt ? organizer.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td></td>
+						<a href="{{ path('back_organizer_show', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-info">Read
+							<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
+								<a href="{{ path('back_organizer_delete', {'id': organizer.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="8">no records found</td>
+							</tr>
+						{% endfor %}
+					</tr>
+				</tbody>
 			</tbody>
-		</tbody>
-	</table>
-
-	<a href="{{ path('back_organizer_create') }}">Create new</a>
-{% endblock %}
+		</table>
+	{% endblock %}
