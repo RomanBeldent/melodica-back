@@ -46,7 +46,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
-     * 
      */
     private $email;
 

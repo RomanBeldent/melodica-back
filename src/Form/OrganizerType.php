@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Organizer;
+use App\Entity\Type;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,18 +17,27 @@ class OrganizerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('website')
+            ->add('name', TextType::class, [
+                'label' => 'Nom'
+            ])
+            ->add('description', TextType::class, [
+                'label' => 'Description'
+            ])
+            ->add('website', TextType::class, [
+                'label' => 'Site internet'
+            ])
             ->add('picture')
-            ->add('created_at')
-            ->add('updated_at')
-            ->add('users', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'firstname',
-                'multiple' => true])
-            ->add('type')
-            ->add('address')
+            ->add('type', EntityType::class, [
+                'class' => Type::class,
+            ])
+            ->add('created_at', DateTimeType::class, [
+                'input' => 'datetime_immutable',
+                'disabled' => true,
+                ])
+            ->add('updated_at', DateTimeType::class, [
+                'input' => 'datetime_immutable',
+                'disabled' => true,
+            ]);
         ;
     }
 
