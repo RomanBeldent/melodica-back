@@ -34,12 +34,7 @@ class OrganizerType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false
             ])
-            // ->add('street', EntityType::class, [
-            // 'class' => Address::class,
-            // 'mapped'      => false,
-            // 'required'    => false
-            // ])
-            ->add('street', CollectionType::class, [
+            ->add('address', CollectionType::class, [
                 'entry_type' => AddressType::class,
                 'entry_options' => ['label' => false],
             ])

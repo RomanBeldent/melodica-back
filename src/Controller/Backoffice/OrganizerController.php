@@ -32,7 +32,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, AddressRepository $addressRepository , OrganizerRepository $organizerRepository, TypeRepository $typeRepository): Response
+    public function create(Request $request, OrganizerRepository $organizerRepository): Response
     {
         $organizer = new Organizer();
 
