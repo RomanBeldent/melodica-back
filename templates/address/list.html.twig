@@ -26,9 +26,9 @@
                 <td>{{ address.city }}</td>
                 <td>{{ address.department }}</td>
                 <td>
-					<a href="{{ path('back_user_show', {'id': user.id}) }}" class="mr-3 btn btn-outline-info">Read
-						<a href="{{ path('back_user_edit', {'id': user.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
-							<a href="{{ path('back_user_delete', {'id': user.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
+					<a href="{{ path('back_address_show', {'id': address.id}) }}" class="mr-3 btn btn-outline-info">Read
+						<a href="{{ path('back_address_edit', {'id': address.id}) }}" class="mr-3 btn bts-sm btn-warning">Update
+							<a href="{{ path('back_address_delete', {'id': address.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
                 </td>
             </tr>
         {% else %}
