@@ -94,8 +94,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $favorites;
 
-
-
     /**
      * @ORM\Column(type="json")
      */
