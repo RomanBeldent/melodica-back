@@ -34,10 +34,10 @@ class OrganizerType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false
             ])
-            ->add('address', CollectionType::class, [
-                'entry_type' => AddressType::class,
-                'entry_options' => ['label' => false],
-            ])
+                ->add(
+                    'address',
+                    AddressType::class
+                )
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
