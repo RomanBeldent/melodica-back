@@ -43,6 +43,7 @@ class Tag
         $this->events = new ArrayCollection();
         $this->band = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {

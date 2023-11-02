@@ -93,6 +93,7 @@ class Band
         $this->genre = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
+    
 
     public function getId(): ?int
     {

@@ -63,7 +63,9 @@ class BandType extends AbstractType
                 'class' => Genre::class,
                 'multiple' => true
             ])
-            ->add('address', AddressType::class);
+            ->add('address', AddressType::class,[
+                'label'=>'Adresse',
+            ]);
             
     }
 

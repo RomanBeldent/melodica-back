@@ -2,12 +2,19 @@
 
 namespace App\Form;
 
+use App\Entity\Tag;
+use App\Entity\Band;
 use App\Entity\Event;
+use App\Entity\Organizer;
+use App\Form\AddressType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class EventType extends AbstractType
 {
@@ -16,25 +23,55 @@ class EventType extends AbstractType
         $builder
             ->add('title', TextType::class,[
                 'label'=>'Titre de l\'évènement',
+                'constraints' =>[
                 new Length([
                     'min'=> 5,
-                    'max' => 30,
-                    'minMessage' => 'Veuillez rentrer un titre entre 5 et 30 caractères',
-                    'maxMessage'=> 'Veuillez rentrer un titre entre 5 et 30 caractères'
+                    'max' => 50,
+                    'minMessage' => 'Veuillez rentrer un titre entre 5 et 50 caractères',
+                    'maxMessage'=> 'Veuillez rentrer un titre entre 5 et 50 caractères'
                 ])
+                ]
             ])
-            ->add('description')
-            ->add('date_start')
-            ->add('date_end')
+            ->add('description', TextType::class,[
+                'label' => 'Description'
+            ])
+            ->add('date_start', DateType::class,[
+                'label'=>'Date de début'
+            ])
+            ->add('date_end', DateType::class,[
+                'label' => 'Date de fin'
+            ])
             ->add('hour_start')
             ->add('hour_end')
-            ->add('picture')
-            ->add('created_at')
-            ->add('updated_at')
-            ->add('tag')
-            ->add('band')
-            ->add('address')
-            ->add('organizer')
+            ->add('picture', TextType::class,[
+                'label'=>'Photo de profil de l\'évènement'
+            ])
+            ->add('created_at', DateTimeType::class, [
+                'input' => 'datetime_immutable',
+                'disabled' => true,
+                ])
+            ->add('updated_at', DateTimeType::class, [
+                'input' => 'datetime_immutable',
+                'disabled' => true,
+            ])
+            ->add('tag', EntityType::class,[
+                'label'=>'Tag',
+                'class' => Tag::class,
+                'multiple'=> true,
+            ])
+            ->add('band', EntityType::class,[
+                'label'=>'Artiste',
+                'class' => Band::class,
+                'multiple' => true,
+                'required' => false
+            ])
+            ->add('address', AddressType::class,[
+                'label' => 'Adresse'
+            ])
+            ->add('organizer', EntityType::class,[
+                'label' => 'Organisateur',
+                'class' => Organizer::class,
+            ])
         ;
     }
 

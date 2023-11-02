@@ -86,10 +86,15 @@ class Event
      */
     private $organizer;
 
+
     public function __construct()
     {
         $this->tag = new ArrayCollection();
         $this->band = new ArrayCollection();
+    }
+    public function __toString()
+    {
+        return $this->title;        
     }
 
     public function getId(): ?int
