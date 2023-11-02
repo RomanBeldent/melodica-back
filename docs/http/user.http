@@ -6,13 +6,13 @@ GET http://localhost:8080/api/user/1
 
 ### Ajout d'un utilisateur
 POST http://localhost:8080/api/user/
-
 content-type: application/json
+
 {
-    "firstname": "TestAPI",
-    "lastname": "TestAPI",
+    "firstname": "TestAPIa",
+    "lastname": "TestAPIa",
     "birthday": "2023-10-26T00:00:00+02:00",
-    "email": "testAPI@test.com",
+    "email": "testAPIaaa@test.com",
     "password": "test",
     "phone_number": "0674896526",
     "picture": "test.png",
@@ -21,11 +21,11 @@ content-type: application/json
 
 ### Modification d'un utilisateur
 PUT http://localhost:8080/api/user/9
-
 content-type: application/json
+
 {
-    "firstname": "Test",
+    "firstname": "Test"
 }
 
 ### Suppression d'un utilisateur
-DELETE http://localhost:8080/api/user/14
+DELETE http://localhost:8080/api/user/25
