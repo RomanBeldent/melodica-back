@@ -1,0 +1,23 @@
+### Liste des utilisateurs
+GET http://localhost:8080/api/user
+
+### Détail d'un utilisateur
+GET http://localhost:8080/api/user/1
+
+### Ajout d'un utilisateur
+POST http://localhost:8080/api/user
+content-type: application/json
+
+{
+    "field": "Test",
+}
+### Modification d'un utilisateur
+PUT http://localhost:8080/api/user/9
+content-type: application/json
+
+{
+    "field": "Test",
+}
+
+### Suppression d'un utilisateur
+DELETE http://localhost:8080/api/user/14

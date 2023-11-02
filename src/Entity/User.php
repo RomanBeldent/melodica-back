@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity("email", message = "Cet email existe déjà")  
+ * @UniqueEntity("email", message = "Cet email existe déjà")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -27,22 +27,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"user_list", "user_show"})
      * @Assert\NotBlank
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $birthday;
 
@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $email;
 
@@ -58,26 +58,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      * @var string The hashed password
      * @Assert\NotBlank
+     * @Groups({"user_create"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $phone_number;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $picture;
 
     /**
+     * @ORM\Column(type="json")
+     * @Groups({"user_list", "user_show"})
+     */
+    private $roles = [];
+
+    /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $created_at;
 
@@ -103,11 +110,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $favorites;
 
-    /**
-     * @ORM\Column(type="json")
-     * @Groups({"user_list", "user_show"})
-     */
-    private $roles = [];
+
 
     public function __construct()
     {
