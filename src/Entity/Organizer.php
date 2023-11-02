@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\OrganizerRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\OrganizerRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -19,34 +20,40 @@ class Organizer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $website;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Assert\NotBlank
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $created_at;
 
@@ -57,18 +64,21 @@ class Organizer
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="organizer")
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $users;
 
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="organizers")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $type;
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="organizer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $address;
 
@@ -79,6 +89,7 @@ class Organizer
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
+     * @Groups({"organizer_list", "organizer_show"})
      */
     private $events;
 
