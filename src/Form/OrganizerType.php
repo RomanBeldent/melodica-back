@@ -27,7 +27,8 @@ class OrganizerType extends AbstractType
                 'label' => 'Description'
             ])
             ->add('website', TextType::class, [
-                'label' => 'Site internet'
+                'label' => 'Site internet',
+                'required' => false,
             ])
             ->add('picture', FileType::class, [
                 'label' => 'Photo du groupe (png, jpeg..)',
@@ -41,7 +42,9 @@ class OrganizerType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false
             ])
-            ->add('address', AddressType::class)
+            ->add('address', AddressType::class,[
+                'label' => 'Adresse'
+            ])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,

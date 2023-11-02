@@ -93,6 +93,10 @@ class Band
         $this->genre = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->name;        
+    }
 
     public function getId(): ?int
     {
