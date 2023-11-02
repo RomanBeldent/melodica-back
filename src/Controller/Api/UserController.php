@@ -81,4 +81,23 @@ class UserController extends AbstractController
         $em->flush();
         return $this->json($user, Response::HTTP_OK, [], ['groups' => 'user_update']);
     }
+
+    /**
+     * @Route("/{id<\d+>}"), name="delete", methods={"DELETE"})
+     */
+    public function delete($id, EntityManagerInterface $em, UserRepository $userRepository)
+    {
+        $user = $em->find(User::class, $id);
+
+        if ($user === null) {
+            $errorMessage = [
+                'message' => "User not found",
+            ];
+            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
+        }
+
+        $userRepository->remove($user, true);
+
+        return $this->json($user, Response::HTTP_OK);
+    }
 }
