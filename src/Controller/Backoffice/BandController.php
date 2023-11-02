@@ -40,10 +40,10 @@ class BandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bandRepository->add($band, true);
-
+            $this->addFlash('success', 'Groupe ajouté !');
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Groupe ajouté !');
+        
         return $this->renderForm('band/create.html.twig', [
             'band' => $band,
             'form' => $form,
@@ -70,10 +70,10 @@ class BandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bandRepository->add($band, true);
-
+            $this->addFlash('success', 'Groupe modifié !');
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Groupe modifié !');
+       
         return $this->renderForm('band/edit.html.twig', [
             'band' => $band,
             'form' => $form,

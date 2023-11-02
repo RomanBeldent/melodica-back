@@ -35,8 +35,7 @@ class AddressType extends AbstractType
             ],
             'label' => 'Département',
             'required' => true
-        ])
-        ;
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

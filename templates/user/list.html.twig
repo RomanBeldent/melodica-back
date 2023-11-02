@@ -47,12 +47,11 @@
 						<td>{{ user.createdAt ? user.createdAt|date('d M Y à H:i') : '' }}</td>
 						<td>{{ user.updatedAt ? user.updatedAt|date('d M Y à H:i') : '' }}</td>
 						<td>
-							<div class='d-flex justify-content-between'>
 								<a href="{{ path('back_user_show', {'id': user.id}) }}" class="mr-3 btn btn-outline-info">Read
 									<a href="{{ path('back_user_edit', {'id': user.id}) }}" class="mr-3 btn btn-outline-warning">Update
 										<a href="{{ path('back_user_delete', {'id': user.id}) }}" class="mr-3 btn btn-outline-danger">Delete</td>
 									</td>
-								</div>
+							</tr>
 							{% else %}
 								<tr>
 									<td colspan="11">no records found</td>

@@ -36,10 +36,10 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $tagRepository->add($tag, true);
-
+            $this->addFlash('success', 'Tag ajouté !');
             return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Tag ajouté !');
+        
         return $this->renderForm('tag/create.html.twig', [
             'tag' => $tag,
             'form' => $form,
@@ -66,10 +66,10 @@ class TagController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $tagRepository->add($tag, true);
-
+            $this->addFlash('success', 'Tag modifié !');
             return $this->redirectToRoute('back_tag_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Tag modifié !');
+        
         return $this->renderForm('tag/edit.html.twig', [
             'tag' => $tag,
             'form' => $form,

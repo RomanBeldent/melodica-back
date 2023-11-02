@@ -36,10 +36,10 @@ class GenreController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $genreRepository->add($genre, true);
-
+            $this->addFlash('success', 'Genre ajouté !');
             return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Genre ajouté !');
+        
         return $this->renderForm('genre/create.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -66,10 +66,10 @@ class GenreController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $genreRepository->add($genre, true);
-
+            $this->addFlash('success', 'Genre modifié !');
             return $this->redirectToRoute('back_genre_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Genre modifié !');
+
         return $this->renderForm('genre/edit.html.twig', [
             'genre' => $genre,
             'form' => $form,
@@ -81,7 +81,7 @@ class GenreController extends AbstractController
      */
     public function delete(Request $request, Genre $genre, GenreRepository $genreRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$genre->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $genre->getId(), $request->request->get('_token'))) {
             $genreRepository->remove($genre, true);
         }
         $this->addFlash('success', 'Genre supprimé !');

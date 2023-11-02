@@ -52,6 +52,7 @@ class UserType extends AbstractType
             ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo de profil',
+                'required' => false
                 ])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
