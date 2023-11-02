@@ -16,7 +16,7 @@ class Band
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show"})})
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -64,7 +64,6 @@ class Band
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="band")
-     * @Groups({"band_list", "band_show"})
      */
     private $users;
 
