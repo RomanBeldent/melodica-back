@@ -75,7 +75,7 @@ class Event
     private $band;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="events")
+     * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="events",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
@@ -92,10 +92,7 @@ class Event
         $this->tag = new ArrayCollection();
         $this->band = new ArrayCollection();
     }
-    public function __toString()
-    {
-        return $this->title;        
-    }
+    
 
     public function getId(): ?int
     {

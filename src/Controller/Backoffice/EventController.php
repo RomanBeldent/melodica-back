@@ -3,12 +3,13 @@
 namespace App\Controller\Backoffice;
 
 use App\Entity\Event;
+use DateTimeImmutable;
 use App\Form\EventType;
 use App\Repository\EventRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("back/event", name="back_event_")
@@ -31,6 +32,7 @@ class EventController extends AbstractController
     public function create(Request $request, EventRepository $eventRepository): Response
     {
         $event = new Event();
+        $event->setCreatedAt(new DateTimeImmutable());
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
