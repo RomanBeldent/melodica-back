@@ -42,6 +42,10 @@ class OrganizerType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false
             ])
+            ->add('users', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'firstname',
+                'multiple' => true])
             ->add('address', AddressType::class,[
                 'label' => 'Adresse'
             ])

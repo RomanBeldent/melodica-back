@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity("email", message = "Cet email existe déjà")  
+ * @UniqueEntity("email", message = "Cet email existe déjà")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -87,16 +87,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Organizer::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Organizer::class, mappedBy="users")
      * @Groups({"user_list", "user_show"})
      */
-    private $organizer;
+    private $organizers;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Band::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="users")
      * @Groups({"user_list", "user_show"})
      */
-    private $band;
+    private $bands;
 
     /**
      * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user", orphanRemoval=true)
@@ -111,8 +111,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->organizer = new ArrayCollection();
-        $this->band = new ArrayCollection();
+        $this->organizers = new ArrayCollection();
+        $this->bands = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
 
@@ -237,21 +237,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getOrganizer(): Collection
     {
-        return $this->organizer;
+        return $this->organizers;
     }
 
     public function addOrganizer(Organizer $organizer): self
     {
-        if (!$this->organizer->contains($organizer)) {
-            $this->organizer[] = $organizer;
+        if (!$this->organizers->contains($organizer)) {
+            $this->organizers[] = $organizer;
+            $organizer->addUser($this);
         }
 
         return $this;
     }
 
-    public function removeOrganizer(Organizer $organizer): self
+    public function removeOrganizer(Organizer $organizers): self
     {
-        $this->organizer->removeElement($organizer);
+        $this->organizers->removeElement($organizers);
 
         return $this;
     }
@@ -261,13 +262,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getBand(): Collection
     {
-        return $this->band;
+        return $this->bands;
     }
 
     public function addBand(Band $band): self
     {
-        if (!$this->band->contains($band)) {
-            $this->band[] = $band;
+        if (!$this->bands->contains($band)) {
+            $this->bands[] = $band;
+            $band->addUser($this);
         }
 
         return $this;
@@ -275,7 +277,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeBand(Band $band): self
     {
-        $this->band->removeElement($band);
+        $this->bands->removeElement($band);
 
         return $this;
     }

@@ -7,6 +7,7 @@ use App\Form\BandType;
 use DateTimeImmutable;
 use App\Entity\Address;
 use App\Repository\BandRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,9 +34,10 @@ class BandController extends AbstractController
     public function create(Request $request, BandRepository $bandRepository): Response
     {
         $band = new Band();
-        
-        $band->setCreatedAt(new DateTimeImmutable());
         $form = $this->createForm(BandType::class, $band);
+
+        $band->setCreatedAt(new DateTimeImmutable());
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

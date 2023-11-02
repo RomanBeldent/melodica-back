@@ -52,7 +52,6 @@ class BandType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'firstname',
                 'multiple' => true])
-            
             ->add('tags', EntityType::class,[
                 'label'=> 'Qu\'êtes vous?',
                 'class' => Tag::class,
@@ -67,8 +66,7 @@ class BandType extends AbstractType
             ])
             ->add('address', AddressType::class,[
                 'label'=>'Adresse',
-            ]);
-            
+            ]);       
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -32,8 +32,9 @@ class EventController extends AbstractController
     public function create(Request $request, EventRepository $eventRepository): Response
     {
         $event = new Event();
-        $event->setCreatedAt(new DateTimeImmutable());
         $form = $this->createForm(EventType::class, $event);
+        
+        $event->setCreatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
