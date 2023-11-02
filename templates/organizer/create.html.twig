@@ -3,7 +3,10 @@
 {% block title %}Nouvel organisateur{% endblock %}
 
 {% block body %}
-    <h1>Création d'un nouvel organisateur</h1>
+	<div class="d-flex justify-content-between m-3">
+		<h2>Création d'un nouvel organisateur</h2>
+		<a href="{{ path('back_organizer_list') }}" class='btn btn-secondary'>Retour</a>
+	</div>
 	{{ include('partials/_form.html.twig') }}
-    <a href="{{ path('back_organizer_list') }}">back to list</a>
+
 {% endblock %}
