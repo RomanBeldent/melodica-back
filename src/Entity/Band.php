@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\BandRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BandRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BandRepository::class)
@@ -15,37 +16,44 @@ class Band
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"band_list", "band_show"})})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"band_list", "band_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"band_list", "band_show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"band_list", "band_show"})
      */
     private $area;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"band_list", "band_show"})
      */
     private $sample;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"band_list", "band_show"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"band_list", "band_show"})
      */
     private $created_at;
 
@@ -61,21 +69,25 @@ class Band
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="band")
+     * @Groups({"band_list", "band_show"})
      */
     private $events;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, mappedBy="band")
+     * @Groups({"band_list", "band_show"})
      */
     private $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="bands")
+     * @Groups({"band_list", "band_show"})
      */
     private $genre;
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="band", cascade={"persist", "remove"})
+     * @Groups({"band_list", "band_show"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
@@ -95,7 +107,7 @@ class Band
     }
     public function __toString()
     {
-        return $this->name;        
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -303,7 +315,7 @@ class Band
 
         return $this;
     }
-    
+
 
     // /**
     //  * @return Collection<int, Favorite>
