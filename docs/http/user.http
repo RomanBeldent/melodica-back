@@ -9,10 +9,10 @@ POST http://localhost:8080/api/user/
 content-type: application/json
 
 {
-    "firstname": "TestAPIa",
-    "lastname": "TestAPIa",
+    "firstname": "TestAPIaa",
+    "lastname": "TestAPIaa",
     "birthday": "2023-10-26T00:00:00+02:00",
-    "email": "testAPIaaa@test.com",
+    "email": "testAPIaaaa@test.com",
     "password": "test",
     "phone_number": "0674896526",
     "picture": "test.png",
@@ -24,8 +24,8 @@ PUT http://localhost:8080/api/user/9
 content-type: application/json
 
 {
-    "firstname": "Test"
+    "firstname": "Testa"
 }
 
 ### Suppression d'un utilisateur
-DELETE http://localhost:8080/api/user/25
+DELETE http://localhost:8080/api/user/26
