@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\AddressRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AddressRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,46 +17,54 @@ class Address
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"address_list", "address_show"})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"address_list", "address_show", "band_list", "band_show"})
      * @Assert\NotBlank
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"address_list", "address_show", "band_list", "band_show"})
      * @Assert\NotBlank
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=85)
+     * @Groups({"address_list", "address_show", "band_list", "band_show"})
      * @Assert\NotBlank
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"address_list", "address_show", "band_list", "band_show"})
      * @Assert\NotBlank
      */
     private $department;
 
     /**
      * @ORM\OneToOne(targetEntity=Organizer::class, mappedBy="address", cascade={"persist", "remove"})
+     * @Groups({"address_list", "address_show"})
      */
     private $organizer;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="address")
+     * @Groups({"address_list", "address_show"})
      */
     private $events;
 
     /**
      * @ORM\OneToOne(targetEntity=Band::class, mappedBy="address", cascade={"persist", "remove"})
+     * @Groups({"address_list", "address_show"})
      */
     private $band;
 
