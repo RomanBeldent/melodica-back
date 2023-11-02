@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      * @Assert\NotBlank
      */
     private $firstname;
@@ -35,14 +35,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $birthday;
 
@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $email;
 
@@ -58,26 +58,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      * @var string The hashed password
      * @Assert\NotBlank
+     * @Groups({"user_create", "user_update"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $phone_number;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $created_at;
 
@@ -88,13 +89,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Organizer::class, mappedBy="users")
-     * @Groups({"user_list", "user_show"})
      */
     private $organizers;
 
     /**
      * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="users")
-     * @Groups({"user_list", "user_show"})
      */
     private $bands;
 
