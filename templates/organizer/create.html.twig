@@ -4,8 +4,6 @@
 
 {% block body %}
     <h1>Création d'un nouvel organisateur</h1>
-
-    {{ include('organizer/_form.html.twig') }}
-
+	{{ include('partials/_form.html.twig') }}
     <a href="{{ path('back_organizer_list') }}">back to list</a>
 {% endblock %}
