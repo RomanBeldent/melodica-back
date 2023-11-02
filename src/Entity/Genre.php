@@ -26,7 +26,7 @@ class Genre
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"genre_list", "genre_show"})
+     * @Groups({"genre_list", "genre_show", "band_list", "band_show"})
      * @Assert\NotBlank
      */
     private $name;
