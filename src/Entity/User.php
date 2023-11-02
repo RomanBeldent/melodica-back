@@ -234,7 +234,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Organizer>
      */
-    public function getOrganizer(): Collection
+    public function getOrganizers(): Collection
     {
         return $this->organizers;
     }
@@ -259,7 +259,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Band>
      */
-    public function getBand(): Collection
+    public function getBands(): Collection
     {
         return $this->bands;
     }
