@@ -15,6 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class EventType extends AbstractType
 {
@@ -41,10 +42,15 @@ class EventType extends AbstractType
             ->add('date_end', DateType::class,[
                 'label' => 'Date de fin'
             ])
-            ->add('hour_start')
-            ->add('hour_end')
+            ->add('hour_start', TimeType::class,[
+                'label'=>'Heure de début'
+            ])
+            ->add('hour_end',TimeType::class,[
+                'label'=>'Heure de fin'
+            ])
             ->add('picture', TextType::class,[
-                'label'=>'Photo de profil de l\'évènement'
+                'label'=>'Photo de profil de l\'évènement',
+                'required'=>false
             ])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',

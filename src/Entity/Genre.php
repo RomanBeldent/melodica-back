@@ -37,6 +37,10 @@ class Genre
     {
         $this->bands = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->name;        
+    }
 
     public function getId(): ?int
     {

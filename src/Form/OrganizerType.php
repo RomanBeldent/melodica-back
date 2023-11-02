@@ -27,7 +27,8 @@ class OrganizerType extends AbstractType
                 'label' => 'Description'
             ])
             ->add('website', TextType::class, [
-                'label' => 'Site internet'
+                'label' => 'Site internet',
+                'required' => false,
             ])
             ->add('picture', FileType::class, [
                 'label' => 'Photo du groupe (png, jpeg..)',
