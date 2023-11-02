@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New user{% endblock %}
+{% block title %}New user
+{% endblock %}
 
 {% block body %}
-    <h1>Création d'un nouvel utilisateur</h1>
 
-    {{ include('user/_form.html.twig') }}
+	<div class="d-flex justify-content-between m-3">
+		<h2>Création d'un nouvel utilisateur</h2>
+		<a href="{{ path('back_user_list') }}" class='btn btn-secondary'>Retour</a>
+	</div>
+	{{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('back_user_list') }}" class='btn btn-secondary'>Retour</a>
 {% endblock %}
