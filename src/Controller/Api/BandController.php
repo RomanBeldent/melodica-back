@@ -19,7 +19,7 @@ class BandController extends AbstractController
     public function list(BandRepository $bandRepository): JsonResponse
     {
         return $this->json([
-            'bands' => $bandRepository->findAll()], 200, [], ['groups' => 'bands_list'
+            'bands' => $bandRepository->findAll()], 200, [], ['groups' => 'band_list'
         ]);
     }
 }
