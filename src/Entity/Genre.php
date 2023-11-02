@@ -6,8 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=GenreRepository::class)
@@ -18,18 +19,21 @@ class Genre
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
+     * @Groups({"genre_list", "genre_show"})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"genre_list", "genre_show"})
      * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="genre")
+     * @Groups({"genre_list", "genre_show"})
      */
     private $bands;
 

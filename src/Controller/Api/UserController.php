@@ -2,33 +2,33 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Band;
-use App\Repository\BandRepository;
+use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/band", name="api_band_")
+ * @Route("/api/user", name="api_user_")
  */
-class BandController extends AbstractController
+class UserController extends AbstractController
 {
     /**
      * @Route("/", name="list", methods={"GET"})
      */
-    public function list(BandRepository $bandRepository): JsonResponse
+    public function list(UserRepository $userRepository): JsonResponse
     {
         return $this->json([
-            'bands' => $bandRepository->findAll()], 200, [], ['groups' => 'band_list'
+            'users' => $userRepository->findAll()], 200, [], ['groups' => 'user_list'
         ]);
     }
 
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
-    public function show(Band $band): JsonResponse
+    public function show(User $user): JsonResponse
     {
         return $this->json([
-            'band' => $band], 200, [], ['groups' => 'band_show']);
+            'user' => $user], 200, [], ['groups' => 'user_show']);
     }
 }
