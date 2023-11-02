@@ -4,11 +4,13 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\Band;
 use App\Form\BandType;
+use DateTimeImmutable;
+use App\Entity\Address;
 use App\Repository\BandRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("back/band", name="back_band_")
@@ -31,6 +33,8 @@ class BandController extends AbstractController
     public function create(Request $request, BandRepository $bandRepository): Response
     {
         $band = new Band();
+        
+        $band->setCreatedAt(new DateTimeImmutable());
         $form = $this->createForm(BandType::class, $band);
         $form->handleRequest($request);
 

@@ -299,6 +299,7 @@ class Band
 
         return $this;
     }
+    
 
     // /**
     //  * @return Collection<int, Favorite>
