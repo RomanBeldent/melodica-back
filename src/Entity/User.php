@@ -110,8 +110,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $favorites;
 
-
-
     public function __construct()
     {
         $this->organizer = new ArrayCollection();
