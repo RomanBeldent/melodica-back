@@ -7,6 +7,7 @@ use App\Form\BandType;
 use DateTimeImmutable;
 use App\Entity\Address;
 use App\Repository\BandRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,17 +34,18 @@ class BandController extends AbstractController
     public function create(Request $request, BandRepository $bandRepository): Response
     {
         $band = new Band();
-        
-        $band->setCreatedAt(new DateTimeImmutable());
         $form = $this->createForm(BandType::class, $band);
+
+        $band->setCreatedAt(new DateTimeImmutable());
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bandRepository->add($band, true);
-
+            $this->addFlash('success', 'Groupe ajouté !');
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Groupe ajouté !');
+        
         return $this->renderForm('band/create.html.twig', [
             'band' => $band,
             'form' => $form,
@@ -70,10 +72,10 @@ class BandController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bandRepository->add($band, true);
-
+            $this->addFlash('success', 'Groupe modifié !');
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Groupe modifié !');
+       
         return $this->renderForm('band/edit.html.twig', [
             'band' => $band,
             'form' => $form,

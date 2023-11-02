@@ -44,10 +44,10 @@ class UserController extends AbstractController
             $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
             $user->setPassword($hashedPassword);
             $userRepository->add($user, true);
-            
+            $this->addFlash('success', 'Utilisateur ajouté !');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Utilisateur ajouté !');
+
         return $this->renderForm('user/create.html.twig', [
             'user' => $user,
             'form' => $form,

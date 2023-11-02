@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Band{% endblock %}
+{% block title %}Nouveau groupe{% endblock %}
 
 {% block body %}
-    <h1>Create new Band</h1>
+	<div class="d-flex justify-content-between m-3">
+		<h2>Création d'un nouveau groupe</h2>
+		<a href="{{ path('back_band_list') }}" class='btn btn-secondary'>Retour</a>
+	</div>
 
-    {{ include('band/_form.html.twig') }}
+	{{ include('partials/_form.html.twig') }}
 
-    <a href="{{ path('back_band_list') }}">back to list</a>
 {% endblock %}

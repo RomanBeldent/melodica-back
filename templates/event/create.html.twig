@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Event{% endblock %}
+{% block title %}Nouvel événement{% endblock %}
 
 {% block body %}
-    <h1>Create new Event</h1>
+	<div class="d-flex justify-content-between m-3">
+    <h2>Ajouter un nouvel événement</h2>
+		<a href="{{ path('back_address_list') }}" class='btn btn-secondary'>Retour</a>
+	</div>
+	{{ include('partials/_form.html.twig') }}
 
-    {{ include('event/_form.html.twig') }}
-
-    <a href="{{ path('back_event_list') }}">back to list</a>
 {% endblock %}

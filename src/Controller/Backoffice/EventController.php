@@ -3,12 +3,13 @@
 namespace App\Controller\Backoffice;
 
 use App\Entity\Event;
+use DateTimeImmutable;
 use App\Form\EventType;
 use App\Repository\EventRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("back/event", name="back_event_")
@@ -32,14 +33,16 @@ class EventController extends AbstractController
     {
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
+        
+        $event->setCreatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eventRepository->add($event, true);
-
+            $this->addFlash('success', 'Événement ajouté !');
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Évènement ajouté !');
+        
         return $this->renderForm('event/create.html.twig', [
             'event' => $event,
             'form' => $form,
@@ -66,10 +69,10 @@ class EventController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $eventRepository->add($event, true);
-
+            $this->addFlash('success', 'Événement ajouté !');
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
         }
-        $this->addFlash('success', 'Évènement ajouté !');
+        
         return $this->renderForm('event/edit.html.twig', [
             'event' => $event,
             'form' => $form,
@@ -84,7 +87,7 @@ class EventController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->request->get('_token'))) {
             $eventRepository->remove($event, true);
         }
-        $this->addFlash('success', 'Évènement supprimé !');
+        $this->addFlash('success', 'Événement supprimé !');
         return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);
     }
 }

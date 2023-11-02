@@ -33,10 +33,12 @@ class BandType extends AbstractType
                 'label'=>'Zone de recherche autour de moi'
             ])
             ->add('sample',TextType::class,[
-                'label' => 'Echantillon de musique'
+                'label' => 'Echantillon de musique',
+                'required' => false
             ])
             ->add('picture',TextType::class,[
-                'label'=>'Photo de profil'
+                'label'=>'Photo de profil',
+                'required'=>false
             ])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
@@ -50,7 +52,6 @@ class BandType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'firstname',
                 'multiple' => true])
-            
             ->add('tags', EntityType::class,[
                 'label'=> 'Qu\'êtes vous?',
                 'class' => Tag::class,
@@ -63,8 +64,9 @@ class BandType extends AbstractType
                 'class' => Genre::class,
                 'multiple' => true
             ])
-            ->add('address', AddressType::class);
-            
+            ->add('address', AddressType::class,[
+                'label'=>'Adresse',
+            ]);       
     }
 
     public function configureOptions(OptionsResolver $resolver): void
