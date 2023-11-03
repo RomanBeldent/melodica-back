@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Genre{% endblock %}
+{% block title %}Nouveau genre
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Genre</h1>
-
+	<div class="d-flex justify-content-between m-3">
+		<h2>Création d'un nouveau genre</h2>
+		<a href="{{ path('back_genre_list') }}" class='btn btn-secondary'>Retour</a>
+	</div>
 	{{ include('partials/_form.html.twig') }}
-
-    <a href="{{ path('back_genre_list') }}">back to list</a>
 {% endblock %}
