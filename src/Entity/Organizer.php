@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=OrganizerRepository::class)
- * @UniqueEntity("name", message = "Ce nom de groupe ou d'artiste existe déjà") 
+ * @UniqueEntity("name", message = "Ce nom de groupe ou d'artiste existe déjà")
  */
 class Organizer
 {
@@ -27,33 +27,33 @@ class Organizer
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $website;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $created_at;
 
@@ -69,16 +69,16 @@ class Organizer
     private $users;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="organizers")
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="organizers", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $type;
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="organizer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $address;
 
@@ -101,7 +101,7 @@ class Organizer
     }
     public function __toString()
     {
-        return $this->name;        
+        return $this->name;
     }
 
     public function getId(): ?int

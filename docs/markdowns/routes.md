@@ -34,7 +34,7 @@
 | /api/user/     | GET       | Api\User   | list   |            | user list          |
 | /api/user/{id} | GET       | Api\User   | show   | id = \d+   | show specific user |
 | /api/user/     | POST      | Api\User   | create |            | create a new user  |
-| /api/user/{id} | PUT       | Api\User   | edit   | id = \d+   | update a user      |
+| /api/user/{id} | PATCH     | Api\User   | edit   | id = \d+   | update a user      |
 | /api/user/{id} | DELETE    | Api\User   | delete | id = \d+   | delete a user      |
 
 ### Band
@@ -45,7 +45,7 @@
 | /api/band/{id}   | GET       | Api\Band   | show   | id = \d+   | show specific band |
 | /api/band/random | GET       | Api\Band   | random |            | get a random band  |
 | /api/band/       | POST      | Api\Band   | create |            | create a new band  |
-| /api/band/{id}   | PUT       | Api\Band   | edit   | id = \d+   | update a band      |
+| /api/band/{id}   | PATCH     | Api\Band   | edit   | id = \d+   | update a band      |
 | /api/band/{id}   | DELETE    | Api\Band   | delete | id = \d+   | delete a band      |
 
 ### Organizer
@@ -56,7 +56,7 @@
 | /api/organizer/{id}   | GET       | Api\Organizer | show   | id = \d+   | show specific organizer |
 | /api/organizer/random | GET       | Api\Organizer | random |            | get a random organizer  |
 | /api/organizer/       | POST      | Api\Organizer | create |            | create a new organizer  |
-| /api/organizer/{id}   | PUT       | Api\Organizer | edit   | id = \d+   | update a organizer      |
+| /api/organizer/{id}   | PATCH     | Api\Organizer | edit   | id = \d+   | update a organizer      |
 | /api/organizer/{id}   | DELETE    | Api\Organizer | delete | id = \d+   | delete a organizer      |
 
 ### Event
@@ -67,7 +67,7 @@
 | /api/event/{id}   | GET       | Api\Event  | show   | id = \d+   | show specific event |
 | /api/event/random | GET       | Api\Event  | random |            | get a random event  |
 | /api/event/       | POST      | Api\Event  | create |            | create a new event  |
-| /api/event/{id}   | PUT       | Api\Event  | edit   | id = \d+   | update a event      |
+| /api/event/{id}   | PATCH     | Api\Event  | edit   | id = \d+   | update a event      |
 | /api/event/{id}   | DELETE    | Api\Event  | delete | id = \d+   | delete a event      |
 
 ### Genre
@@ -77,7 +77,7 @@
 | /api/genre/     | GET       | Api\Genre  | list   |            | genre list          |
 | /api/genre/{id} | GET       | Api\Genre  | show   | id = \d+   | show specific genre |
 | /api/genre/     | POST      | Api\Genre  | create |            | create a new genre  |
-| /api/genre/{id} | PUT       | Api\Genre  | edit   | id = \d+   | update a genre      |
+| /api/genre/{id} | PATCH     | Api\Genre  | edit   | id = \d+   | update a genre      |
 | /api/genre/{id} | DELETE    | Api\Genre  | delete | id = \d+   | delete a genre      |
 
 ### Tag
@@ -87,18 +87,18 @@
 | /api/tag/     | GET       | Api\Tag    | list   |            | tag list          |
 | /api/tag/{id} | GET       | Api\Tag    | show   | id = \d+   | show specific tag |
 | /api/tag/     | POST      | Api\Tag    | create |            | create a new tag  |
-| /api/tag/{id} | PUT       | Api\Tag    | edit   | id = \d+   | update a tag      |
+| /api/tag/{id} | PATCH     | Api\Tag    | edit   | id = \d+   | update a tag      |
 | /api/tag/{id} | DELETE    | Api\Tag    | delete | id = \d+   | delete a tag      |
 
 ### Tag
 
-| url           | Verb HTTP | Controller | Method | constraint | comment           |
-| ------------- | --------- | ---------- | ------ | ---------- | ----------------- |
-| /api/address/     | GET       | Api\Address    | list   |            | address list          |
-| /api/address/{id} | GET       | Api\Address    | show   | id = \d+   | show specific address |
-| /api/address/     | POST      | Api\Address    | create |            | create a new address  |
-| /api/address/{id} | PUT       | Api\Address    | edit   | id = \d+   | update a address      |
-| /api/address/{id} | DELETE    | Api\Address    | delete | id = \d+   | delete a address      |
+| url               | Verb HTTP | Controller  | Method | constraint | comment               |
+| ----------------- | --------- | ----------- | ------ | ---------- | --------------------- |
+| /api/address/     | GET       | Api\Address | list   |            | address list          |
+| /api/address/{id} | GET       | Api\Address | show   | id = \d+   | show specific address |
+| /api/address/     | POST      | Api\Address | create |            | create a new address  |
+| /api/address/{id} | PATCH     | Api\Address | edit   | id = \d+   | update a address      |
+| /api/address/{id} | DELETE    | Api\Address | delete | id = \d+   | delete a address      |
 
 
 ## BackOffice
@@ -110,7 +110,7 @@
 | /back/user/          | GET       | Back\User  | list   |            | user list                  |
 | /back/user/{id}      | GET       | Back\User  | read   | id = \d+   | user read                  |
 | /back/user/{id}/edit | GET       | Back\User  | edit   | id = \d+   | user edit : display form   |
-| /back/user/{id}/edit | PUT       | Back\User  | edit   | id = \d+   | user edit : manage form    |
+| /back/user/{id}/edit | PATCH     | Back\User  | edit   | id = \d+   | user edit : manage form    |
 | /back/user/create    | GET       | Back\User  | create |            | user create : display form |
 | /back/user/create    | POST      | Back\User  | create |            | user create : manage form  |
 | /back/user/{id}      | DELETE    | Back\User  | delete | id = \d+   | user delete                |
@@ -123,7 +123,7 @@
 | /back/band/          | GET       | Back\Band  | list   |            | band list                                              |
 | /back/band/{id}      | GET       | Back\Band  | read   | id = \d+   | band read                                              |
 | /back/band/{id}/edit | GET       | Back\Band  | edit   | id = \d+   | band edit : display form                               |
-| /back/band/{id}/edit | PUT       | Back\Band  | edit   | id = \d+   | band edit : manage form                                |
+| /back/band/{id}/edit | PATCH     | Back\Band  | edit   | id = \d+   | band edit : manage form                                |
 | /back/band/create    | GET       | Back\Band  | create |            | band create : display form                             |
 | /back/band/create    | POST      | Back\Band  | create |            | band create : manage form                              |
 | /back/band/{id}      | DELETE    | Back\Band  | delete | id = \d+   | band delete                                            |
@@ -135,7 +135,7 @@
 | /back/organizer/          | GET       | Back\Organizer | list   |            | organizer list                  |
 | /back/organizer/{id}      | GET       | Back\Organizer | read   | id = \d+   | organizer read                  |
 | /back/organizer/{id}/edit | GET       | Back\Organizer | edit   | id = \d+   | organizer edit : display form   |
-| /back/organizer/{id}/edit | PUT       | Back\Organizer | edit   | id = \d+   | organizer edit : manage form    |
+| /back/organizer/{id}/edit | PATCH     | Back\Organizer | edit   | id = \d+   | organizer edit : manage form    |
 | /back/organizer/create    | GET       | Back\Organizer | create |            | organizer create : display form |
 | /back/organizer/create    | POST      | Back\Organizer | create |            | organizer create : manage form  |
 | /back/organizer/{id}      | DELETE    | Back\Organizer | delete | id = \d+   | organizer delete                |
@@ -147,7 +147,7 @@
 | /back/event/          | GET       | Back\Event | list   |            | event list                  |
 | /back/event/{id}      | GET       | Back\Event | read   | id = \d+   | event read                  |
 | /back/event/{id}/edit | GET       | Back\Event | edit   | id = \d+   | event edit : display form   |
-| /back/event/{id}/edit | PUT       | Back\Event | edit   | id = \d+   | event edit : manage form    |
+| /back/event/{id}/edit | PATCH     | Back\Event | edit   | id = \d+   | event edit : manage form    |
 | /back/event/create    | GET       | Back\Event | create |            | event create : display form |
 | /back/event/create    | POST      | Back\Event | create |            | event create : manage form  |
 | /back/event/{id}      | DELETE    | Back\Event | delete | id = \d+   | event delete                |
@@ -159,7 +159,7 @@
 | /back/genre/          | GET       | Back\Genre | list   |            | genre list                  |
 | /back/genre/{id}      | GET       | Back\Genre | read   | id = \d+   | genre read                  |
 | /back/genre/{id}/edit | GET       | Back\Genre | edit   | id = \d+   | genre edit : display form   |
-| /back/genre/{id}/edit | PUT       | Back\Genre | edit   | id = \d+   | genre edit : manage form    |
+| /back/genre/{id}/edit | PATCH     | Back\Genre | edit   | id = \d+   | genre edit : manage form    |
 | /back/genre/create    | GET       | Back\Genre | create |            | genre create : display form |
 | /back/genre/create    | POST      | Back\Genre | create |            | genre create : manage form  |
 | /back/genre/{id}      | DELETE    | Back\Genre | delete | id = \d+   | genre delete                |
@@ -171,7 +171,7 @@
 | /back/tag/          | GET       | Back\Tag   | list   |            | tag list                  |
 | /back/tag/{id}      | GET       | Back\Tag   | read   | id = \d+   | tag read                  |
 | /back/tag/{id}/edit | GET       | Back\Tag   | edit   | id = \d+   | tag edit : display form   |
-| /back/tag/{id}/edit | PUT       | Back\Tag   | edit   | id = \d+   | tag edit : manage form    |
+| /back/tag/{id}/edit | PATCH     | Back\Tag   | edit   | id = \d+   | tag edit : manage form    |
 | /back/tag/create    | GET       | Back\Tag   | create |            | tag create : display form |
 | /back/tag/create    | POST      | Back\Tag   | create |            | tag create : manage form  |
 | /back/tag/{id}      | DELETE    | Back\Tag   | delete | id = \d+   | tag delete                |
