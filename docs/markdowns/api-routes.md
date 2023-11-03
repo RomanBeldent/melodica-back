@@ -4,7 +4,7 @@
 | ADDRESS    | OK  | OK     | OK   | OK    | OK     |
 | BAND       | WIP | WIP    | WIP  | WIP   | WIP    |
 | ORGANIZER  | WIP | WIP    | WIP  | WIP   | WIP    |
-| GENRE      | WIP | WIP    | WIP  | WIP   | WIP    |
+| GENRE      | OK  | OK     | OK   | OK    | OK     |
 | EVENT      | WIP | WIP    | WIP  | WIP   | WIP    |
-| TAG        | WIP | WIP    | WIP  | WIP   | WIP    |
-| TYPE       | WIP | WIP    | WIP  | WIP   | WIP    |
+| TAG        | OK  | OK     | OK   | OK    | OK     |
+| TYPE       | OK  | OK     | OK   | OK    | OK     |

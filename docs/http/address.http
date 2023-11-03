@@ -1,7 +1,7 @@
 ### Liste des adresses
 GET http://localhost:8080/api/address
 ### Détail d'une adresse
-GET http://localhost:8080/api/address/1
+GET http://localhost:8080/api/address/3
 ### Ajout d'une adresse
 POST http://localhost:8080/api/address/
 content-type: application/json
@@ -13,12 +13,12 @@ content-type: application/json
     "department":"Test"
 }
 ### Modification d'une adresse
-PATCH http://localhost:8080/api/address/2
+PATCH http://localhost:8080/api/address/3
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopat",
+    "street": "24 rue du Matokopata",
     "city": "Pokomoto"
 }
 ### Suppression d'une adresse
-DELETE http://localhost:8080/api/address/1
+DELETE http://localhost:8080/api/address/4

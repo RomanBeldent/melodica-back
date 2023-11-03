@@ -38,7 +38,7 @@ class TypeController extends AbstractController
             'type' => $type], 200, [], ['groups' => 'type_show']);
     }
 
-        /**
+    /**
      * @Route("/", name="create", methods={"POST"})
      */
     public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
@@ -101,4 +101,3 @@ class TypeController extends AbstractController
         return $this->json($type, Response::HTTP_OK);
     }
 }
-
