@@ -7,7 +7,16 @@ POST http://localhost:8080/api/event/
 content-type: application/json
 
 {
-    "field": "test"
+      "title": "API EVENT TEST",
+      "description": "API EVENT TEST",
+      "date_start": "2023-12-01T00:00:00+01:00",
+      "date_end": "2023-12-02T00:00:00+01:00",
+      "hour_start": "1970-01-01T14:00:00+01:00",
+      "hour_end": "1970-01-01T06:00:00+01:00",
+      "picture": null,
+      "created_at": "2023-11-03T11:57:55+01:00",
+      "updated_at": null,
+      "tags": [
 }
 
 ### Modification d'un événement
