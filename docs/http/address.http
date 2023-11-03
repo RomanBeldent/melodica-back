@@ -4,8 +4,8 @@ GET http://localhost:8080/api/address
 GET http://localhost:8080/api/address/1
 ### Ajout d'un utilisateur
 POST http://localhost:8080/api/address/
-
 content-type: application/json
+
 {
     "street": "Test",
     "zipcode": "Test",
@@ -13,9 +13,9 @@ content-type: application/json
     "department":"Test"
 }
 ### Modification d'un utilisateur
-PUT http://localhost:8080/api/address/2
-
+PATCH http://localhost:8080/api/address/2
 content-type: application/json
+
 {
     "street": "Test",
 }
