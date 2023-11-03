@@ -64,6 +64,7 @@ class Band
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="bands")
+     * @Groups({"band_list", "band_show"})
      */
     private $users;
 
