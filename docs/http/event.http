@@ -16,15 +16,23 @@ content-type: application/json
       "picture": null,
       "created_at": "2023-11-03T11:57:55+01:00",
       "updated_at": null,
-      "tags": [6,7]
+      "tags": [6,7],
+      "bands": [1,5],
+      "organizer": 1,
+            "address": {
+            "street": "24 rue du Test event",
+            "zipcode": "42000",
+            "city":"EventCity",
+            "department":"42"
+        }
 }
 
 ### Modification d'un événement
-PATCH http://localhost:8080/api/event/1
+PATCH http://localhost:8080/api/event/2
 content-type: application/json
 
 {
-    "field": "test"
+    "title": "API retest patch"
 }
 ### Suppression d'un événement
 DELETE http://localhost:8080/api/event/1

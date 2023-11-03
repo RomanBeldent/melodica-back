@@ -5,6 +5,6 @@
 | BAND       | OK  | OK     | OK   | OK    | OK     |
 | ORGANIZER  | OK  | OK     | OK   | OK    | OK     |
 | GENRE      | OK  | OK     | OK   | OK    | OK     |
-| EVENT      | OK  | OK     | WIP  | OK    | OK     |
+| EVENT      | OK  | OK     | OK   | OK    | OK     |
 | TAG        | OK  | OK     | OK   | OK    | OK     |
 | TYPE       | OK  | OK     | OK   | OK    | OK     |
