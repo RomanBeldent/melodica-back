@@ -43,7 +43,7 @@
 						<td>{{ organizer.updatedAt ? organizer.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>
 							<a href="{{ path('back_organizer_show', {'id': organizer.id}) }}" class="m-1 btn btn-outline-info">Read
-								<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="m-1 btn bts-sm btn-warning">Update
+								<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="m-1 btn btn-outline-warning">Update
 									<a href="{{ path('back_organizer_delete', {'id': organizer.id}) }}" class="m-1 btn btn-outline-danger">Delete</td>
 								</tr>
 							{% else %}

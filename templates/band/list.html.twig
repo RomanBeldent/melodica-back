@@ -44,7 +44,7 @@
 						<td>{{ band.updatedAt ? band.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>
 							<a href="{{ path('back_band_show', {'id': band.id}) }}" class="m-1 btn btn-outline-info">Read
-								<a href="{{ path('back_band_edit', {'id': band.id}) }}" class="m-1 btn bts-sm btn-warning">Update
+								<a href="{{ path('back_band_edit', {'id': band.id}) }}" class="m-1 btn btn-outline-warning">Update
 									<a href="{{ path('back_band_delete', {'id': band.id}) }}" class="m-1 btn btn-outline-danger">Delete</td>
 								</td>
 							</tr>
