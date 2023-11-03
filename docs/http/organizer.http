@@ -1,0 +1,29 @@
+### Liste des utilisateurs
+GET http://localhost:8080/api/organizer
+
+### Détail d'un utilisateur
+GET http://localhost:8080/api/organizer/1
+
+### Ajout d'un utilisateur
+POST http://localhost:8080/api/organizer/
+content-type: application/json
+
+{
+    "name": "TestAPIaaa",
+    "description": "Hello",
+    "website": "site.web",
+    "picture": "picture.png",
+    "created_at": "2023-10-31T16:13:48+01:00",
+    "type": "Bar"
+}
+
+### Modification d'un utilisateur
+PATCH http://localhost:8080/api/organizer/5
+content-type: application/json
+
+{
+      "name": "New bar testa"
+}
+
+### Suppression d'un utilisateur
+DELETE http://localhost:8080/api/organizer/26
