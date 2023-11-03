@@ -7,14 +7,28 @@ POST http://localhost:8080/api/band/
 content-type: application/json
 
 {
-
+    "name": "BidibibapaTESTa",
+    "description": "BadababoupaTEST",
+    "area": 50,
+    "sample": null,
+    "picture": null,
+    "created_at": "2023-12-03T11:55:08+01:00",
+        "address": [
+        {
+            "street": "TestA",
+            "zipcode": "TestA",
+            "city":"TestA",
+            "department":"TestA"
+        }
+        ]
 }
+
 ### Modification d'un groupe
-PATCH http://localhost:8080/api/band/
+PATCH http://localhost:8080/api/band/1
 content-type: application/json
 
 {
-
+    "name": "Badidou"
 }
 ### Suppression d'un groupe
 DELETE http://localhost:8080/api/band/1

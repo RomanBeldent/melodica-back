@@ -2,9 +2,9 @@
 | ---------- | --- | ------ | ---- | ----- | ------ |
 | USER       | OK  | OK     | OK   | OK    | OK     |
 | ADDRESS    | OK  | OK     | OK   | OK    | OK     |
-| BAND       | WIP | WIP    | WIP  | WIP   | WIP    |
-| ORGANIZER  | WIP | WIP    | WIP  | WIP   | WIP    |
+| BAND       | OK  | OK     | WIP  | OK    | OK     |
+| ORGANIZER  | OK  | OK     | WIP  | OK    | OK     |
 | GENRE      | OK  | OK     | OK   | OK    | OK     |
-| EVENT      | WIP | WIP    | WIP  | WIP   | WIP    |
+| EVENT      | OK  | OK     | WIP  | OK    | OK     |
 | TAG        | OK  | OK     | OK   | OK    | OK     |
 | TYPE       | OK  | OK     | OK   | OK    | OK     |

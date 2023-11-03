@@ -16,44 +16,44 @@ class Band
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"band_list", "band_show"})})
+     * @Groups({"band_list", "band_show"})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "user_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "user_show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $area;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show"})
      */
     private $sample;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $created_at;
 
@@ -64,31 +64,30 @@ class Band
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="bands")
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $users;
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="band")
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $events;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="bands")
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="bands")
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $genre;
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="band", cascade={"persist", "remove"})
-     * @Groups({"band_list", "band_show"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;

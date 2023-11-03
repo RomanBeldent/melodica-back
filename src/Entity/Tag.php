@@ -25,7 +25,7 @@ class Tag
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"tag_list", "tag_show", "band_list", "band_show"})
+     * @Groups({"tag_list", "tag_show", "band_list", "band_show", "event_list", "event_show"})
      * @Assert\NotBlank
      */
     private $name;
