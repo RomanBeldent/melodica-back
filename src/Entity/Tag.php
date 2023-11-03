@@ -31,7 +31,7 @@ class Tag
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="tag")
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="tags")
      */
     private $events;
 

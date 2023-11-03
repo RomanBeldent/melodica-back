@@ -63,7 +63,7 @@ class Organizer
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers", cascade={"persist"})
      * @Groups({"organizer_list", "organizer_show"})
      */
     private $users;
