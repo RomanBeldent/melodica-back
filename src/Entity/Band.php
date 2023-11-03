@@ -75,7 +75,7 @@ class Band
     private $events;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Tag::class, mappedBy="band")
+     * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="bands")
      * @Groups({"band_list", "band_show"})
      */
     private $tags;
@@ -265,7 +265,6 @@ class Band
     {
         if (!$this->tags->contains($tag)) {
             $this->tags[] = $tag;
-            $tag->addBand($this);
         }
 
         return $this;
