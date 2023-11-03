@@ -57,7 +57,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="update", methods={"PUT"})
+     * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
     public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
