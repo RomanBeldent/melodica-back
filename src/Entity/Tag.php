@@ -36,14 +36,15 @@ class Tag
     private $events;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Band::class, inversedBy="tags")
+     * 
+     * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="tags")
      */
-    private $band;
+    private $bands;
 
     public function __construct()
     {
         $this->events = new ArrayCollection();
-        $this->band = new ArrayCollection();
+        $this->bands = new ArrayCollection();
     }
     public function __toString()
     {
@@ -99,13 +100,14 @@ class Tag
      */
     public function getBand(): Collection
     {
-        return $this->band;
+        return $this->bands;
     }
 
     public function addBand(Band $band): self
     {
-        if (!$this->band->contains($band)) {
-            $this->band[] = $band;
+        if (!$this->bands->contains($band)) {
+            $this->bands[] = $band;
+            $band->addTag($this);
         }
 
         return $this;
@@ -113,7 +115,7 @@ class Tag
 
     public function removeBand(Band $band): self
     {
-        $this->band->removeElement($band);
+        $this->bands->removeElement($band);
 
         return $this;
     }
