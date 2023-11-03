@@ -31,4 +31,6 @@ class TypeController extends AbstractController
         return $this->json([
             'type' => $type], 200, [], ['groups' => 'type_show']);
     }
+
 }
+
