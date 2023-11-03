@@ -63,7 +63,7 @@ class Band
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="band")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="bands")
      */
     private $users;
 
@@ -211,7 +211,6 @@ class Band
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addBand($this);
         }
 
         return $this;

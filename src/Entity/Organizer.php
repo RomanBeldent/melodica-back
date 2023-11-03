@@ -63,7 +63,7 @@ class Organizer
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="organizer")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers")
      * @Groups({"organizer_list", "organizer_show"})
      */
     private $users;
@@ -193,7 +193,6 @@ class Organizer
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addOrganizer($this);
         }
 
         return $this;

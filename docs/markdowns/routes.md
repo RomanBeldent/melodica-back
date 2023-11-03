@@ -90,6 +90,16 @@
 | /api/tag/{id} | PUT       | Api\Tag    | edit   | id = \d+   | update a tag      |
 | /api/tag/{id} | DELETE    | Api\Tag    | delete | id = \d+   | delete a tag      |
 
+### Tag
+
+| url           | Verb HTTP | Controller | Method | constraint | comment           |
+| ------------- | --------- | ---------- | ------ | ---------- | ----------------- |
+| /api/address/     | GET       | Api\Address    | list   |            | address list          |
+| /api/address/{id} | GET       | Api\Address    | show   | id = \d+   | show specific address |
+| /api/address/     | POST      | Api\Address    | create |            | create a new address  |
+| /api/address/{id} | PUT       | Api\Address    | edit   | id = \d+   | update a address      |
+| /api/address/{id} | DELETE    | Api\Address    | delete | id = \d+   | delete a address      |
+
 
 ## BackOffice
 

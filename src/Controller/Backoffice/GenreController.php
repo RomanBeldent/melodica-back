@@ -32,6 +32,7 @@ class GenreController extends AbstractController
     {
         $genre = new Genre();
         $form = $this->createForm(GenreType::class, $genre);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

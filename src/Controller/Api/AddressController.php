@@ -38,6 +38,7 @@ class AddressController extends AbstractController
         return $this->json([
             'address' => $address], 200, [], ['groups' => 'address_show']);
     }
+
     /**
      * @Route("/", name="create", methods={"POST"})
      */
@@ -90,3 +91,4 @@ class AddressController extends AbstractController
         return $this->json($address, Response::HTTP_OK);
     }
 }
+

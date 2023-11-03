@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity("email", message = "Cet email existe déjà")  
+ * @UniqueEntity("email", message = "Cet email existe déjà")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      * @Assert\NotBlank
      */
     private $firstname;
@@ -35,14 +35,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="date")
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $birthday;
 
@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $email;
 
@@ -58,26 +58,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      * @var string The hashed password
      * @Assert\NotBlank
+     * @Groups({"user_create", "user_update"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $phone_number;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $created_at;
 
@@ -87,16 +88,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Organizer::class, inversedBy="users")
-     * @Groups({"user_list", "user_show"})
+     * @ORM\ManyToMany(targetEntity=Organizer::class, mappedBy="users")
      */
-    private $organizer;
+    private $organizers;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Band::class, inversedBy="users")
-     * @Groups({"user_list", "user_show"})
+     * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="users")
      */
-    private $band;
+    private $bands;
 
     /**
      * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="user", orphanRemoval=true)
@@ -111,8 +110,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->organizer = new ArrayCollection();
-        $this->band = new ArrayCollection();
+        $this->organizers = new ArrayCollection();
+        $this->bands = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
 
@@ -235,23 +234,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Organizer>
      */
-    public function getOrganizer(): Collection
+    public function getOrganizers(): Collection
     {
-        return $this->organizer;
+        return $this->organizers;
     }
 
     public function addOrganizer(Organizer $organizer): self
     {
-        if (!$this->organizer->contains($organizer)) {
-            $this->organizer[] = $organizer;
+        if (!$this->organizers->contains($organizer)) {
+            $this->organizers[] = $organizer;
+            $organizer->addUser($this);
         }
 
         return $this;
     }
 
-    public function removeOrganizer(Organizer $organizer): self
+    public function removeOrganizer(Organizer $organizers): self
     {
-        $this->organizer->removeElement($organizer);
+        $this->organizers->removeElement($organizers);
 
         return $this;
     }
@@ -259,15 +259,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Band>
      */
-    public function getBand(): Collection
+    public function getBands(): Collection
     {
-        return $this->band;
+        return $this->bands;
     }
 
     public function addBand(Band $band): self
     {
-        if (!$this->band->contains($band)) {
-            $this->band[] = $band;
+        if (!$this->bands->contains($band)) {
+            $this->bands[] = $band;
+            $band->addUser($this);
         }
 
         return $this;
@@ -275,7 +276,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeBand(Band $band): self
     {
-        $this->band->removeElement($band);
+        $this->bands->removeElement($band);
 
         return $this;
     }
