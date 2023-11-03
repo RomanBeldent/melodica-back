@@ -1,0 +1,21 @@
+### Liste des tags
+GET http://localhost:8080/api/tag
+### Détail d'un tag
+GET http://localhost:8080/api/tag/1
+### Ajout d'un tag
+POST http://localhost:8080/api/tag/
+content-type: application/json
+
+{
+    "name": "test"
+}
+
+### Modification d'un tag
+PATCH http://localhost:8080/api/tag/7
+content-type: application/json
+
+{
+    "name": "Djembe"
+}
+### Suppression d'un tag
+DELETE http://localhost:8080/api/tag/8

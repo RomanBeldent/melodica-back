@@ -1,0 +1,21 @@
+### Liste des genres
+GET http://localhost:8080/api/genre
+### Détail d'un genre
+GET http://localhost:8080/api/genre/1
+### Ajout d'un genre
+POST http://localhost:8080/api/genre/
+content-type: application/json
+
+{
+    "name": "Rap"
+}
+
+### Modification d'un genre
+PATCH http://localhost:8080/api/genre/1
+content-type: application/json
+
+{
+    "field": "test"
+}
+### Suppression d'un genre
+DELETE http://localhost:8080/api/genre/3

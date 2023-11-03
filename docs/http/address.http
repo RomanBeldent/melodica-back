@@ -1,24 +1,24 @@
-### Liste des utilisateurs
+### Liste des adresses
 GET http://localhost:8080/api/address
-### Détail d'un utilisateur
-GET http://localhost:8080/api/address/1
-### Ajout d'un utilisateur
+### Détail d'une adresse
+GET http://localhost:8080/api/address/3
+### Ajout d'une adresse
 POST http://localhost:8080/api/address/
 content-type: application/json
 
 {
-    "street": "Testaaa",
+    "street": "Test",
     "zipcode": "Test",
     "city":"Test",
     "department":"Test"
 }
-### Modification d'un utilisateur
-PATCH http://localhost:8080/api/address/7
+### Modification d'une adresse
+PATCH http://localhost:8080/api/address/3
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopat",
+    "street": "24 rue du Matokopata",
     "city": "Pokomoto"
 }
-### Suppression d'un utilisateur
-DELETE http://localhost:8080/api/address/20
+### Suppression d'une adresse
+DELETE http://localhost:8080/api/address/4

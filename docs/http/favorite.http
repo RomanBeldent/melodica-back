@@ -1,0 +1,21 @@
+### Liste des favoris
+GET http://localhost:8080/api/favorite
+### Détail d'un favoris
+GET http://localhost:8080/api/favorite/1
+### Ajout d'un favoris
+POST http://localhost:8080/api/favorite/
+content-type: application/json
+
+{
+    "field": "test"
+}
+
+### Modification d'un favoris
+PATCH http://localhost:8080/api/favorite/1
+content-type: application/json
+
+{
+    "field": "test"
+}
+### Suppression d'un favoris
+DELETE http://localhost:8080/api/favorite/1

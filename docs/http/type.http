@@ -1,0 +1,21 @@
+### Liste des types
+GET http://localhost:8080/api/type
+### Détail d'un type
+GET http://localhost:8080/api/type/3
+### Ajout d'un type
+POST http://localhost:8080/api/type/
+content-type: application/json
+
+{
+    "name": "Anniversaire"
+}
+
+### Modification d'un type
+PATCH http://localhost:8080/api/type/5
+content-type: application/json
+
+{
+    "name": "Bar"
+}
+### Suppression d'un type
+DELETE http://localhost:8080/api/type/6

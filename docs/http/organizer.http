@@ -1,10 +1,10 @@
-### Liste des utilisateurs
+### Liste des organisateurs
 GET http://localhost:8080/api/organizer
 
-### Détail d'un utilisateur
+### Détail d'un organisateur
 GET http://localhost:8080/api/organizer/1
 
-### Ajout d'un utilisateur
+### Ajout d'un organisateur
 POST http://localhost:8080/api/organizer/
 content-type: application/json
 
@@ -17,13 +17,13 @@ content-type: application/json
     "type": "Bar"
 }
 
-### Modification d'un utilisateur
-PATCH http://localhost:8080/api/organizer/5
+### Modification d'un organisateur
+PATCH http://localhost:8080/api/organizer/1
 content-type: application/json
 
 {
-      "name": "New bar testa"
+      "name": "Le Bar de Basil le Scratcher fou"
 }
 
-### Suppression d'un utilisateur
+### Suppression d'un organisateur
 DELETE http://localhost:8080/api/organizer/26
