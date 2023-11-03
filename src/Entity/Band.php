@@ -84,7 +84,7 @@ class Band
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="bands")
      * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
-    private $genre;
+    private $genres;
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="band", cascade={"persist", "remove"})
@@ -102,7 +102,7 @@ class Band
         $this->users = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->tags = new ArrayCollection();
-        $this->genre = new ArrayCollection();
+        $this->genres = new ArrayCollection();
         $this->favorites = new ArrayCollection();
     }
     public function __toString()
@@ -281,15 +281,15 @@ class Band
     /**
      * @return Collection<int, Genre>
      */
-    public function getGenre(): Collection
+    public function getGenres(): Collection
     {
-        return $this->genre;
+        return $this->genres;
     }
 
     public function addGenre(Genre $genre): self
     {
-        if (!$this->genre->contains($genre)) {
-            $this->genre[] = $genre;
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
         }
 
         return $this;
@@ -297,7 +297,7 @@ class Band
 
     public function removeGenre(Genre $genre): self
     {
-        $this->genre->removeElement($genre);
+        $this->genres->removeElement($genre);
 
         return $this;
     }

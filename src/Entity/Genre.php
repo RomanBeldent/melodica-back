@@ -32,7 +32,7 @@ class Genre
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="genre")
+     * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="genres")
      * @Groups({"genre_list", "genre_show"})
      */
     private $bands;
