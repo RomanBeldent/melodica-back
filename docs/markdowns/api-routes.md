@@ -3,7 +3,7 @@
 | USER       | OK  | OK     | OK   | OK    | OK     |
 | ADDRESS    | OK  | OK     | OK   | OK    | OK     |
 | BAND       | OK  | OK     | WIP  | OK    | OK     |
-| ORGANIZER  | OK  | OK     | WIP  | OK    | OK     |
+| ORGANIZER  | OK  | OK     | OK   | OK    | OK     |
 | GENRE      | OK  | OK     | OK   | OK    | OK     |
 | EVENT      | OK  | OK     | WIP  | OK    | OK     |
 | TAG        | OK  | OK     | OK   | OK    | OK     |
