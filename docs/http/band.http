@@ -10,11 +10,11 @@ content-type: application/json
 
 }
 ### Modification d'un groupe
-PATCH http://localhost:8080/api/band/7
+PATCH http://localhost:8080/api/band/
 content-type: application/json
 
 {
 
 }
 ### Suppression d'un groupe
-DELETE http://localhost:8080/api/band/20
+DELETE http://localhost:8080/api/band/1
