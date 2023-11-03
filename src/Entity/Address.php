@@ -24,28 +24,28 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"address_list", "address_show", "band_list", "band_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update"})
      * @Assert\NotBlank
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"address_list", "address_show", "band_list", "band_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update"})
      * @Assert\NotBlank
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=85)
-     * @Groups({"address_list", "address_show", "band_list", "band_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update"})
      * @Assert\NotBlank
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"address_list", "address_show", "band_list", "band_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update"})
      * @Assert\NotBlank
      */
     private $department;
