@@ -7,17 +7,18 @@ POST http://localhost:8080/api/address/
 content-type: application/json
 
 {
-    "street": "Test",
+    "street": "Testaaa",
     "zipcode": "Test",
     "city":"Test",
     "department":"Test"
 }
 ### Modification d'un utilisateur
-PATCH http://localhost:8080/api/address/2
+PATCH http://localhost:8080/api/address/18
 content-type: application/json
 
 {
-    "street": "Test",
+    "street": "24 rue du Matokopat",
+    "city": "Pokomoto"
 }
 ### Suppression d'un utilisateur
-DELETE http://localhost:8080/api/address/2
+DELETE http://localhost:8080/api/address/20

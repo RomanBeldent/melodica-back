@@ -55,7 +55,7 @@ class AddressController extends AbstractController
         return $this->json($address, Response::HTTP_CREATED, [], ["groups" => 'address_create']);
     }
     /**
-     * @Route("/{id<\d+>}", name="update", methods={"PUT"})
+     * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
     public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
