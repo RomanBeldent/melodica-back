@@ -3,11 +3,10 @@
 {% block title %}Edit Event{% endblock %}
 
 {% block body %}
-    <h1>Modifier un événement</h1>
-
+	<div class="d-flex justify-content-between m-3">
+		<h2>Mettre à jour l'événement {{ event.title }} </h2>
+		<a href="{{ path('back_event_list') }}" class='mb-3 btn btn-secondary'>Retour</a>
+	</div>
     {{ include('partials/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('back_event_list') }}">back to list</a>
-
     {{ include('event/_delete_form.html.twig') }}
 {% endblock %}
