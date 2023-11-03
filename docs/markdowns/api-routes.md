@@ -1,3 +1,10 @@
 | Table_name | GET | GET/id | POST | PATCH | DELETE |
 | ---------- | --- | ------ | ---- | ----- | ------ |
 | USER       | OK  | OK     | OK   | OK    | OK     |
+| ADDRESS    | OK  | OK     | OK   | OK    | OK     |
+| BAND       | WIP | WIP    | WIP  | WIP   | WIP    |
+| ORGANIZER  | WIP | WIP    | WIP  | WIP   | WIP    |
+| GENRE      | WIP | WIP    | WIP  | WIP   | WIP    |
+| EVENT      | WIP | WIP    | WIP  | WIP   | WIP    |
+| TAG        | WIP | WIP    | WIP  | WIP   | WIP    |
+| TYPE       | WIP | WIP    | WIP  | WIP   | WIP    |

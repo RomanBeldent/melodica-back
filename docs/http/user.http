@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/user
 
 ### Détail d'un utilisateur
-GET http://localhost:8080/api/user/1
+GET http://localhost:8080/api/user/2
 
 ### Ajout d'un utilisateur
 POST http://localhost:8080/api/user/
@@ -20,7 +20,7 @@ content-type: application/json
 }
 
 ### Modification d'un utilisateur
-PATCH http://localhost:8080/api/user/1
+PATCH http://localhost:8080/api/user/2
 content-type: application/json
 
 {
@@ -28,4 +28,4 @@ content-type: application/json
 }
 
 ### Suppression d'un utilisateur
-DELETE http://localhost:8080/api/user/26
+DELETE http://localhost:8080/api/user/1

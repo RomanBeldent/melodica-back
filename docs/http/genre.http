@@ -1,24 +1,21 @@
-### Liste des adresses
-GET http://localhost:8080/api/address
-### Détail d'une adresse
-GET http://localhost:8080/api/address/1
-### Ajout d'une adresse
-POST http://localhost:8080/api/address/
+### Liste des genres
+GET http://localhost:8080/api/genre
+### Détail d'un genre
+GET http://localhost:8080/api/genre/1
+### Ajout d'un genre
+POST http://localhost:8080/api/genre/
 content-type: application/json
 
 {
-    "street": "Testaaa",
-    "zipcode": "Test",
-    "city":"Test",
-    "department":"Test"
+    "field": "test"
 }
-### Modification d'une adresse
-PATCH http://localhost:8080/api/address/7
+
+### Modification d'un genre
+PATCH http://localhost:8080/api/genre/1
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopat",
-    "city": "Pokomoto"
+    "field": "test"
 }
-### Suppression d'une adresse
-DELETE http://localhost:8080/api/address/20
+### Suppression d'un genre
+DELETE http://localhost:8080/api/genre/1

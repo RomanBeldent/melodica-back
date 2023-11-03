@@ -1,24 +1,20 @@
 ### Liste des groupes
 GET http://localhost:8080/api/band
-### Détail d'une groupe
+### Détail d'un groupe
 GET http://localhost:8080/api/band/1
-### Ajout d'une groupe
+### Ajout d'un groupe
 POST http://localhost:8080/api/band/
 content-type: application/json
 
 {
-    "street": "Testaaa",
-    "zipcode": "Test",
-    "city":"Test",
-    "department":"Test"
+
 }
-### Modification d'une groupe
+### Modification d'un groupe
 PATCH http://localhost:8080/api/band/7
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopat",
-    "city": "Pokomoto"
+
 }
-### Suppression d'une groupe
+### Suppression d'un groupe
 DELETE http://localhost:8080/api/band/20
