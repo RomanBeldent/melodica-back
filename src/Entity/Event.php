@@ -84,7 +84,7 @@ class Event
      * @ORM\ManyToMany(targetEntity=Band::class, inversedBy="events")
      * @Groups({"event_list", "event_show"})
      */
-    private $band;
+    private $bands;
 
     /**
      * @ORM\ManyToOne(targetEntity=Address::class, inversedBy="events",cascade={"persist"})
@@ -104,7 +104,7 @@ class Event
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->band = new ArrayCollection();
+        $this->bands = new ArrayCollection();
     }
     
 
@@ -248,15 +248,15 @@ class Event
     /**
      * @return Collection<int, Band>
      */
-    public function getBand(): Collection
+    public function getBands(): Collection
     {
-        return $this->band;
+        return $this->bands;
     }
 
     public function addBand(Band $band): self
     {
-        if (!$this->band->contains($band)) {
-            $this->band[] = $band;
+        if (!$this->bands->contains($band)) {
+            $this->bands[] = $band;
         }
 
         return $this;
@@ -264,7 +264,7 @@ class Event
 
     public function removeBand(Band $band): self
     {
-        $this->band->removeElement($band);
+        $this->bands->removeElement($band);
 
         return $this;
     }

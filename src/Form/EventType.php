@@ -60,12 +60,12 @@ class EventType extends AbstractType
                 'input' => 'datetime_immutable',
                 'disabled' => true,
             ])
-            ->add('tag', EntityType::class,[
+            ->add('tags', EntityType::class,[
                 'label'=>'Tag',
                 'class' => Tag::class,
                 'multiple'=> true,
             ])
-            ->add('band', EntityType::class,[
+            ->add('bands', EntityType::class,[
                 'label'=>'Artiste',
                 'class' => Band::class,
                 'multiple' => true,

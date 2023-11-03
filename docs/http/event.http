@@ -16,7 +16,7 @@ content-type: application/json
       "picture": null,
       "created_at": "2023-11-03T11:57:55+01:00",
       "updated_at": null,
-      "tags": [
+      "tags": [6,7]
 }
 
 ### Modification d'un événement

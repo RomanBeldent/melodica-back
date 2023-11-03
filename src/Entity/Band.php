@@ -69,7 +69,7 @@ class Band
     private $users;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="band")
+     * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="bands")
      * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
     private $events;
