@@ -20,7 +20,7 @@ content-type: application/json
 }
 
 ### Modification d'un utilisateur
-PATCH http://localhost:8080/api/user/9
+PATCH http://localhost:8080/api/user/1
 content-type: application/json
 
 {
