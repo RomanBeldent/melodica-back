@@ -6,14 +6,14 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Tag;
-
 use App\Entity\Type;
 use App\Entity\User;
 use App\Entity\Genre;
 use DateTimeImmutable;
 use App\Entity\Address;
+use App\Entity\Band;
+use App\Entity\Event;
 use App\Entity\Organizer;
-use Faker\Provider\fr_FR\PhoneNumber;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -29,8 +29,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-
-
+        mt_srand(1);
+        // faker avec des datas française
         $faker = Factory::create('fr_FR');
 
         // AJOUT DE GENRE
@@ -45,7 +45,6 @@ class AppFixtures extends Fixture
         $genreNames[] = 'RNB';
         $genreNames[] = 'Rap';
 
-
         $genreObjectList = [];
         foreach ($genreNames as $currentGenreName) {
             $genre = new Genre();
@@ -53,6 +52,7 @@ class AppFixtures extends Fixture
             $manager->persist($genre);
             $genreObjectList[] = $genre;
         }
+
         // Fixture Tag
         $tagNames = [];
         $tagNames[] = 'DJ';
@@ -68,13 +68,13 @@ class AppFixtures extends Fixture
             $manager->persist($tag);
             $tagObjectList[] = $tag;
         }
+
         //Fixtures Type
         $typeNames = [];
         $typeNames[] = 'Bar';
         $typeNames[] = 'Particulier';
         $typeNames[] = 'Festival';
         $typeNames[] = 'Association';
-
 
         $typeObjectList = [];
         foreach ($typeNames as $currentTypeName) {
@@ -84,12 +84,10 @@ class AppFixtures extends Fixture
             $typeObjectList[] = $type;
         }
 
-
-
         // AJOUT DE USER
 
         $userObjectList = [];
-        for ($nbUserToAdd = 1; $nbUserToAdd < 100; $nbUserToAdd++) {
+        for ($nbUserToAdd = 1; $nbUserToAdd < 50; $nbUserToAdd++) {
             $user = new User();
             $user->setFirstname($faker->firstName());
             $user->setLastname($faker->lastName());
@@ -103,13 +101,12 @@ class AppFixtures extends Fixture
             $user->setCreatedAt(new DateTimeImmutable());
             $user->setRoles(['ROLE_USER']);
 
-
             $manager->persist($user);
             $userObjectList[] = $user;
         }
         // Fixture Address
         $addressObjectList = [];
-        for ($nbAddressToAdd = 1; $nbAddressToAdd < 100; $nbAddressToAdd++) {
+        for ($nbAddressToAdd = 1; $nbAddressToAdd < 200; $nbAddressToAdd++) {
 
             $address = new Address();
             $address->setStreet($faker->streetAddress());
@@ -120,17 +117,17 @@ class AppFixtures extends Fixture
             $manager->persist($address);
             $addressObjectList[] = $address;
         }
+
         // Fixture Organizer
         $organizerObjectList = [];
-        for ($nbOrganizerToAdd = 1; $nbOrganizerToAdd < 100; $nbOrganizerToAdd++) {
+        for ($nbOrganizerToAdd = 1; $nbOrganizerToAdd < 50; $nbOrganizerToAdd++) {
 
             $organizer = new Organizer();
             $organizer->addUser($faker->randomElement($userObjectList));
-            $organizer->setName($faker->company());
+            $organizer->setName($faker->unique()->company());
             $organizer->setWebsite('https://theuselessweb.com/');
             $organizer->setDescription($faker->text(30));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
-            // $posterUrl = $faker->imageUrl(200, 300, 'animals', true);
             $organizer->setPicture($posterUrl);
             $organizer->setCreatedAt(new DateTimeImmutable());
 
@@ -143,8 +140,53 @@ class AppFixtures extends Fixture
 
             $organizerObjectList[] = $organizer;
             $manager->persist($organizer);
-
         }
+
+        // Fixture Band
+        $organizerObjectList = [];
+        for ($nbBandToAdd = 1; $nbBandToAdd < 50; $nbBandToAdd++) {
+
+            $band = new Band();
+            $band->addUser($faker->randomElement($userObjectList));
+            $band->setName($faker->unique()->company());
+            $band->setDescription($faker->text(30));
+            $band->setArea($faker->numberBetween(25, 10000));
+            $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
+            $band->setPicture($posterUrl);
+            $band->setSample('https://www.youtube.com/watch?v=Lgs9QUtWc3M');
+            $band->setCreatedAt(new DateTimeImmutable());
+
+            $randomGenre = $faker->randomElement($genreObjectList);
+            $band->addGenre($randomGenre);
+
+            // ici il faut rendre l'adresse unique sinon on a un "duplicate key", en effet cette dernière doit être unique
+            $randomAddress = $faker->unique()->randomElement($addressObjectList);
+            $band->setAddress($randomAddress);
+
+            $bandObjectList[] = $band;
+            $manager->persist($band);
+        }
+
+        // Fixture Event
+        // for ($nbEventToAdd = 1; $nbEventToAdd < 2; $nbEventToAdd++) {
+
+        //     $event = new Event();
+        //     $event->setTitle($faker->unique()->title());
+        //     $event->setDescription($faker->text(30));
+        //     $event->setDateStart(new DateTimeImmutable());
+        //     $event->setHourStart($faker->dateTime());
+        //     $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
+        //     $event->setPicture($posterUrl);
+        //     $event->setCreatedAt(new DateTimeImmutable());
+        //     $event->addTag($faker->randomElement($tagObjectList));
+        //     $event->addBand($faker->randomElement($bandObjectList));
+        //     $event->setOrganizer($faker->randomElement($organizerObjectList));
+        //     $randomAddress = $faker->unique()->randomElement($addressObjectList);
+        //     $event->setAddress($randomAddress);
+
+        //     $manager->persist($event);
+        //     $eventObjectList[] = $event;
+        // }
 
         $manager->flush();
     }
