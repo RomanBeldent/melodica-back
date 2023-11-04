@@ -125,6 +125,7 @@ class AppFixtures extends Fixture
         for ($nbOrganizerToAdd = 1; $nbOrganizerToAdd < 20; $nbOrganizerToAdd++) {
 
             $organizer = new Organizer();
+            $organizer->addUser($faker->randomElement($userObjectList));
             $organizer->setName($faker->company());
             $organizer->setWebsite('https://theuselessweb.com/');
             $organizer->setDescription($faker->text(30));
