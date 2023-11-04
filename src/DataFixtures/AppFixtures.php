@@ -29,7 +29,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        mt_srand(42);
+        mt_srand(1);
         // faker avec des datas française
         $faker = Factory::create('fr_FR');
 
@@ -106,7 +106,7 @@ class AppFixtures extends Fixture
         }
         // Fixture Address
         $addressObjectList = [];
-        for ($nbAddressToAdd = 1; $nbAddressToAdd < 100; $nbAddressToAdd++) {
+        for ($nbAddressToAdd = 1; $nbAddressToAdd < 200; $nbAddressToAdd++) {
 
             $address = new Address();
             $address->setStreet($faker->streetAddress());
@@ -168,17 +168,25 @@ class AppFixtures extends Fixture
         }
 
         // Fixture Event
-        for ($nbEventToAdd = 1; $nbEventToAdd < 100; $nbEventToAdd++) {
+        // for ($nbEventToAdd = 1; $nbEventToAdd < 2; $nbEventToAdd++) {
 
-            $event = new Event();
-            $event->setStreet($faker->streetAddress());
-            $event->setZipcode($faker->numberBetween(10000, 99999));
-            $event->setCity($faker->city());
-            $event->setDepartment($faker->numberBetween(01, 99));
+        //     $event = new Event();
+        //     $event->setTitle($faker->unique()->title());
+        //     $event->setDescription($faker->text(30));
+        //     $event->setDateStart(new DateTimeImmutable());
+        //     $event->setHourStart($faker->dateTime());
+        //     $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
+        //     $event->setPicture($posterUrl);
+        //     $event->setCreatedAt(new DateTimeImmutable());
+        //     $event->addTag($faker->randomElement($tagObjectList));
+        //     $event->addBand($faker->randomElement($bandObjectList));
+        //     $event->setOrganizer($faker->randomElement($organizerObjectList));
+        //     $randomAddress = $faker->unique()->randomElement($addressObjectList);
+        //     $event->setAddress($randomAddress);
 
-            $manager->persist($event);
-            $eventObjectList[] = $event;
-        }
+        //     $manager->persist($event);
+        //     $eventObjectList[] = $event;
+        // }
 
         $manager->flush();
     }
