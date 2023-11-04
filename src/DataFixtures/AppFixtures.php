@@ -21,14 +21,11 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        
-        
+
+
         $faker = Factory::create('fr_FR');
-        // $faker->addProvider(new \Xylis\FakerCinema\Provider\Movie($faker));
-        // $faker->addProvider(new \Xylis\FakerCinema\Provider\TvShow($faker));
 
         // AJOUT DE GENRE
-        // pareil la création de genre à faire hors des movies sinon tu recréé la liste pour chaque movie
 
         $genreNames = [];
         $genreNames[] = 'Electro';
@@ -39,7 +36,7 @@ class AppFixtures extends Fixture
         $genreNames[] = 'Classique';
         $genreNames[] = 'RNB';
         $genreNames[] = 'Rap';
-        
+
 
         $genreObjectList = [];
         foreach ($genreNames as $currentGenreName) {
@@ -69,7 +66,7 @@ class AppFixtures extends Fixture
         $typeNames[] = 'Particulier';
         $typeNames[] = 'Festival';
         $typeNames[] = 'Association';
-        
+
 
         $typeObjectList = [];
         foreach ($typeNames as $currentTypeName) {
@@ -80,10 +77,9 @@ class AppFixtures extends Fixture
         }
 
 
-        
+
         // AJOUT DE USER
-        // a faire hors de la boucle de création de movie
-        // la tu crées à chaque fois 500 user à chaque création de Movie ( c'est excessif (un peu oui) )
+
         $userObjectList = [];
         for ($nbUserToAdd = 1; $nbUserToAdd < 20; $nbUserToAdd++) {
             $user = new User();
@@ -95,7 +91,7 @@ class AppFixtures extends Fixture
             $user->setPhoneNumber($faker->mobileNumber());
             $user->setCreatedAt(new DateTimeImmutable());
             $user->setRoles(['ROLE_USER']);
-            
+
 
             $manager->persist($user);
             $userObjectList[] = $user;
@@ -103,10 +99,10 @@ class AppFixtures extends Fixture
         // Fixture Address
         $addressObjectList = [];
         for ($nbAddressToAdd = 1; $nbAddressToAdd < 20; $nbAddressToAdd++) {
-            
+
             $address = new Address();
             $address->setStreet($faker->streetAddress());
-            $address->setZipcode($faker->numberBetween(10000,99999));
+            $address->setZipcode($faker->numberBetween(10000, 99999));
             $address->setCity($faker->city());
             $address->setDepartment($faker->departmentName());
 
@@ -116,17 +112,22 @@ class AppFixtures extends Fixture
         // Fixture Organizer
         $organizerObjectList = [];
         for ($nbOrganizerToAdd = 1; $nbOrganizerToAdd < 20; $nbOrganizerToAdd++) {
-            
+
             $organizer = new Organizer();
             $organizer->setName($faker->name());
             $organizer->setDescription($faker->text(30));
             $organizer->setCreatedAt(new DateTimeImmutable());
-            $organizer->getType(0);
+
+            $randomType = $faker->randomElement($typeObjectList);
+            $organizer->setType($randomType);
+
+            $randomAddress = $faker->randomElement($addressObjectList);
+            $organizer->setAddress($randomAddress);
             
-            $manager->persist($organizer);
             $organizerObjectList[] = $organizer;
+            $manager->persist($organizer);
+
         }
-// $movie->setType($movieType[mt_rand(0, 1)]);
 
         $manager->flush();
     }
