@@ -121,6 +121,7 @@ class AppFixtures extends Fixture
             $randomType = $faker->randomElement($typeObjectList);
             $organizer->setType($randomType);
 
+            //ici il faut rendre l'adresse unique sinon on a un "duplicate key", en effet cette dernière doit être unique
             $randomAddress = $faker->unique()->randomElement($addressObjectList);
             $organizer->setAddress($randomAddress);
             
