@@ -89,7 +89,7 @@ class AppFixtures extends Fixture
         // AJOUT DE USER
 
         $userObjectList = [];
-        for ($nbUserToAdd = 1; $nbUserToAdd < 20; $nbUserToAdd++) {
+        for ($nbUserToAdd = 1; $nbUserToAdd < 100; $nbUserToAdd++) {
             $user = new User();
             $user->setFirstname($faker->firstName());
             $user->setLastname($faker->lastName());
@@ -109,20 +109,20 @@ class AppFixtures extends Fixture
         }
         // Fixture Address
         $addressObjectList = [];
-        for ($nbAddressToAdd = 1; $nbAddressToAdd < 20; $nbAddressToAdd++) {
+        for ($nbAddressToAdd = 1; $nbAddressToAdd < 100; $nbAddressToAdd++) {
 
             $address = new Address();
             $address->setStreet($faker->streetAddress());
             $address->setZipcode($faker->numberBetween(10000, 99999));
             $address->setCity($faker->city());
-            $address->setDepartment($faker->departmentName());
+            $address->setDepartment($faker->numberBetween(01, 99));
 
             $manager->persist($address);
             $addressObjectList[] = $address;
         }
         // Fixture Organizer
         $organizerObjectList = [];
-        for ($nbOrganizerToAdd = 1; $nbOrganizerToAdd < 20; $nbOrganizerToAdd++) {
+        for ($nbOrganizerToAdd = 1; $nbOrganizerToAdd < 100; $nbOrganizerToAdd++) {
 
             $organizer = new Organizer();
             $organizer->addUser($faker->randomElement($userObjectList));
@@ -137,6 +137,7 @@ class AppFixtures extends Fixture
             $randomType = $faker->randomElement($typeObjectList);
             $organizer->setType($randomType);
 
+            // ici il faut rendre l'adresse unique sinon on a un "duplicate key", en effet cette dernière doit être unique
             $randomAddress = $faker->unique()->randomElement($addressObjectList);
             $organizer->setAddress($randomAddress);
 

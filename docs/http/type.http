@@ -1,24 +1,21 @@
-### Liste des adresses
-GET http://localhost:8080/api/address
-### Détail d'une adresse
-GET http://localhost:8080/api/address/1
-### Ajout d'une adresse
-POST http://localhost:8080/api/address/
+### Liste des types
+GET http://localhost:8080/api/type
+### Détail d'un type
+GET http://localhost:8080/api/type/3
+### Ajout d'un type
+POST http://localhost:8080/api/type/
 content-type: application/json
 
 {
-    "street": "Testaaa",
-    "zipcode": "Test",
-    "city":"Test",
-    "department":"Test"
+    "name": "Anniversaire"
 }
-### Modification d'une adresse
-PATCH http://localhost:8080/api/address/7
+
+### Modification d'un type
+PATCH http://localhost:8080/api/type/5
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopat",
-    "city": "Pokomoto"
+    "name": "Bar"
 }
-### Suppression d'une adresse
-DELETE http://localhost:8080/api/address/20
+### Suppression d'un type
+DELETE http://localhost:8080/api/type/6

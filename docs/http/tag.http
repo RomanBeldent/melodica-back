@@ -1,24 +1,21 @@
-### Liste des adresses
-GET http://localhost:8080/api/address
-### Détail d'une adresse
-GET http://localhost:8080/api/address/1
-### Ajout d'une adresse
-POST http://localhost:8080/api/address/
+### Liste des tags
+GET http://localhost:8080/api/tag
+### Détail d'un tag
+GET http://localhost:8080/api/tag/1
+### Ajout d'un tag
+POST http://localhost:8080/api/tag/
 content-type: application/json
 
 {
-    "street": "Testaaa",
-    "zipcode": "Test",
-    "city":"Test",
-    "department":"Test"
+    "name": "test"
 }
-### Modification d'une adresse
-PATCH http://localhost:8080/api/address/7
+
+### Modification d'un tag
+PATCH http://localhost:8080/api/tag/7
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopat",
-    "city": "Pokomoto"
+    "name": "Djembe"
 }
-### Suppression d'une adresse
-DELETE http://localhost:8080/api/address/20
+### Suppression d'un tag
+DELETE http://localhost:8080/api/tag/8

@@ -22,12 +22,12 @@
 
 				<tr>
 					<th>Id</th>
-					<th>Name</th>
+					<th>Nom</th>
 					<th>Description</th>
-					<th>Website</th>
-					<th>Picture</th>
-					<th>Created_at</th>
-					<th>Updated_at</th>
+					<th>Site web</th>
+					<th>Image</th>
+					<th>Créé le</th>
+					<th>Mise à jour le</th>
 					<th>actions</th>
 				</tr>
 			</thead>
@@ -43,7 +43,7 @@
 						<td>{{ organizer.updatedAt ? organizer.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>
 							<a href="{{ path('back_organizer_show', {'id': organizer.id}) }}" class="m-1 btn btn-outline-info">Read
-								<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="m-1 btn bts-sm btn-warning">Update
+								<a href="{{ path('back_organizer_edit', {'id': organizer.id}) }}" class="m-1 btn btn-outline-warning">Update
 									<a href="{{ path('back_organizer_delete', {'id': organizer.id}) }}" class="m-1 btn btn-outline-danger">Delete</td>
 								</tr>
 							{% else %}

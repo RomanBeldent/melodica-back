@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"user_list", "user_show", "user_create", "user_update"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show"})
      * @Assert\NotBlank
      */
     private $firstname;
@@ -35,7 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show", "user_create", "user_update"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show"})
      */
     private $lastname;
 
@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
-     * @Groups({"user_list", "user_show", "user_create", "user_update"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show"})
      */
     private $email;
 
@@ -65,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show", "user_create", "user_update"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "band_list", "band_show"})
      */
     private $phone_number;
 
@@ -89,11 +89,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Organizer::class, mappedBy="users")
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $organizers;
 
     /**
      * @ORM\ManyToMany(targetEntity=Band::class, mappedBy="users")
+     * @Groups({"user_list", "user_show", "user_create"})
      */
     private $bands;
 

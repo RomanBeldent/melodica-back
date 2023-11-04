@@ -27,20 +27,20 @@ class Organizer
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update","user_list", "user_show", "event_list", "event_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update","user_list", "user_show", "event_list", "event_show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show"})
      */
     private $website;
 
@@ -63,7 +63,7 @@ class Organizer
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers", cascade={"persist"})
      * @Groups({"organizer_list", "organizer_show"})
      */
     private $users;

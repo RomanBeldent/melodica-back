@@ -12,7 +12,7 @@
                 <td>{{ event.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ event.title }}</td>
             </tr>
             <tr>
@@ -20,31 +20,31 @@
                 <td>{{ event.description }}</td>
             </tr>
             <tr>
-                <th>Date_start</th>
+                <th>Date de début</th>
                 <td>{{ event.dateStart ? event.dateStart|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Date_end</th>
+                <th>Date de fin</th>
                 <td>{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Hour_start</th>
+                <th>Heure de début</th>
                 <td>{{ event.hourStart ? event.hourStart|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Hour_end</th>
+                <th>Heure de fin</th>
                 <td>{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Picture</th>
+                <th>Image</th>
                 <td>{{ event.picture }}</td>
             </tr>
             <tr>
-                <th>Created_at</th>
+                <th>Créé le</th>
                 <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Updated_at</th>
+                <th>Mis à jour le</th>
                 <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>

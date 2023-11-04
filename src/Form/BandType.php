@@ -58,7 +58,7 @@ class BandType extends AbstractType
                 'multiple' => true,
                 'choice_label' => 'name'
             ])
-            ->add('genre', EntityType::class,[
+            ->add('genres', EntityType::class,[
                 'label' => 'Votre genre de musique',
                 'choice_label' => 'name',
                 'class' => Genre::class,

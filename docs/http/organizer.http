@@ -2,27 +2,34 @@
 GET http://localhost:8080/api/organizer
 
 ### Détail d'un organisateur
-GET http://localhost:8080/api/organizer/2
+GET http://localhost:8080/api/organizer/1
 
 ### Ajout d'un organisateur
 POST http://localhost:8080/api/organizer/
 content-type: application/json
 
 {
-    "name": "TestAPIaaa",
-    "description": "Hello",
-    "website": "site.web",
-    "picture": "picture.png",
-    "created_at": "2023-10-31T16:13:48+01:00",
-    "type": "Bar"
+    "name": "Bar Test Post Apia",
+    "description": "Stp marchea",
+    "website": null,
+    "picture": null,
+    "created_at": "2023-11-03T11:52:45+01:00",
+    "users": [2],
+    "type":  8,
+    "address": {
+      "street": "24 rue du testa",
+      "zipcode": "24000",
+      "city": "TestCity",
+      "department": "24"
+    }
 }
 
 ### Modification d'un organisateur
-PATCH http://localhost:8080/api/organizer/4
+PATCH http://localhost:8080/api/organizer/1
 content-type: application/json
 
 {
-      "name": "New bar testaa"
+      "name": "Le Bar de Basil le Scratcher fou"
 }
 
 ### Suppression d'un organisateur

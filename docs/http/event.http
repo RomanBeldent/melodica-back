@@ -1,24 +1,38 @@
-### Liste des adresses
-GET http://localhost:8080/api/address
-### Détail d'une adresse
-GET http://localhost:8080/api/address/1
-### Ajout d'une adresse
-POST http://localhost:8080/api/address/
+### Liste des événements
+GET http://localhost:8080/api/event
+### Détail d'un événement
+GET http://localhost:8080/api/event/1
+### Ajout d'un événement
+POST http://localhost:8080/api/event/
 content-type: application/json
 
 {
-    "street": "Testaaa",
-    "zipcode": "Test",
-    "city":"Test",
-    "department":"Test"
+      "title": "API EVENT TEST",
+      "description": "API EVENT TEST",
+      "date_start": "2023-12-01T00:00:00+01:00",
+      "date_end": "2023-12-02T00:00:00+01:00",
+      "hour_start": "1970-01-01T14:00:00+01:00",
+      "hour_end": "1970-01-01T06:00:00+01:00",
+      "picture": null,
+      "created_at": "2023-11-03T11:57:55+01:00",
+      "updated_at": null,
+      "tags": [6,7],
+      "bands": [1,5],
+      "organizer": 1,
+            "address": {
+            "street": "24 rue du Test event",
+            "zipcode": "42000",
+            "city":"EventCity",
+            "department":"42"
+        }
 }
-### Modification d'une adresse
-PATCH http://localhost:8080/api/address/7
+
+### Modification d'un événement
+PATCH http://localhost:8080/api/event/2
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopat",
-    "city": "Pokomoto"
+    "title": "API retest patch"
 }
-### Suppression d'une adresse
-DELETE http://localhost:8080/api/address/20
+### Suppression d'un événement
+DELETE http://localhost:8080/api/event/1
