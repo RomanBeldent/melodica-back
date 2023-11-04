@@ -16,9 +16,17 @@ use App\Entity\Organizer;
 use Faker\Provider\fr_FR\PhoneNumber;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $passwordHasher;
+    // injecter une dépendance
+    public function __construct(UserPasswordHasherInterface $passwordHasherInterface)
+    {
+        $this->passwordHasher = $passwordHasherInterface;
+    }
+
     public function load(ObjectManager $manager)
     {
 
@@ -87,7 +95,10 @@ class AppFixtures extends Fixture
             $user->setLastname($faker->lastName());
             $user->setBirthday($faker->dateTimeThisCentury());
             $user->setEmail($faker->email());
-            $user->setPassword($faker->password());
+            $hashedPassword = $this->passwordHasher->hashPassword($user, 'user');
+            $user->setPassword($hashedPassword);
+            $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/200";
+            $user->setPicture($posterUrl);
             $user->setPhoneNumber($faker->mobileNumber());
             $user->setCreatedAt(new DateTimeImmutable());
             $user->setRoles(['ROLE_USER']);
@@ -114,8 +125,12 @@ class AppFixtures extends Fixture
         for ($nbOrganizerToAdd = 1; $nbOrganizerToAdd < 100; $nbOrganizerToAdd++) {
 
             $organizer = new Organizer();
-            $organizer->setName($faker->name());
+            $organizer->setName($faker->company());
+            $organizer->setWebsite('https://theuselessweb.com/');
             $organizer->setDescription($faker->text(30));
+            $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
+            // $posterUrl = $faker->imageUrl(200, 300, 'animals', true);
+            $organizer->setPicture($posterUrl);
             $organizer->setCreatedAt(new DateTimeImmutable());
 
             $randomType = $faker->randomElement($typeObjectList);
@@ -124,7 +139,7 @@ class AppFixtures extends Fixture
             // ici il faut rendre l'adresse unique sinon on a un "duplicate key", en effet cette dernière doit être unique
             $randomAddress = $faker->unique()->randomElement($addressObjectList);
             $organizer->setAddress($randomAddress);
-            
+
             $organizerObjectList[] = $organizer;
             $manager->persist($organizer);
 
