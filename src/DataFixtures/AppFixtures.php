@@ -121,7 +121,7 @@ class AppFixtures extends Fixture
             $randomType = $faker->randomElement($typeObjectList);
             $organizer->setType($randomType);
 
-            $randomAddress = $faker->randomElement($addressObjectList);
+            $randomAddress = $faker->unique()->randomElement($addressObjectList);
             $organizer->setAddress($randomAddress);
             
             $organizerObjectList[] = $organizer;
