@@ -110,9 +110,12 @@ class AppFixtures extends Fixture
 
             $address = new Address();
             $address->setStreet($faker->streetAddress());
-            $address->setZipcode($faker->numberBetween(10000, 99999));
             $address->setCity($faker->city());
-            $address->setDepartment($faker->numberBetween(01, 99));
+            $address->setZipcode($faker->numberBetween(10000, 99999));
+            // on récupère les 2 premiers chiffres de l'adresse pour l'ajouter dans département
+            $addressFrstNbrs = $address->getZipcode();
+            
+            $address->setDepartment(substr($addressFrstNbrs, 0, 2));
 
             $manager->persist($address);
             $addressObjectList[] = $address;
@@ -150,7 +153,7 @@ class AppFixtures extends Fixture
             $band->addUser($faker->randomElement($userObjectList));
             $band->setName($faker->unique()->words(2, true));
             $band->setDescription($faker->text(30));
-            $band->setArea($faker->numberBetween(25, 10000));
+            $band->setArea($faker->numberBetween(25, 1000));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
             $band->setPicture($posterUrl);
             $band->setSample('https://www.youtube.com/watch?v=Lgs9QUtWc3M');
