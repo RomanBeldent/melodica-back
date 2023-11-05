@@ -111,12 +111,24 @@ class AppFixtures extends Fixture
         for ($nbAddressToAdd = 1; $nbAddressToAdd < 200; $nbAddressToAdd++) {
 
             $address = new Address();
-            $address->setStreet($faker->streetAddress());
+
+            // on checke si l'adresse contient une virgule, car faker nous envoie des adresses avec des virgules
+            // on veut supprimer cette dernière car on n'en veut pas dans notre adresse
+            $street = $faker->streetAddress();
+            $streetNoComa = str_replace(',', '', $street);
+            $address->setStreet($streetNoComa);
+
             $address->setCity($faker->city());
-            $address->setZipcode($faker->departmentNumber());
-            // on récupère les 2 premiers chiffres du zipcode pour l'ajouter dans department
-            $addressFrstNbrs = $address->getZipcode();
-            $address->setDepartment(substr($addressFrstNbrs, 0, 2));
+            $department = $faker->departmentNumber();
+            $address->setDepartment($department);
+            $departmentLength = strlen($department);
+            // si le département contient 2 chiffres, on ajoute 3 chiffres au zipcode
+            if ($departmentLength == 2) {
+                $address->setZipcode($department . $faker->numberBetween(100, 999));
+            // si le département contient 3 chiffres, on veut rajouter 2 chiffres aléatoire au zipcode
+            } elseif ($departmentLength == 3) {
+                $address->setZipcode($department . $faker->numberBetween(10, 99));
+            }
 
             $manager->persist($address);
             $addressObjectList[] = $address;
@@ -162,7 +174,8 @@ class AppFixtures extends Fixture
 
             $randomGenre = $faker->randomElement($genreObjectList);
             $band->addGenre($randomGenre);
-
+            
+            $band->addTag($faker->randomElement($tagObjectList));
             // ici il faut rendre l'adresse unique sinon on a un "duplicate key", en effet cette dernière doit être unique
             $randomAddress = $faker->unique()->randomElement($addressObjectList);
             $band->setAddress($randomAddress);
