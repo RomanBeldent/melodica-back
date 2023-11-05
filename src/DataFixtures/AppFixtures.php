@@ -169,7 +169,7 @@ class AppFixtures extends Fixture
             $band->setArea($faker->numberBetween(25, 1000));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
             $band->setPicture($posterUrl);
-            $band->setSample('https://www.youtube.com/watch?v=Lgs9QUtWc3M');
+            $band->setSample('https://www.youtube.com/embed/Lgs9QUtWc3M?si=pTFpPLfBIZqLgUxT');
             $band->setCreatedAt(new DateTimeImmutable());
 
             $randomGenre = $faker->randomElement($genreObjectList);
