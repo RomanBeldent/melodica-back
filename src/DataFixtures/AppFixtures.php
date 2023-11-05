@@ -98,7 +98,9 @@ class AppFixtures extends Fixture
             $user->setPicture($posterUrl);
             $user->setPhoneNumber('06' . $faker->numberBetween(10000000, 99999999));
             $user->setCreatedAt(new DateTimeImmutable());
-            $user->setRoles(['ROLE_USER']);
+
+            $userRoles = [['ROLE_USER'], ['ROLE_MANAGER'], ['ROLE_ADMIN']];
+            $user->setRoles($faker->randomElement($userRoles));
 
             $manager->persist($user);
             $userObjectList[] = $user;
