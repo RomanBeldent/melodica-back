@@ -143,12 +143,12 @@ class AppFixtures extends Fixture
         }
 
         // Fixture Band
-        $organizerObjectList = [];
+        $bandObjectList = [];
         for ($nbBandToAdd = 1; $nbBandToAdd < 50; $nbBandToAdd++) {
 
             $band = new Band();
             $band->addUser($faker->randomElement($userObjectList));
-            $band->setName($faker->unique()->company());
+            $band->setName($faker->unique()->words(2, true));
             $band->setDescription($faker->text(30));
             $band->setArea($faker->numberBetween(25, 10000));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
@@ -168,25 +168,27 @@ class AppFixtures extends Fixture
         }
 
         // Fixture Event
-        // for ($nbEventToAdd = 1; $nbEventToAdd < 2; $nbEventToAdd++) {
+        $eventObjectList = [];
+        for ($nbEventToAdd = 1; $nbEventToAdd < 50; $nbEventToAdd++) {
 
-        //     $event = new Event();
-        //     $event->setTitle($faker->unique()->title());
-        //     $event->setDescription($faker->text(30));
-        //     $event->setDateStart(new DateTimeImmutable());
-        //     $event->setHourStart($faker->dateTime());
-        //     $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
-        //     $event->setPicture($posterUrl);
-        //     $event->setCreatedAt(new DateTimeImmutable());
-        //     $event->addTag($faker->randomElement($tagObjectList));
-        //     $event->addBand($faker->randomElement($bandObjectList));
-        //     $event->setOrganizer($faker->randomElement($organizerObjectList));
-        //     $randomAddress = $faker->unique()->randomElement($addressObjectList);
-        //     $event->setAddress($randomAddress);
+            $event = new Event();
+            $event->setTitle($faker->unique()->words(3, true));
+            $event->setDescription($faker->text(30));
+            $event->setDateStart(new DateTimeImmutable());
+            $event->setHourStart($faker->dateTime());
+            $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
+            $event->setPicture($posterUrl);
+            $event->setCreatedAt(new DateTimeImmutable());
+            $event->addTag($faker->randomElement($tagObjectList));
+            $event->addBand($faker->randomElement($bandObjectList));
+            $event->setOrganizer($faker->randomElement($organizerObjectList));
 
-        //     $manager->persist($event);
-        //     $eventObjectList[] = $event;
-        // }
+            $randomAddress = $faker->unique()->randomElement($addressObjectList);
+            $event->setAddress($randomAddress);
+
+            $manager->persist($event);
+            $eventObjectList[] = $event;
+        }
 
         $manager->flush();
     }
