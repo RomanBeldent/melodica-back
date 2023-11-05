@@ -32,9 +32,9 @@ class AppFixtures extends Fixture
         mt_srand(1);
         // faker avec des datas française
         $faker = Factory::create('fr_FR');
-
+        $faker->addProvider(new \Faker\Provider\fr_FR\Address($faker));
+        
         // AJOUT DE GENRE
-
         $genreNames = [];
         $genreNames[] = 'Electro';
         $genreNames[] = 'Metal';
@@ -85,7 +85,6 @@ class AppFixtures extends Fixture
         }
 
         // AJOUT DE USER
-
         $userObjectList = [];
         for ($nbUserToAdd = 1; $nbUserToAdd < 50; $nbUserToAdd++) {
             $user = new User();
@@ -97,13 +96,14 @@ class AppFixtures extends Fixture
             $user->setPassword($hashedPassword);
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/200";
             $user->setPicture($posterUrl);
-            $user->setPhoneNumber($faker->mobileNumber());
+            $user->setPhoneNumber('06' . $faker->numberBetween(10000000, 99999999));
             $user->setCreatedAt(new DateTimeImmutable());
             $user->setRoles(['ROLE_USER']);
 
             $manager->persist($user);
             $userObjectList[] = $user;
         }
+
         // Fixture Address
         $addressObjectList = [];
         for ($nbAddressToAdd = 1; $nbAddressToAdd < 200; $nbAddressToAdd++) {
@@ -111,10 +111,9 @@ class AppFixtures extends Fixture
             $address = new Address();
             $address->setStreet($faker->streetAddress());
             $address->setCity($faker->city());
-            $address->setZipcode($faker->numberBetween(10000, 99999));
-            // on récupère les 2 premiers chiffres de l'adresse pour l'ajouter dans département
+            $address->setZipcode($faker->departmentNumber());
+            // on récupère les 2 premiers chiffres du zipcode pour l'ajouter dans department
             $addressFrstNbrs = $address->getZipcode();
-            
             $address->setDepartment(substr($addressFrstNbrs, 0, 2));
 
             $manager->persist($address);
