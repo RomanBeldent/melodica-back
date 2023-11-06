@@ -39,6 +39,31 @@ class OrganizerController extends AbstractController
     }
 
     /**
+     * @Route("/random", name="random", methods={"GET"})
+     */
+    public function random(OrganizerRepository $organizerRepository): JsonResponse
+    {
+        $organizers = $organizerRepository->findAll();
+        if (count($organizers) === 0) {
+            $errorMessage = [
+                'message' => "No organizers in database",
+            ];
+            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
+        }
+
+        // on mélange les groupes
+        shuffle($organizers);
+
+        $randomOrganizers = [];
+        for ($randomOrganizerToAdd = 1; $randomOrganizerToAdd <= 30; $randomOrganizerToAdd++) {
+            $randomOrganizers[] = $organizers[$randomOrganizerToAdd];
+        }
+
+        return $this->json([
+            'randomOrganizers' => $randomOrganizers], 200, [], ['groups' => 'organizer_random']);
+    }
+
+    /**
      * @Route("/", name="create", methods={"POST"})
      */
     public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse

@@ -23,37 +23,37 @@ class Band
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "user_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show", "user_list", "user_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "user_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show", "user_list", "user_show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"band_list", "band_show", "band_create", "band_update"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random"})
      */
     private $area;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show"})
      */
     private $sample;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"band_list", "band_show", "band_create", "band_update"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"band_list", "band_show", "band_create", "band_update"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random"})
      */
     private $created_at;
 

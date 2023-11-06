@@ -29,6 +29,7 @@ class BandController extends AbstractController
         ]);
     }
 
+    
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
@@ -37,8 +38,33 @@ class BandController extends AbstractController
         return $this->json([
             'band' => $band], 200, [], ['groups' => 'band_show']);
     }
-
-        /**
+    
+    /**
+     * @Route("/random", name="random", methods={"GET"})
+     */
+    public function random(BandRepository $bandRepository): JsonResponse
+    {
+        $bands = $bandRepository->findAll();
+        if (count($bands) === 0) {
+            $errorMessage = [
+                'message' => "No bands in database",
+            ];
+            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
+        }
+        
+        // on mélange les groupes
+        shuffle($bands);
+ 
+        $randomBands = [];
+        for ($randomBandToAdd = 1; $randomBandToAdd <= 30; $randomBandToAdd++) {
+            $randomBands[] = $bands[$randomBandToAdd];
+        }
+ 
+        return $this->json([
+            'randomBands' => $randomBands], 200, [], ['groups' => 'band_random']);
+    }
+    
+    /**
      * @Route("/", name="create", methods={"POST"})
      */
     public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
@@ -74,6 +100,7 @@ class BandController extends AbstractController
         $em->flush();
         return $this->json($band, Response::HTTP_OK, [], ['groups' => 'band_update']);
     }
+
     /**
      * @Route("/{id<\d+>}"), name="delete", methods={"DELETE"})
      */
