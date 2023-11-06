@@ -30,7 +30,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        mt_srand(1);
+        mt_srand(2);
         // faker avec des datas française
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new \Faker\Provider\fr_FR\Address($faker));

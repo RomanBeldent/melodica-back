@@ -3,10 +3,8 @@ POST http://localhost:8080/api/login_check
 content-type: application/json
 
 {
-
     "username":"rojobaga@melodica.fr",
     "password":"admin"
-
 }
 
 ### Liste des utilisateurs
