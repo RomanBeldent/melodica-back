@@ -13,10 +13,8 @@ class ErrorController extends AbstractController
      *
      * @return void
      */
-    public function err404()
+    public function show()
     {
-        // On envoie le header 404
-        header('HTTP/1.0 404 Not Found');
-
+        return $this->render('bundles/TwigBundle/Exception/error404.html.twig');
     }
 }

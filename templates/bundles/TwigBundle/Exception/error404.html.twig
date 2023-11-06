@@ -1,0 +1,16 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class='d-flex-column text-center'>
+	<h1 class='text-danger'>||| 404 ||| BOOM CASSÉ ||| 404 |||</h1>
+    <H2>Et ça aurait pas pu être pire...</H2>
+	<img src="{{ asset('https://i.gyazo.com/a54f938c2f17993f62735ba5637cde51.png')}}" alt="">
+	<h2>Et ouais tu t'es gourré mon ou ma pote ! (écrituuuuure inclusiiiive sisi tavu)</h2>
+	<p>
+		Vérifies ta route mon gros couillon tu t'es planté !
+		        Si c'est toi Gaétane t'es vraiment une grosse narine
+		<a href="{{ path('back_index') }}">Je t'emmerde, tu rentres à ta maison !</a>.
+	</p>
+</div>
+{% endblock %}
