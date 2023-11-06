@@ -27,7 +27,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
+
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show","message_list", "message_show","message_create"})
      * @Assert\NotBlank
      */
     private $firstname;
@@ -35,7 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
+
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show","message_list", "message_show","message_create"})
      */
     private $lastname;
 

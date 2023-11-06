@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MessageRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
@@ -19,11 +20,13 @@ class Message
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"message_list", "message_show","message_create","message_update"})
      */
     private $content;
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups({"message_list", "message_show","message_create","message_update"})
      */
     private $created_at;
 
@@ -33,14 +36,16 @@ class Message
     private $updated_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sentMessages",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"message_list", "message_show","message_create","message_update"})
      */
     private $sender;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedMessages",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"message_list", "message_show","message_create","message_update"})
      */
     private $recipient;
 
