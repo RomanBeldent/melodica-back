@@ -213,7 +213,9 @@ class AppFixtures extends Fixture
         for ($nbMessageToAdd = 1; $nbMessageToAdd < 50; $nbMessageToAdd++) {
 
             $message = new Message;
-            $message->setContent($faker->paragraph(3, true));
+            $messageToHash = $faker->paragraph(3, true);
+            $hashedMessage = hash("sha256", $messageToHash);
+            $message->setContent($hashedMessage);
             $message->setSender($faker->randomElement($userObjectList));
             $message->setRecipient($faker->randomElement($userObjectList));
             $message->setCreatedAt(new DateTimeImmutable());
