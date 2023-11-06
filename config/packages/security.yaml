@@ -8,7 +8,7 @@ security:
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
-                class: App\Entity\UserTest
+                class: App\Entity\User
                 property: email
     firewalls:
         dev:
@@ -19,6 +19,7 @@ security:
             provider: app_user_provider
             form_login:
                 # "app_login" is the name of the route created previously
+                enable_csrf: true
                 login_path: app_login
                 check_path: app_login
             logout:
