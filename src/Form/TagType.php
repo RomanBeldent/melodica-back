@@ -16,8 +16,7 @@ class TagType extends AbstractType
         ->add('name', TextType::class, [
             'label' => 'Tag',
             'required' => true
-        ])
-        ;
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

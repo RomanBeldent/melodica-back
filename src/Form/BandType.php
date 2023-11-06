@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class BandType extends AbstractType
 {
@@ -27,45 +28,61 @@ class BandType extends AbstractType
                 'label'=>'Nom'
             ])
             ->add('description',TextType::class, [
-                'label'=>'Description'
-            ])
+                'label'=>'Description',
+                'attr' => [
+                'placeholder' => 'On est les Melodica Bangers, et on est pas là pour déconner !!',
+            ]])
             ->add('area', IntegerType::class,[
-                'label'=>'Zone de recherche autour de moi'
-            ])
+                'label'=>'Zone de recherche autour de moi',
+                'attr' => [
+                'placeholder' => '50km',
+            ]])
             ->add('sample',TextType::class,[
                 'label' => 'Echantillon de musique',
-                'required' => false
-            ])
-            ->add('picture',TextType::class,[
-                'label'=>'Photo de profil',
-                'required'=>false
-            ])
+                'required' => false,
+                'attr' => [
+                'placeholder' => 'https://www.youtube.com/watch?v=Xq7W5_QnkKo',
+            ]])
+            ->add('picture', FileType::class, [
+                'label' => 'Photo du groupe (png, jpeg..)',
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-                ])
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none'
+                ]])
             ->add('updated_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-            ])
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none'
+                ]])
             ->add('users', EntityType::class, [
                 'class' => User::class,
+                'label' => 'Utilisateur(s)',
                 'choice_label' => 'firstname',
                 'multiple' => true])
             ->add('tags', EntityType::class,[
-                'label'=> 'Qu\'êtes vous?',
+                'label'=> 'Vous êtes',
                 'class' => Tag::class,
                 'multiple' => true,
                 'choice_label' => 'name'
             ])
             ->add('genres', EntityType::class,[
-                'label' => 'Votre genre de musique',
+                'label' => 'Genre de musique',
                 'choice_label' => 'name',
                 'class' => Genre::class,
                 'multiple' => true
             ])
             ->add('address', AddressType::class,[
-                'label'=>'Adresse',
+                'label'=>'Adresse'
             ]);       
     }
 

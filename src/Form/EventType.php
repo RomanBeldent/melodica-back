@@ -15,6 +15,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class EventType extends AbstractType
@@ -30,36 +31,43 @@ class EventType extends AbstractType
                     'max' => 50,
                     'minMessage' => 'Veuillez rentrer un titre entre 5 et 50 caractères',
                     'maxMessage'=> 'Veuillez rentrer un titre entre 5 et 50 caractères'
-                ])
-                ]
-            ])
+                ])]])
             ->add('description', TextType::class,[
                 'label' => 'Description'
             ])
             ->add('date_start', DateType::class,[
-                'label'=>'Date de début'
-            ])
+                'label' => 'Date de début'
+                ])
             ->add('date_end', DateType::class,[
                 'label' => 'Date de fin'
-            ])
+                ])
             ->add('hour_start', TimeType::class,[
                 'label'=>'Heure de début'
             ])
             ->add('hour_end',TimeType::class,[
                 'label'=>'Heure de fin'
             ])
-            ->add('picture', TextType::class,[
-                'label'=>'Photo de profil de l\'évènement',
-                'required'=>false
-            ])
+            ->add('picture', FileType::class, [
+                'label' => 'Photo de l\'évènement (png, jpeg..)',
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-                ])
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none'
+                ]])
             ->add('updated_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-            ])
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none'
+                ]])
             ->add('tags', EntityType::class,[
                 'label'=>'Tag',
                 'class' => Tag::class,

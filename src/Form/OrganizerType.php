@@ -24,12 +24,16 @@ class OrganizerType extends AbstractType
                 'label' => 'Nom'
             ])
             ->add('description', TextType::class, [
-                'label' => 'Description'
-            ])
+                'label' => 'Description',
+                'attr' => [
+                'placeholder' => 'En 2018, j\'ai ouvert mon bar avec mon meilleur ami..',
+            ]])
             ->add('website', TextType::class, [
                 'label' => 'Site internet',
                 'required' => false,
-            ])
+                'attr' => [
+                'placeholder' => 'www.website.com',
+            ]])
             ->add('picture', FileType::class, [
                 'label' => 'Photo du groupe (png, jpeg..)',
                 // unmapped means that this field is not associated to any entity property
@@ -42,21 +46,28 @@ class OrganizerType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false
             ])
-            ->add('users', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'firstname',
-                'multiple' => true])
-            ->add('address', AddressType::class,[
+            ->add('address', AddressType::class, [
                 'label' => 'Adresse'
             ])
+            ->add('users', EntityType::class, [
+                'class' => User::class,
+                'label' => 'Utilisateur(s)',
+                'choice_label' => 'firstname',
+                'multiple' => true])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-            ])
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none'
+                ]])
             ->add('updated_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-            ]);
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none'
+                ]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
