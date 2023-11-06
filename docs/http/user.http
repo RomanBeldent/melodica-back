@@ -1,10 +1,10 @@
 ### Récupération du token
-POST http://localhost:8080/api/login_check
+POST http://localhost:8000/api/login_check
 content-type: application/json
 
 {
-    "username":"romanbeldent@oclock.school",
-    "password":"admin"
+    "username":"gaetaneheiderich@gmail.com",
+    "password":"gagalove"
 }
 
 ### Liste des utilisateurs
