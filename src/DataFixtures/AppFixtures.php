@@ -13,6 +13,7 @@ use DateTimeImmutable;
 use App\Entity\Address;
 use App\Entity\Band;
 use App\Entity\Event;
+use App\Entity\Message;
 use App\Entity\Organizer;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -206,6 +207,20 @@ class AppFixtures extends Fixture
             $manager->persist($event);
             $eventObjectList[] = $event;
         }
+
+        // Fixture Message
+        $messageObjectList = [];
+        for ($nbMessageToAdd = 1; $nbMessageToAdd < 50; $nbMessageToAdd++) {
+
+            $message = new Message;
+            $message->setContent($faker->paragraph(3, true));
+            $message->setSender($faker->randomElement($userObjectList));
+            $message->setRecipient($faker->randomElement($userObjectList));
+            $message->setCreatedAt(new DateTimeImmutable());
+            
+            $manager->persist($message);
+            $messageObjectList[] = $message;
+        }   
 
         $manager->flush();
     }
