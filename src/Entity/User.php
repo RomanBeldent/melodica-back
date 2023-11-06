@@ -27,7 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
      * @Assert\NotBlank
      */
     private $firstname;
@@ -35,7 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
      */
     private $lastname;
 
@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=100, unique=true)
      * @Assert\NotBlank
      * @Assert\Email
-     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
      */
     private $email;
 
@@ -65,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"user_list", "user_show", "user_create", "user_update", "band_list", "band_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "band_list", "band_show", "band_create", "band_update"})
      */
     private $phone_number;
 
