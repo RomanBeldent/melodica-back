@@ -38,14 +38,14 @@ class Message
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sentMessages",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"message_list", "message_show","message_create","message_update"})
+     * @Groups({"message_list", "message_show","message_create"})
      */
     private $sender;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="receivedMessages",cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"message_list", "message_show","message_create","message_update"})
+     * @Groups({"message_list", "message_show","message_create"})
      */
     private $recipient;
 
