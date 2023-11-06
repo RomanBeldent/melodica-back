@@ -3,13 +3,17 @@ POST http://localhost:8080/api/login_check
 content-type: application/json
 
 {
-    "username":"jordan@melodica.com",
-    "password":"jordan"
+
+    "username":"roman@melodica.fr",
+    "password":"admin"
+
 }
 
 ### Liste des utilisateurs
 GET http://localhost:8080/api/user
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2OTkyODIyMjEsImV4cCI6MTY5OTI4NTgyMSwicm9sZXMiOnsiMSI6IlJPTEVfQURNSU4iLCIyIjoiUk9MRV9VU0VSIn0sInVzZXJuYW1lIjoiam9yZGFuQG1lbG9kaWNhLmNvbSJ9.kDM2PflLpQupC-b9J59W-Dnk097ZeR8bk4agtVvdcIboBAYiM2s2ST7pGsEFQWabQGPalGVRweodTQm47tynMHY3USB-KMvp8gHdR9e_9tdVhpBSz6OZG-9zuDwZYKhyhffUwdEcRLo-Oyk7ukybXsBWH0mTzFLrIIl4hJCYfEi7gHYrAhcPRNnHk6dMvjP-HAyMhf2H_PkMnXSfUBQXFxdyvZzfZJYlHwnprh9h6G-HGOvOcefdBLq7zjBSQ5Z9HcprGaMHFKRP66g9IPIkia2-VDZmorhtPYXlejTEs1a3YrD17cqQkUsb3WmaqdHbWGlbJnigzkoMrGaurCU4vQ
+
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2OTkyODQ4MDEsImV4cCI6MTY5OTI4ODQwMSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InJvbWFuQG1lbG9kaWNhLmZyIn0.wa569KSA6JCDAWnNt_-Ros-r15pAO08N0klaGEoo2A_XBhvrzAprMuHGMAjrNq2ioJ0JRHAN5q4vpx6-pd3rg2ohwZPyg8lCBC5h3Ah395tThY3wypEyQxFUZKhRRzQZAvFaZfzgsTUTc8umX9HA7Mg8T0rwU_I9tXhWLQfdpWcFwH3vEYfaAliwfkCZ-Flcr6DbL9_BHAi3chJk7MtG6G8retpoPkD8CnBy3OuLE5tdqpIt3eVy1JYpCMV0dYr7fsEBNyu-F7svC1UkLFDq4Ifk33vxNhNQirpxJJzJtppPdn-KaYEIMlsLYcP9oex7ARXT8UjLKurbrR2aFJAblA
+
 
 ### Détail d'un utilisateur
 GET http://localhost:8080/api/user/2
