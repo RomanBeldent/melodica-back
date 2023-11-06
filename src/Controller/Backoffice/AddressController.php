@@ -33,6 +33,8 @@ class AddressController extends AbstractController
         $address = new Address();
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
+        
+        // todo : mettre en place les premiers chiffres du zipcode et les rentrer dans setDepartment
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->add($address, true);
