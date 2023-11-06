@@ -87,6 +87,19 @@ class AppFixtures extends Fixture
 
         // AJOUT DE USER
         $userObjectList = [];
+        $user = new User();
+        $user->setFirstname('GaBaJoRo');
+        $user->setLastname('RoJoBaGa');
+        $user->setBirthday($faker->dateTimeThisCentury());
+        $user->setEmail('rojobaga@melodica.fr');
+        $hashedPassword = $this->passwordHasher->hashPassword($user, 'admin');
+        $user->setPassword($hashedPassword);
+        $user->setPhoneNumber('06' . $faker->numberBetween(10000000, 99999999));
+        $user->setCreatedAt(new DateTimeImmutable());
+        $user->setRoles(['ROLE_ADMIN']);
+        $manager->persist($user);
+        $userObjectList[] = $user;
+        
         for ($nbUserToAdd = 1; $nbUserToAdd < 50; $nbUserToAdd++) {
             $user = new User();
             $user->setFirstname($faker->firstName());
