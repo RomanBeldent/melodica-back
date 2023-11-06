@@ -14,9 +14,9 @@ class TypeType extends AbstractType
     {
         $builder
             ->add('name', TextType::class,[
-                'label' => 'Nom du type'
-            ])
-        ;
+                'label' => 'Nom du type',
+                'required' => true
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -33,7 +33,10 @@ class UserType extends AbstractType
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
             ])
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'user@gmail.com',
+            ]])
             ->add('password', PasswordType::class)
             ->add('phone_number', TextType::class, [
                 'label' => 'Numéro de téléphone',
@@ -43,37 +46,33 @@ class UserType extends AbstractType
                 'minMessage' => 'Veuillez rentrer un téléphone valide'
             ])
             ]])
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Admin' => "ROLE_ADMIN",
-                    'Moderator' => "ROLE_MANAGER",
-                    'User' => "ROLE_USER",
-                ],
-                'multiple' => true,
-                'expanded' => true,
-            ])
             ->add('picture', TextType::class, [
                 'label' => 'Photo de profil',
                 'required' => false
-                ])
-            
+            ])
+            ->add('roles', ChoiceType::class, [
+                    'choices' => [
+                        'Admin' => "ROLE_ADMIN",
+                        'Moderator' => "ROLE_MANAGER",
+                        'User' => "ROLE_USER",
+                    ],
+                    'multiple' => true,
+                    'expanded' => true,
+            ])
             ->add('created_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-                'label'=> false,
-                'attr'=>[
-                    'style'=> 'display:none',
-                    
-                    ]
-                ])
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none',
+            ]])
             ->add('updated_at', DateTimeType::class, [
                 'input' => 'datetime_immutable',
                 'disabled' => true,
-                'label'=> false,
-                'attr'=>[
-                'style'=> 'display:none',
-                ]
-            ]);
+                'label' => false,
+                'attr' => [
+                'style' => 'display:none',
+            ]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
