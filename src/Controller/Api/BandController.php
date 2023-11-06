@@ -30,6 +30,25 @@ class BandController extends AbstractController
     }
 
     /**
+     * @Route("/random", name="random", methods={"GET"})
+     */
+    public function random(BandRepository $bandRepository): JsonResponse
+    {
+        $randomBands = $bandRepository->findBy([], [], [20], [30]);
+        if (count($randomBands) === 0) {
+            $errorMessage = [
+                'message' => "No bands in database",
+            ];
+            return new JsonREsponse($errorMessage, Response::HTTP_NOT_FOUND);
+        }
+        dd($randomBands);
+        shuffle($randomBands);
+
+        return $this->json([
+            'bands' => $randomBands], 200, [], ['groups' => 'band_random']);
+    }
+
+    /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
     public function show(Band $band): JsonResponse
@@ -38,7 +57,7 @@ class BandController extends AbstractController
             'band' => $band], 200, [], ['groups' => 'band_show']);
     }
 
-        /**
+    /**
      * @Route("/", name="create", methods={"POST"})
      */
     public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
@@ -74,6 +93,7 @@ class BandController extends AbstractController
         $em->flush();
         return $this->json($band, Response::HTTP_OK, [], ['groups' => 'band_update']);
     }
+
     /**
      * @Route("/{id<\d+>}"), name="delete", methods={"DELETE"})
      */
