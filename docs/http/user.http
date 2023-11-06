@@ -1,5 +1,15 @@
+### Récupération du token
+POST http://localhost:8080/api/login_check
+content-type: application/json
+
+{
+    "username":"romanbeldent@oclock.school",
+    "password":"admin"
+}
+
 ### Liste des utilisateurs
 GET http://localhost:8080/api/user
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2OTkyNzk1NzUsImV4cCI6MTY5OTI4MzE3NSwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiIsIlJPTEVfTUFOQUdFUiJdLCJ1c2VybmFtZSI6InJvbWFuYmVsZGVudEBvY2xvY2suc2Nob29sIn0.DE9wG9p89gFDLUfJz0apGR8jyrdjCUP5HPGxgmMb5aglWkzvenJ9O5O1E32W0lbo74fL9FYJF26Fz3G451GOwWDoLXjwSYXfv0r70VfAboQDOtO4h5U9mm-LoO7GIT665IIUJXXhLJNf2C8NtWmmU5fVsaFmufP5UXkvgC8CHpBljw75VAlU3mHNMHLf2JpEo8a_lrmEn4TmtlkRMhfEETj7zgYSNC-dCYly3VeCmtMZUClgJaE4r1MnPudxcJGRSm0wffb391SEyQJGaS8dBzjoaFKmmHyOyxKGjd8kxmGxGwZOIyEuUkQ5mF48b7K6CdSSBLILTbszZ8jvdl9ngQ
 
 ### Détail d'un utilisateur
 GET http://localhost:8080/api/user/2
