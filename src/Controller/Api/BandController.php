@@ -29,25 +29,7 @@ class BandController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/random", name="random", methods={"GET"})
-     */
-    public function random(BandRepository $bandRepository): JsonResponse
-    {
-        $randomBands = $bandRepository->findBy([], [], [20], [30]);
-        if (count($randomBands) === 0) {
-            $errorMessage = [
-                'message' => "No bands in database",
-            ];
-            return new JsonREsponse($errorMessage, Response::HTTP_NOT_FOUND);
-        }
-        dd($randomBands);
-        shuffle($randomBands);
-
-        return $this->json([
-            'bands' => $randomBands], 200, [], ['groups' => 'band_random']);
-    }
-
+    
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
@@ -56,7 +38,32 @@ class BandController extends AbstractController
         return $this->json([
             'band' => $band], 200, [], ['groups' => 'band_show']);
     }
-
+    
+    /**
+     * @Route("/random", name="random", methods={"GET"})
+     */
+    public function random(BandRepository $bandRepository): JsonResponse
+    {
+        $bands = $bandRepository->findAll();
+        if (count($bands) === 0) {
+            $errorMessage = [
+                'message' => "No bands in database",
+            ];
+            return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
+        }
+        
+        // on mélange les groupes
+        shuffle($bands);
+ 
+        $randomBands = [];
+        for ($randomBandToAdd = 1; $randomBandToAdd <= 30; $randomBandToAdd++) {
+            $randomBands[] = $bands[$randomBandToAdd];
+        }
+ 
+        return $this->json([
+            'randomBands' => $randomBands], 200, [], ['groups' => 'band_random']);
+    }
+    
     /**
      * @Route("/", name="create", methods={"POST"})
      */
