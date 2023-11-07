@@ -79,7 +79,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
-     * @Assert\NotBlank
      * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $created_at;

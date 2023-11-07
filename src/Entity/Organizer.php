@@ -52,7 +52,6 @@ class Organizer
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Assert\NotBlank
      * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random"})
      */
     private $created_at;
