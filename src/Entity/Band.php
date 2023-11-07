@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BandRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -104,6 +105,7 @@ class Band
         $this->tags = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->setCreatedAt(new DateTimeImmutable());
     }
     public function __toString()
     {
