@@ -2,13 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Organizer;
 use App\Entity\User;
+use App\Entity\Organizer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -45,11 +47,7 @@ class UserType extends AbstractType
                 'min' => 10,
                 'minMessage' => 'Veuillez rentrer un téléphone valide'
             ])
-            ]])
-            ->add('picture', TextType::class, [
-                'label' => 'Photo de profil',
-                'required' => false
-            ])
+            ]])     
             ->add('roles', ChoiceType::class, [
                     'choices' => [
                         'Admin' => "ROLE_ADMIN",
@@ -72,7 +70,32 @@ class UserType extends AbstractType
                 'label' => false,
                 'attr' => [
                 'style' => 'display:none',
-            ]]);
+            ]
+        ])
+        ->add('brochure', FileType::class, [
+            'label' => 'Brochure (PDF file)',
+
+            // unmapped means that this field is not associated to any entity property
+            'mapped' => false,
+
+            // make it optional so you don't have to re-upload the PDF file
+            // every time you edit the Product details
+            'required' => false,
+
+            // unmapped fields can't define their validation using annotations
+            // in the associated entity, so you can use the PHP constraint classes
+            'constraints' => [
+                new File([
+                    'maxSize' => '1024k',
+                    'mimeTypes' => [
+                        'application/pdf',
+                        'application/x-pdf',
+                    ],
+                    'mimeTypesMessage' => 'Please upload a valid PDF document',
+                ])
+            ],
+        ])
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
