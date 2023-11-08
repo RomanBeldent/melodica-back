@@ -10,7 +10,7 @@ content-type: application/json
 ### Liste des utilisateurs
 GET http://localhost:8080/api/user
 
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2OTkyODQ4MDEsImV4cCI6MTY5OTI4ODQwMSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InJvbWFuQG1lbG9kaWNhLmZyIn0.wa569KSA6JCDAWnNt_-Ros-r15pAO08N0klaGEoo2A_XBhvrzAprMuHGMAjrNq2ioJ0JRHAN5q4vpx6-pd3rg2ohwZPyg8lCBC5h3Ah395tThY3wypEyQxFUZKhRRzQZAvFaZfzgsTUTc8umX9HA7Mg8T0rwU_I9tXhWLQfdpWcFwH3vEYfaAliwfkCZ-Flcr6DbL9_BHAi3chJk7MtG6G8retpoPkD8CnBy3OuLE5tdqpIt3eVy1JYpCMV0dYr7fsEBNyu-F7svC1UkLFDq4Ifk33vxNhNQirpxJJzJtppPdn-KaYEIMlsLYcP9oex7ARXT8UjLKurbrR2aFJAblA
+# Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2OTkyODQ4MDEsImV4cCI6MTY5OTI4ODQwMSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InJvbWFuQG1lbG9kaWNhLmZyIn0.wa569KSA6JCDAWnNt_-Ros-r15pAO08N0klaGEoo2A_XBhvrzAprMuHGMAjrNq2ioJ0JRHAN5q4vpx6-pd3rg2ohwZPyg8lCBC5h3Ah395tThY3wypEyQxFUZKhRRzQZAvFaZfzgsTUTc8umX9HA7Mg8T0rwU_I9tXhWLQfdpWcFwH3vEYfaAliwfkCZ-Flcr6DbL9_BHAi3chJk7MtG6G8retpoPkD8CnBy3OuLE5tdqpIt3eVy1JYpCMV0dYr7fsEBNyu-F7svC1UkLFDq4Ifk33vxNhNQirpxJJzJtppPdn-KaYEIMlsLYcP9oex7ARXT8UjLKurbrR2aFJAblA
 
 
 ### Détail d'un utilisateur
@@ -24,11 +24,10 @@ content-type: application/json
     "firstname": "TestAPIaa",
     "lastname": "TestAPIaa",
     "birthday": "2023-10-26T00:00:00+02:00",
-    "email": "testAPIaaaa@test.coma",
+    "email": "testAPIaaaaaaa@test.coma",
     "password": "test",
     "phone_number": "0674896526",
-    "picture": "test.png",
-    "created_at": "2023-10-27T15:56:27+02:00"
+    "picture": "test.png"
 }
 
 ### Modification d'un utilisateur

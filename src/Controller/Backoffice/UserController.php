@@ -29,6 +29,16 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/{id<\d+>}", name="show", methods={"GET"})
+     */
+    public function show(User $user): Response
+    {
+        return $this->render('user/show.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
     public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
@@ -55,16 +65,6 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="show", methods={"GET"})
-     */
-    public function show(User $user): Response
-    {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
-
-    /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      *
      */
@@ -80,10 +80,9 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-                        $newPassword = $form->get('password')->getData();
+            $newPassword = $form->get('password')->getData();
 
-            if (! is_null($newPassword))
-            {
+            if (!is_null($newPassword)) {
                 //('hashage du mot de passe en clair ' . $newPassword);
                 $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hashedPassword);
