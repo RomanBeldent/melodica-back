@@ -89,7 +89,7 @@ class Organizer
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $events;
 

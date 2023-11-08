@@ -22,43 +22,43 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $date_start;
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $date_end;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $hour_start;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $hour_end;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "organizer_list", "organizer_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $picture;
 
