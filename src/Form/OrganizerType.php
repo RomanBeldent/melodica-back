@@ -53,21 +53,7 @@ class OrganizerType extends AbstractType
                 'class' => User::class,
                 'label' => 'Utilisateur(s)',
                 'choice_label' => 'firstname',
-                'multiple' => true])
-            ->add('created_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none'
-                ]])
-            ->add('updated_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none'
-                ]]);
+                'multiple' => true]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

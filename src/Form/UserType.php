@@ -3,10 +3,8 @@
 namespace App\Form;
 
 use App\Entity\User;
-use App\Entity\Organizer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -57,21 +55,6 @@ class UserType extends AbstractType
                     'multiple' => true,
                     'expanded' => true,
             ])
-            ->add('created_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none',
-            ]])
-            ->add('updated_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none',
-            ]
-        ])
              ->add('picture', FileType::class, [
                 'label' => 'Photo de profil (jpeg,jpg,png)',
                 'mapped' => false,
