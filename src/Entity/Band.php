@@ -17,7 +17,7 @@ class Band
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "user_list", "user_show"})
      * @ORM\Column(type="integer")
      */
     private $id;

@@ -21,7 +21,7 @@ class Organizer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $id;
 

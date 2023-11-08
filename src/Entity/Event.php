@@ -17,6 +17,7 @@ class Event
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $id;
 
