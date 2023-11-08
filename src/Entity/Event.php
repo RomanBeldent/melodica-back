@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\Collection;
@@ -105,6 +106,7 @@ class Event
     {
         $this->tags = new ArrayCollection();
         $this->bands = new ArrayCollection();
+        $this->setCreatedAt(new DateTimeImmutable());
     }
     
 

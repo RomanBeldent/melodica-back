@@ -128,7 +128,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->favorites = new ArrayCollection();
         $this->sentMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
-        $this->setCreatedAt(new DateTimeImmutable());
+        if($this->getCreatedAt() === null){
+            $this->setCreatedAt(new DateTimeImmutable());
+        }
     }
 
     public function getId(): ?int

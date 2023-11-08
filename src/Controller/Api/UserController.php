@@ -63,6 +63,7 @@ class UserController extends AbstractController
     public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
         $user = $em->find(User::class, $id);
+        $user->setUpdatedAt(new DateTimeImmutable());
 
         if ($user === null) {
             $errorMessage = [
