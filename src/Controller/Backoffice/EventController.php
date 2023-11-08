@@ -34,7 +34,7 @@ class EventController extends AbstractController
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         
-        $event->setCreatedAt(new DateTimeImmutable());
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

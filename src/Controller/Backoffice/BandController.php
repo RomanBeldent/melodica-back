@@ -36,7 +36,7 @@ class BandController extends AbstractController
         $band = new Band();
         $form = $this->createForm(BandType::class, $band);
 
-        $band->setCreatedAt(new DateTimeImmutable());
+        
 
         $form->handleRequest($request);
 
@@ -68,6 +68,7 @@ class BandController extends AbstractController
     public function edit(Request $request, Band $band, BandRepository $bandRepository): Response
     {
         $form = $this->createForm(BandType::class, $band);
+        $band->setUpdatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
