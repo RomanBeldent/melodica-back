@@ -5,9 +5,9 @@ namespace App\Form;
 use App\Entity\User;
 use App\Entity\Organizer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -47,7 +47,7 @@ class UserType extends AbstractType
                 'min' => 10,
                 'minMessage' => 'Veuillez rentrer un téléphone valide'
             ])
-            ]])     
+            ]])
             ->add('roles', ChoiceType::class, [
                     'choices' => [
                         'Admin' => "ROLE_ADMIN",
@@ -72,31 +72,23 @@ class UserType extends AbstractType
                 'style' => 'display:none',
             ]
         ])
-        ->add('brochure', FileType::class, [
-            'label' => 'Brochure (PDF file)',
-
-            // unmapped means that this field is not associated to any entity property
-            'mapped' => false,
-
-            // make it optional so you don't have to re-upload the PDF file
-            // every time you edit the Product details
-            'required' => false,
-
-            // unmapped fields can't define their validation using annotations
-            // in the associated entity, so you can use the PHP constraint classes
-            'constraints' => [
-                new File([
-                    'maxSize' => '1024k',
-                    'mimeTypes' => [
-                        'application/pdf',
-                        'application/x-pdf',
-                    ],
-                    'mimeTypesMessage' => 'Please upload a valid PDF document',
+             ->add('picture', FileType::class, [
+                'label' => 'Photo de profil (jpeg,jpg,png)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                     new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                        ],
+                        'mimeTypesMessage' => 'Veuillez rentrer une image au format JPEG/JPG/PNG',
                 ])
             ],
         ])
     ;
-    }
+}
 
     public function configureOptions(OptionsResolver $resolver): void
     {
