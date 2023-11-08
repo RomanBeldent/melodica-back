@@ -4,13 +4,17 @@ namespace App\Controller\Backoffice;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
 use DateTimeImmutable;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use App\Service\FileUploader;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
@@ -41,7 +45,7 @@ class UserController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
+    public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, FileUploader $fileUploader): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -50,9 +54,31 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //password hashing
             $clearPassword = $user->getPassword();
             $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
             $user->setPassword($hashedPassword);
+
+            // gestion de l'image qu'on va upload en BDD
+            $pictureFile = $form->get('picture')->getData();
+
+            if ($pictureFile) {
+                $pictureFilename = $fileUploader->upload($pictureFile);
+                $user->setPictureFilename($pictureFilename);
+
+                // on déplace le fichier uploader dans le dossier voulu
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('pictures_directory'),
+                        $pictureFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                $user->setPictureFilename($pictureFilename);
+            }
+
             $userRepository->add($user, true);
             $this->addFlash('success', 'Utilisateur ajouté !');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
@@ -73,6 +99,10 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $user->setUpdatedAt(new DateTimeImmutable());
 
+        $user->setPictureFilename(
+            new File($this->getParameter('pictures_directory'). '/' . $user->getPictureFilename())
+        );
+
         // on démappe le champ mdp car on a une gestion spécifique à faire
         $form->add('password', PasswordType::class, [
             'mapped' => false,
@@ -86,6 +116,7 @@ class UserController extends AbstractController
                 //('hashage du mot de passe en clair ' . $newPassword);
                 $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hashedPassword);
+                
             } else {
                 // on ne fait rien et l'ancien mot qui était en BDD est conservé
             }

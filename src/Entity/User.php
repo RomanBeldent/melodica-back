@@ -78,6 +78,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $picture;
 
     /**
+     * Undocumented variable
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $pictureFilename;
+
+    /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
      * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
@@ -437,6 +443,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setRecipient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPictureFilename()
+    {
+        return $this->pictureFilename;
+    }
+
+    public function setPictureFilename(string $pictureFilename): self
+    {
+        $this->pictureFilename = $pictureFilename;
 
         return $this;
     }

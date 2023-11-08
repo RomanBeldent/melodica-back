@@ -50,8 +50,12 @@
 				</td>
 			</tr>
 			<tr>
+				<th>Nom de l'image pour debug</th>
+				<td>{{user.pictureFilename}}</td>
+			</tr>
+			<tr>
 				<th>Image</th>
-				<td>{{ user.picture }}</td>
+				<td><a href="{{ asset('uploads/userPictures/' ~ user.pictureFilename) }}">Voir l'image</a></td>
 			</tr>
 			<tr>
 				<th>Créé le</th>

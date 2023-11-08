@@ -65,6 +65,7 @@ class UserType extends AbstractType
                         'mimeTypes' => [
                             'image/png',
                             'image/jpeg',
+                            'image/webp'
                         ],
                         'mimeTypesMessage' => 'Veuillez rentrer une image au format JPEG/JPG/PNG',
                 ])
