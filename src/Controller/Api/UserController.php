@@ -44,7 +44,7 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, JWTTokenManagerInterface $jwtManager): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
     {
         $json = $request->getContent();
         $user = $serializer->deserialize($json, User::class, 'json');
@@ -57,8 +57,7 @@ class UserController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
         
-        $token = $jwtManager->create($user);
-        return $this->json($token, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
+        return $this->json($user, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
     }
 
     /**

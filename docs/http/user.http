@@ -24,11 +24,10 @@ content-type: application/json
     "firstname": "TestAPIaa",
     "lastname": "TestAPIaa",
     "birthday": "2023-10-26T00:00:00+02:00",
-    "email": "testAPIaaaa@test.com",
+    "email": "testAPIaaaaazdaaazdzadazdza@test.com",
     "password": "test",
     "phone_number": "0674896526",
-    "picture": "test.png",
-    "created_at": "2023-10-27T15:56:27+02:00"
+    "picture": "test.png"
 }
 
 ### Modification d'un utilisateur
