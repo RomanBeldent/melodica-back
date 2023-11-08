@@ -44,10 +44,19 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, UserRepository $userRepository): JsonResponse
     {
         $json = $request->getContent();
         $user = $serializer->deserialize($json, User::class, 'json');
+
+        $emailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
+
+        if ($emailExist) {
+            $errorEmail = [
+                'message' => 'Cet email existe déjà !'
+            ];
+            return new JsonResponse($errorEmail, Response::HTTP_CONFLICT);
+        }
 
         $errorList = $validator->validate($user);
         if (count($errorList) > 0) {
@@ -56,7 +65,7 @@ class UserController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
-        
+
         return $this->json($user, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
     }
 

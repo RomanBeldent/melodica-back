@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Band;
 use DateTimeImmutable;
 use App\Repository\BandRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,6 +73,7 @@ class BandController extends AbstractController
     {
         $json = $request->getContent();
         $band = $serializer->deserialize($json, Band::class, 'json');
+
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
