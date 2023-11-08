@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Config\Security\FirewallConfig\JwtConfig;
 
 /**
  * @Route("/api/user", name="api_user_")
@@ -42,7 +44,7 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, JWTTokenManagerInterface $jwtManager): JsonResponse
     {
         $json = $request->getContent();
         $user = $serializer->deserialize($json, User::class, 'json');
@@ -54,7 +56,9 @@ class UserController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
-        return $this->json($user, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
+        
+        $token = $jwtManager->create($user);
+        return $this->json($token, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
     }
 
     /**
