@@ -447,7 +447,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPictureFilename()
+    public function getPictureFilename(): ?string
     {
         return $this->pictureFilename;
     }
