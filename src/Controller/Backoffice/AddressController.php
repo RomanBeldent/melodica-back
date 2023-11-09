@@ -5,6 +5,7 @@ namespace App\Controller\Backoffice;
 use App\Entity\Address;
 use App\Form\AddressType;
 use App\Repository\AddressRepository;
+use App\Service\SetAddressDepartment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,20 +29,22 @@ class AddressController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, AddressRepository $addressRepository): Response
+    public function create(Request $request, AddressRepository $addressRepository, SetAddressDepartment $setAddressDepartment): Response
     {
         $address = new Address();
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
-        
-        // todo : mettre en place les premiers chiffres du zipcode et les rentrer dans setDepartment
+
+        //todo gérer les DOM TOM
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $setAddressDepartment->setDepartmentFromZipcode($address);
             $addressRepository->add($address, true);
+
             $this->addFlash('success', 'Adresse ajouté !');
             return $this->redirectToRoute('back_address_list', [], Response::HTTP_SEE_OTHER);
         }
-      
+
         return $this->renderForm('address/create.html.twig', [
             'address' => $address,
             'form' => $form,
@@ -83,7 +86,7 @@ class AddressController extends AbstractController
      */
     public function delete(Request $request, Address $address, AddressRepository $addressRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$address->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $address->getId(), $request->request->get('_token'))) {
             $addressRepository->remove($address, true);
         }
         $this->addFlash('success', 'Adresse supprimé !');

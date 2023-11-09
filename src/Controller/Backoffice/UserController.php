@@ -63,6 +63,7 @@ class UserController extends AbstractController
             // donner un ID unique à notre image
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
+            //todo créer une entité image (nullable)
             if ($pictureFile) {
                 $pictureFilename = $fileUploader->upload($pictureFile);
                 $user->setPictureFilename($pictureFilename);

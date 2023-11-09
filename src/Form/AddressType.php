@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,16 +23,6 @@ class AddressType extends AbstractType
         ])
         ->add('city', TextType::class, [
             'label' => 'Ville',
-            'required' => true
-        ])
-        ->add('department', ChoiceType::class, [
-            'choices' => [
-                '75' => "75",
-                '33' => "33",
-                '44' => "44",
-                '78' => "78",
-            ],
-            'label' => 'Département',
             'required' => true
         ]);
     }
