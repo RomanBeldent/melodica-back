@@ -49,7 +49,7 @@ class Organizer
      * @ORM\Column(type="string", nullable=true)
      * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "random_all"})
      */
-    private $pictureFilename;
+    private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -146,14 +146,14 @@ class Organizer
         return $this;
     }
 
-    public function getPictureFilename(): ?string
+    public function getPicture(): ?string
     {
-        return $this->pictureFilename;
+        return $this->picture;
     }
 
-    public function setPictureFilename(string $pictureFilename): self
+    public function setPicture(string $picture): self
     {
-        $this->pictureFilename = $pictureFilename;
+        $this->picture = $picture;
 
         return $this;
     }

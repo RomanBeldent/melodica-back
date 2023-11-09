@@ -77,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", nullable=true)
      * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
-    private $pictureFilename;
+    private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
@@ -214,14 +214,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPictureFilename(): ?string
+    public function getPicture(): ?string
     {
-        return $this->pictureFilename;
+        return $this->picture;
     }
 
-    public function setPictureFilename(string $pictureFilename): self
+    public function setPicture(string $picture): self
     {
-        $this->pictureFilename = $pictureFilename;
+        $this->picture = $picture;
 
         return $this;
     }

@@ -35,7 +35,11 @@ PATCH http://localhost:8080/api/user/2
 content-type: application/json
 
 {
-    "firstname": "Testa"
+    "bands": [
+        {
+            "name": "test"
+        }
+    ]
 }
 
 ### Suppression d'un utilisateur

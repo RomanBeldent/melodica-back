@@ -54,7 +54,7 @@ class EventController extends AbstractController
             $setAddressDepartment->setDepartmentFromZipcode($event);
 
             // gestion de l'image qu'on va upload en BDD
-            $pictureFile = $form->get('pictureFilename')->getData();
+            $pictureFile = $form->get('picture')->getData();
 
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
@@ -62,8 +62,8 @@ class EventController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
-                $pictureFilename = $fileUploader->upload($pictureFile);
-                $event->setPictureFilename($pictureFilename);
+                $picture = $fileUploader->upload($pictureFile);
+                $event->setPicture($picture);
             }
 
             $eventRepository->add($event, true);
@@ -88,7 +88,7 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $setAddressDepartment->setDepartmentFromZipcode($event);
             // gestion de l'image qu'on va upload en BDD
-            $pictureFile = $form->get('pictureFilename')->getData();
+            $pictureFile = $form->get('picture')->getData();
 
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
@@ -96,8 +96,8 @@ class EventController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
-                $pictureFilename = $fileUploader->upload($pictureFile);
-                $event->setPictureFilename($pictureFilename);
+                $picture = $fileUploader->upload($pictureFile);
+                $event->setPicture($picture);
             }
             
             $eventRepository->add($event, true);

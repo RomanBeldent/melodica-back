@@ -109,7 +109,7 @@ class AppFixtures extends Fixture
             $hashedPassword = $this->passwordHasher->hashPassword($user, 'user');
             $user->setPassword($hashedPassword);
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/200";
-            $user->setPictureFilename($posterUrl);
+            $user->setPicture($posterUrl);
             $user->setPhoneNumber('06' . $faker->numberBetween(10000000, 99999999));
             $user->setCreatedAt(new DateTimeImmutable());
 
@@ -158,7 +158,7 @@ class AppFixtures extends Fixture
             $organizer->setWebsite('https://theuselessweb.com/');
             $organizer->setDescription($faker->paragraphs(3, true));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
-            $organizer->setPictureFilename($posterUrl);
+            $organizer->setPicture($posterUrl);
             $organizer->setCreatedAt(new DateTimeImmutable());
 
             $randomType = $faker->randomElement($typeObjectList);
@@ -182,7 +182,7 @@ class AppFixtures extends Fixture
             $band->setDescription($faker->paragraphs(3, true));
             $band->setArea($faker->numberBetween(25, 1000));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
-            $band->setPictureFilename($posterUrl);
+            $band->setPicture($posterUrl);
             $band->setSample('https://www.youtube.com/embed/Lgs9QUtWc3M?si=pTFpPLfBIZqLgUxT');
             $band->setCreatedAt(new DateTimeImmutable());
 
@@ -208,7 +208,7 @@ class AppFixtures extends Fixture
             $event->setDateStart(new DateTimeImmutable());
             $event->setHourStart($faker->dateTime());
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
-            $event->setPictureFilename($posterUrl);
+            $event->setPicture($posterUrl);
             $event->setCreatedAt(new DateTimeImmutable());
             $event->addTag($faker->randomElement($tagObjectList));
             $event->addBand($faker->randomElement($bandObjectList));

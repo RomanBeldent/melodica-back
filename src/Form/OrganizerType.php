@@ -35,7 +35,7 @@ class OrganizerType extends AbstractType
                 'attr' => [
                 'placeholder' => 'www.website.com',
             ]])
-            ->add('pictureFilename', FileType::class, [
+            ->add('picture', FileType::class, [
                 'label' => 'Photo de profil (jpeg,jpg,png)',
                 'mapped' => false,
                 'required' => false,

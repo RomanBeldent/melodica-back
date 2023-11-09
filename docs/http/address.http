@@ -16,7 +16,7 @@ PATCH http://localhost:8080/api/address/3
 content-type: application/json
 
 {
-    "zipcode": "03000"
+    "zipcode": "45000"
 }
 ### Suppression d'une adresse
 DELETE http://localhost:8080/api/address/4

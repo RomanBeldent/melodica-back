@@ -47,7 +47,7 @@ class EventType extends AbstractType
             ->add('hour_end',TimeType::class,[
                 'label'=>'Heure de fin'
             ])
-            ->add('pictureFilename', FileType::class, [
+            ->add('picture', FileType::class, [
                 'label' => 'Photo de profil (jpeg,jpg,png)',
                 'mapped' => false,
                 'required' => false,
