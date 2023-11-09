@@ -12,16 +12,15 @@ content-type: application/json
     "area": 105,
     "sample": null,
     "picture": null,
-    "created_at": "2023-12-03T11:55:08+01:00",
-    "users": [2414],
+    "users": [1],
         "address": {
             "street": "24 rue du Test Artiste",
             "zipcode": "48000",
             "city":"ArtisteCity",
             "department":"48"
         },
-    "genres": [477,478],
-    "tags": [304,305]
+    "genres": [1],
+    "tags": [1]
 }
 
 ### Modification d'un groupe

@@ -24,7 +24,7 @@ content-type: application/json
     "firstname": "TestAPIaa",
     "lastname": "TestAPIaa",
     "birthday": "2023-10-26T00:00:00+02:00",
-    "email": "testAPIaaaaaaa@test.coma",
+    "email": "testAPIaaaaazdaaazdzadazdza@test.com",
     "password": "test",
     "phone_number": "0674896526",
     "picture": "test.png"

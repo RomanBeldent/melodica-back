@@ -3,16 +3,18 @@
 namespace App\Controller\Api;
 
 use App\Entity\Band;
+use DateTimeImmutable;
 use App\Repository\BandRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/api/band", name="api_band_")
@@ -71,6 +73,7 @@ class BandController extends AbstractController
     {
         $json = $request->getContent();
         $band = $serializer->deserialize($json, Band::class, 'json');
+
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
@@ -85,6 +88,7 @@ class BandController extends AbstractController
     public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
         $band = $em->find(Band::class, $id);
+        $band->setUpdatedAt(new DateTimeImmutable());
         if ($band === null) {
             $errorMessage = [
                 'message' => "Band not found",

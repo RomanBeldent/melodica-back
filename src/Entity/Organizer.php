@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OrganizerRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -20,7 +21,7 @@ class Organizer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $id;
 
@@ -51,7 +52,6 @@ class Organizer
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Assert\NotBlank
      * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random"})
      */
     private $created_at;
@@ -88,7 +88,7 @@ class Organizer
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $events;
 
@@ -97,6 +97,7 @@ class Organizer
         $this->users = new ArrayCollection();
         $this->favorites = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->setCreatedAt(new DateTimeImmutable());
     }
     public function __toString()
     {

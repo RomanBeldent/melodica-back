@@ -3,16 +3,17 @@
 namespace App\Controller\Api;
 
 use App\Entity\Event;
+use DateTimeImmutable;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/api/event", name="api_event_")
@@ -62,6 +63,7 @@ class EventController extends AbstractController
     public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
         $event = $em->find(Event::class, $id);
+        $event->setUpdatedAt(new DateTimeImmutable());
 
         if ($event === null) {
             $errorMessage = [

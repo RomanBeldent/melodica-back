@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+<div class=container-sm>
 	<h1 class='mb-2'  align='center'>Bienvenue sur le BackOffice de Mélodica</h1>
 	<h2 class='mb-5' align='center'>Veuillez choisir la catégorie à laquelle vous voulez accéder</h2>
 	<div class="col-md-6 offset-md-3 row align-items-center">
@@ -16,4 +17,5 @@
 		<a href="{{ path('back_type_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Type</a>
 		<a href="{{ path('back_tag_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Tag</a>
 	</div>
+</div>
 {% endblock %}

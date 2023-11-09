@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BandRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -16,7 +17,7 @@ class Band
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"band_list", "band_show"})
+     * @Groups({"band_list", "band_show", "user_list", "user_show"})
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -69,7 +70,7 @@ class Band
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="bands")
-     * @Groups({"band_list", "band_show", "band_create", "band_update"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "user_list", "user_show"})
      */
     private $events;
 
@@ -103,6 +104,7 @@ class Band
         $this->tags = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->favorites = new ArrayCollection();
+        $this->setCreatedAt(new DateTimeImmutable());
     }
     public function __toString()
     {

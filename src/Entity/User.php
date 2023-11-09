@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -106,7 +107,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $favorites;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", options={"default": "['ROLE_USER']"}))
      * @Groups({"user_list", "user_show"})
      */
     private $roles = [];
@@ -127,6 +128,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->favorites = new ArrayCollection();
         $this->sentMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
+        if($this->getCreatedAt() === null){
+            $this->setCreatedAt(new DateTimeImmutable());
+        }
     }
 
     public function getId(): ?int

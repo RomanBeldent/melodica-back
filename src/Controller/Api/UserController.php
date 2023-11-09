@@ -5,7 +5,9 @@ namespace App\Controller\Api;
 use App\Entity\User;
 use DateTimeImmutable;
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +17,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Config\Security\FirewallConfig\JwtConfig;
 
 /**
  * @Route("/api/user", name="api_user_")
@@ -52,6 +55,14 @@ class UserController extends AbstractController
         $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
         $user->setPassword($hashedPassword);
         $this->addFlash('success', 'Utilisateur ajouté !');
+        $emailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
+
+        if ($emailExist) {
+            $errorEmail = [
+                'message' => 'Cet email existe déjà !'
+            ];
+            return new JsonResponse($errorEmail, Response::HTTP_CONFLICT);
+        }
 
         $errorList = $validator->validate($user);
         if (count($errorList) > 0) {
@@ -60,6 +71,7 @@ class UserController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
+
         return $this->json($user, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
     }
 
@@ -69,6 +81,7 @@ class UserController extends AbstractController
     public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
         $user = $em->find(User::class, $id);
+        $user->setUpdatedAt(new DateTimeImmutable());
 
         if ($user === null) {
             $errorMessage = [

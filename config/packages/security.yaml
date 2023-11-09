@@ -46,7 +46,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api,       roles: PUBLIC_ACCESS }
         - { path: ^/back/user/create, roles: ROLE_ADMIN }
         - { path: ^/back/(organizer|band|address|tag|genre|type|event)/create, roles: ROLE_MANAGER }
