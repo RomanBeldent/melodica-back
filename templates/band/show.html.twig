@@ -29,10 +29,10 @@
                 <th>Echantillon</th>
                 <td>{{ band.sample }}</td>
             </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ band.picture }}</td>
-            </tr>
+			<tr>
+				<th>Image</th>
+				<td><a href="{{ asset('uploads/pictures/' ~ band.pictureFilename) }}">Voir l'image</a></td>
+			</tr>
             <tr>
                 <th>Créé le</th>
                 <td>{{ band.createdAt ? band.createdAt|date('Y-m-d H:i:s') : '' }}</td>

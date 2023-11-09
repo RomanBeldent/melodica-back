@@ -28,7 +28,6 @@
 					<th>Date de fin</th>
 					<th>Heure de début</th>
 					<th>Heure de fin</th>
-					<th>Image</th>
 					<th>Créé le</th>
 					<th>Mis à jour le</th>
 					<th>actions</th>
@@ -44,7 +43,6 @@
 						<td>{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
 						<td>{{ event.hourStart ? event.hourStart|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
-						<td>{{ event.picture }}</td>
 						<td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>
