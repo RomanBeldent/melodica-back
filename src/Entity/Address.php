@@ -44,9 +44,8 @@ class Address
     private $city;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update", "organizer_list", "organizer_show", "event_list", "event_show"})
-     * @Assert\NotBlank
      */
     private $department;
 
@@ -71,6 +70,7 @@ class Address
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
