@@ -24,7 +24,7 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "band_list", "band_show", "organizer_list", "organizer_show", "user_list", "user_show", "random_all"})
      */
     private $title;
 

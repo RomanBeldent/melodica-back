@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Band;
 use DateTimeImmutable;
 use App\Repository\BandRepository;
+use App\Repository\OrganizerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,6 +64,26 @@ class BandController extends AbstractController
  
         return $this->json([
             'randomBands' => $randomBands], 200, [], ['groups' => 'band_random']);
+    }
+
+    /**
+     * @Route("/randomAll", name="randomAll", methods={"GET"})
+     */
+    public function randomAll(BandRepository $bandRepository, OrganizerRepository $organizerRepository): JsonResponse
+    {
+        // ou alors option de tout regrouper et définir si c'est un groupe ou un organizer grâce à l'area
+        $randomAll = [];
+        $bands = $bandRepository->findAll();
+        shuffle($bands);
+        $organizers = $organizerRepository->findAll();
+        shuffle($organizers);
+
+        array_push($randomAll, $bands);
+        array_push($randomAll, $organizers);
+
+        return $this->json([
+            'organizers' => $organizers,
+            'bands' => $bands], 200, [], ['groups' => 'random_all']);
     }
     
     /**
