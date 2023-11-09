@@ -41,7 +41,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, OrganizerRepository $organizerRepository, SetAddressDepartment $setAddressDepartment , FileUploader $fileUploader): Response
+    public function create(Request $request, OrganizerRepository $organizerRepository, SetAddressDepartment $setAddressDepartment, FileUploader $fileUploader): Response
     {
         $organizer = new Organizer();
 
@@ -51,10 +51,8 @@ class OrganizerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            // appel du service pour définir les 2 premiers numéro du département en fonction du zipcode
             $setAddressDepartment->setDepartmentFromZipcode($organizer);
-            // $zipcodeIntoDepartment = $organizer->getAddress()->getZipcode();
-            // $department = substr($zipcodeIntoDepartment, 0, -3);
-            // $organizer->getAddress()->setDepartment($department);
 
             // gestion de l'image qu'on va upload en BDD
             $pictureFile = $form->get('pictureFilename')->getData();

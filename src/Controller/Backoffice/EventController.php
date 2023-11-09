@@ -5,8 +5,9 @@ namespace App\Controller\Backoffice;
 use App\Entity\Event;
 use DateTimeImmutable;
 use App\Form\EventType;
-use App\Repository\EventRepository;
 use App\Service\FileUploader;
+use App\Repository\EventRepository;
+use App\Service\SetAddressDepartment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,7 +41,7 @@ class EventController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, EventRepository $eventRepository, FileUploader $fileUploader): Response
+    public function create(Request $request, EventRepository $eventRepository, SetAddressDepartment $setAddressDepartment, FileUploader $fileUploader): Response
     {
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
@@ -49,6 +50,9 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // appel du service pour définir les 2 premiers numéro du département en fonction du zipcode
+            $setAddressDepartment->setDepartmentFromZipcode($event);
+
             // gestion de l'image qu'on va upload en BDD
             $pictureFile = $form->get('pictureFilename')->getData();
 
