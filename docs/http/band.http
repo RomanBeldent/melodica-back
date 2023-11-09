@@ -27,7 +27,9 @@ PATCH http://localhost:8080/api/band/1
 content-type: application/json
 
 {
-    "name": "Badidou"
+     "address": {
+        "zipcode": "99000"
+     }
 }
 ### Suppression d'un groupe
 DELETE http://localhost:8080/api/band/1
