@@ -78,13 +78,14 @@ class BandController extends AbstractController
     /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Band $band, BandRepository $bandRepository, FileUploader $fileUploader): Response
+    public function edit(Request $request, Band $band, BandRepository $bandRepository, FileUploader $fileUploader, SetAddressDepartment $setAddressDepartment): Response
     {
         $form = $this->createForm(BandType::class, $band);
         $band->setUpdatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $setAddressDepartment->setDepartmentFromZipcode($band);
             // gestion de l'image qu'on va upload en BDD
             $pictureFile = $form->get('pictureFilename')->getData();
 

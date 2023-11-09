@@ -80,12 +80,13 @@ class EventController extends AbstractController
     /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Event $event, EventRepository $eventRepository, FileUploader $fileUploader): Response
+    public function edit(Request $request, Event $event, EventRepository $eventRepository, FileUploader $fileUploader, SetAddressDepartment $setAddressDepartment): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $setAddressDepartment->setDepartmentFromZipcode($event);
             // gestion de l'image qu'on va upload en BDD
             $pictureFile = $form->get('pictureFilename')->getData();
 

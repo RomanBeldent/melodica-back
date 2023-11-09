@@ -27,7 +27,7 @@ class OrganizerController extends AbstractController
             'organizers' => $organizerRepository->findAll(),
         ]);
     }
-    
+
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
@@ -85,7 +85,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Organizer $organizer, OrganizerRepository $organizerRepository, FileUploader $fileUploader): Response
+    public function edit(Request $request, Organizer $organizer, OrganizerRepository $organizerRepository, FileUploader $fileUploader, SetAddressDepartment $setAddressDepartment): Response
     {
         $form = $this->createForm(OrganizerType::class, $organizer);
 
@@ -93,9 +93,10 @@ class OrganizerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $setAddressDepartment->setDepartmentFromZipcode($organizer);
             // gestion de l'image qu'on va upload en BDD
             $pictureFile = $form->get('pictureFilename')->getData();
-            
+
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
             // donner un ID unique à notre image
