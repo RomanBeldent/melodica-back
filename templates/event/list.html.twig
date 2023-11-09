@@ -13,40 +13,39 @@
 			</div>
 		{% endfor %}
 	{% endfor %}
-
-	<table class="table table-dark table-striped">
 		<div class='d-flex justify-content-between'>
 			<a href="{{ path('back_index') }}" class="btn btn-secondary btn-lg active m-3">Accueil back
 				<a href="{{ path('back_event_create')}}" class="btn btn-success btn-lg active m-3" role="button" aria-pressed="true">Ajouter un nouvel événement</a>
 			</div>
+			<table class="table table-dark table-striped">
 			<thead>
-				<tr>
+				<tr class="text-center">
 					<th>#</th>
 					<th>Titre</th>
-					<th>Description</th>
+					<th class = "d-none d-lg-table-cell">Description</th>
 					<th>Date de début</th>
-					<th>Date de fin</th>
+					<th class = "d-none d-lg-table-cell">Date de fin</th>
 					<th>Heure de début</th>
-					<th>Heure de fin</th>
+					<th class = "d-none d-lg-table-cell">Heure de fin</th>
 					<th>Image</th>
 					<th>Créé le</th>
-					<th>Mis à jour le</th>
-					<th>actions</th>
+					<th class = "d-none d-lg-table-cell">Mis à jour le</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for event in events %}
-					<tr>
+					<tr class="text-center">
 						<td>{{ event.id }}</td>
 						<td>{{ event.title }}</td>
-						<td>{{ event.description }}</td>
+						<td class = "d-none d-lg-table-cell">{{ event.description }}</td>
 						<td>{{ event.dateStart ? event.dateStart|date('Y-m-d') : '' }}</td>
-						<td>{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
+						<td class = "d-none d-lg-table-cell">{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
 						<td>{{ event.hourStart ? event.hourStart|date('Y-m-d H:i:s') : '' }}</td>
-						<td>{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
+						<td class = "d-none d-lg-table-cell">{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ event.picture }}</td>
 						<td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-						<td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+						<td class = "d-none d-lg-table-cell">{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>
 							<a href="{{ path('back_event_show', {'id': event.id}) }}" class="m-1 btn btn-outline-info">Read
 								<a href="{{ path('back_event_edit', {'id': event.id}) }}" class="m-1 btn btn-outline-warning">Update

@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+
 	<h1 align='center'>Liste des genres</h1>
 	{% for label, messages in app.flashes %}
 		{% for message in messages %}
@@ -13,24 +14,25 @@
 			</div>
 		{% endfor %}
 	{% endfor %}
-	<table class="table table-dark table-striped">
+	
 		<div class='d-flex justify-content-between'>
 			<a href="{{ path('back_index') }}" class="btn btn-secondary btn-lg active m-3">Accueil back
 				<a href="{{ path('back_genre_create')}}" class="btn btn-success btn-lg active m-3" role="button" aria-pressed="true">Ajouter un nouveau genre</a>
 			</div>
+			<table class="table table-dark table-striped">
 			<thead>
-				<tr>
-					<th>#</th>
-					<th>Nom</th>
-					<th>actions</th>
+				<tr class="text-center">
+					<th class="col-4">#</th>
+					<th class="col-4">Nom</th>
+					<th class="col-4">Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for genre in genres %}
-					<tr>
-						<td>{{ genre.id }}</td>
-						<td>{{ genre.name }}</td>
-						<td>
+					<tr class="text-center">
+						<td class="col-4">{{ genre.id }}</td>
+						<td class="col-4">{{ genre.name }}</td>
+						<td class="col-4">
 							<a href="{{ path('back_genre_show', {'id': genre.id}) }}" class="m-1 btn btn-outline-info">Read
 								<a href="{{ path('back_genre_edit', {'id': genre.id}) }}" class="m-1 btn btn-outline-warning">Update
 									<a href="{{ path('back_genre_delete', {'id': genre.id}) }}" class="m-1 btn btn-outline-danger">Delete</td>
@@ -43,6 +45,5 @@
 						{% endfor %}
 					</tr>
 				</tbody>
-			</tbody>
-		</table>
+		</table>	
 	{% endblock %}
