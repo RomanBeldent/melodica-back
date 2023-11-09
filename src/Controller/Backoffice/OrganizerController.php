@@ -2,12 +2,9 @@
 
 namespace App\Controller\Backoffice;
 
-use App\Entity\Address;
 use App\Entity\Organizer;
 use App\Form\OrganizerType;
-use App\Repository\AddressRepository;
 use App\Repository\OrganizerRepository;
-use App\Repository\TypeRepository;
 use App\Service\FileUploader;
 use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
