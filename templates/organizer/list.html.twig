@@ -13,29 +13,28 @@
 			</div>
 		{% endfor %}
 	{% endfor %}
-	<table class="table table-dark table-striped">
 		<div class='d-flex justify-content-between'>
 			<a href="{{ path('back_index') }}" class="btn btn-secondary btn-lg active m-3">Accueil back
 				<a href="{{ path('back_organizer_create')}}" class="btn btn-success btn-lg active m-3" role="button" aria-pressed="true">Ajouter un nouvel organisateur</a>
 			</div>
 			<thead>
-
-				<tr>
+			<table class="table table-dark table-striped">
+				<tr class="text-center">
 					<th>#</th>
 					<th>Nom</th>
-					<th>Description</th>
+					<th class = "d-none d-lg-table-cell">Description</th>
 					<th>Site web</th>
 					<th>Créé le</th>
 					<th>Mise à jour le</th>
-					<th>actions</th>
+					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for organizer in organizers %}
-					<tr>
+					<tr class="text-center">
 						<td>{{ organizer.id }}</td>
 						<td>{{ organizer.name }}</td>
-						<td>{{ organizer.description }}</td>
+						<td class = "d-none d-lg-table-cell">{{ organizer.description }}</td>
 						<td>{{ organizer.website }}</td>
 						<td>{{ organizer.createdAt ? organizer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ organizer.updatedAt ? organizer.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
