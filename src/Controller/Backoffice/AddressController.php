@@ -24,6 +24,16 @@ class AddressController extends AbstractController
         return $this->render('address/list.html.twig', [
             'addresses' => $addressRepository->findAll(),
         ]);
+
+    }
+    /**
+     * @Route("/{id<\d+>}", name="show", methods={"GET"})
+     */
+    public function show(Address $address): Response
+    {
+        return $this->render('address/show.html.twig', [
+            'address' => $address,
+        ]);
     }
 
     /**
@@ -52,24 +62,15 @@ class AddressController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="show", methods={"GET"})
-     */
-    public function show(Address $address): Response
-    {
-        return $this->render('address/show.html.twig', [
-            'address' => $address,
-        ]);
-    }
-
-    /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Address $address, AddressRepository $addressRepository): Response
+    public function edit(Request $request, Address $address, AddressRepository $addressRepository, SetAddressDepartment $setAddressDepartment): Response
     {
         $form = $this->createForm(AddressType::class, $address);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $setAddressDepartment->setDepartmentFromZipcode($address);
             $addressRepository->add($address, true);
             $this->addFlash('success', 'Adresse modifié !');
             return $this->redirectToRoute('back_address_list', [], Response::HTTP_SEE_OTHER);

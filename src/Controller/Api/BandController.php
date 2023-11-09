@@ -6,6 +6,7 @@ use App\Entity\Band;
 use DateTimeImmutable;
 use App\Repository\BandRepository;
 use App\Repository\OrganizerRepository;
+use App\Service\SetAddressDepartment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -89,15 +90,18 @@ class BandController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $json = $request->getContent();
         $band = $serializer->deserialize($json, Band::class, 'json');
+
+        $setAddressDepartment->setDepartmentFromZipcode($band);
 
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
         }
+
         $entityManager->persist($band);
         $entityManager->flush();
         return $this->json($band, Response::HTTP_CREATED, [], ["groups" => 'band_create']);
@@ -105,22 +109,28 @@ class BandController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
-    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
+    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $band = $em->find(Band::class, $id);
         $band->setUpdatedAt(new DateTimeImmutable());
+
         if ($band === null) {
             $errorMessage = [
                 'message' => "Band not found",
             ];
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
+
         $json = $request->getContent();
         $serializer->deserialize($json, Band::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $band]);
+
+        $setAddressDepartment->setDepartmentFromZipcode($band);
+
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
         }
+        
         $em->flush();
         return $this->json($band, Response::HTTP_OK, [], ['groups' => 'band_update']);
     }

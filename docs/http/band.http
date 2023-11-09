@@ -7,7 +7,7 @@ POST http://localhost:8080/api/band/
 content-type: application/json
 
 {
-    "name": "Test x a",
+    "name": "Tesat xa aa",
     "description": "Test Band APIa",
     "area": 105,
     "sample": null,
@@ -15,9 +15,8 @@ content-type: application/json
     "users": [1],
         "address": {
             "street": "24 rue du Test Artiste",
-            "zipcode": "48000",
-            "city":"ArtisteCity",
-            "department":"48"
+            "zipcode": "99000",
+            "city":"ArtisteCity"
         },
     "genres": [1],
     "tags": [1]
