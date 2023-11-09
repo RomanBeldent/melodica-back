@@ -27,7 +27,6 @@
 					<th class = "d-none d-lg-table-cell">Date de fin</th>
 					<th>Heure de début</th>
 					<th class = "d-none d-lg-table-cell">Heure de fin</th>
-					<th>Image</th>
 					<th>Créé le</th>
 					<th class = "d-none d-lg-table-cell">Mis à jour le</th>
 					<th>Actions</th>
@@ -43,7 +42,6 @@
 						<td class = "d-none d-lg-table-cell">{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
 						<td>{{ event.hourStart ? event.hourStart|date('Y-m-d H:i:s') : '' }}</td>
 						<td class = "d-none d-lg-table-cell">{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
-						<td>{{ event.picture }}</td>
 						<td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td class = "d-none d-lg-table-cell">{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>

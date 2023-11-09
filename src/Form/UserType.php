@@ -2,13 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Organizer;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -46,10 +46,6 @@ class UserType extends AbstractType
                 'minMessage' => 'Veuillez rentrer un téléphone valide'
             ])
             ]])
-            ->add('picture', TextType::class, [
-                'label' => 'Photo de profil',
-                'required' => false
-            ])
             ->add('roles', ChoiceType::class, [
                     'choices' => [
                         'Admin' => "ROLE_ADMIN",
@@ -59,21 +55,24 @@ class UserType extends AbstractType
                     'multiple' => true,
                     'expanded' => true,
             ])
-            ->add('created_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none',
-            ]])
-            ->add('updated_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none',
-            ]]);
-    }
+             ->add('pictureFilename', FileType::class, [
+                'label' => 'Photo de profil (jpeg,jpg,png)',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                     new File([
+                        'maxSize' => '2m',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                            'image/webp'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez rentrer une image au format JPEG/JPG/PNG',
+                ])
+            ],
+        ])
+    ;
+}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

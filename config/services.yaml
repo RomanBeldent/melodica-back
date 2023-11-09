@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    pictures_directory: '%kernel.project_dir%/public/uploads/pictures'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -23,6 +23,10 @@ services:
     App\Normalizer\EntityNormalizer:
         tags: [serializer.normalizer]
 
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%pictures_directory%'
+            
     acme_api.event.jwt_created_listener:
         class: App\EventListener\JWTCreatedListener
         arguments: [ '@request_stack' ]

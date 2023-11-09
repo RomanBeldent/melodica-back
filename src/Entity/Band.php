@@ -24,37 +24,37 @@ class Band
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show", "user_list", "user_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show", "user_list", "user_show", "random_all"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show", "user_list", "user_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show", "user_list", "user_show", "random_all"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "random_all"})
      */
     private $area;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "event_list", "event_show", "random_all"})
      */
     private $sample;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random"})
      */
-    private $picture;
+    private $pictureFilename;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random", "random_all"})
      */
     private $created_at;
 
@@ -71,19 +71,19 @@ class Band
 
     /**
      * @ORM\ManyToMany(targetEntity=Event::class, mappedBy="bands")
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "user_list", "user_show"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "user_list", "user_show", "random_all"})
      */
     private $events;
 
     /**
      * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="bands")
-     * @Groups({"band_list", "band_show", "band_create", "band_update"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "random_all"})
      */
     private $tags;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="bands")
-     * @Groups({"band_list", "band_show", "band_create", "band_update"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "random_all"})
      */
     private $genres;
 
@@ -165,14 +165,14 @@ class Band
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getPictureFilename(): ?string
     {
-        return $this->picture;
+        return $this->pictureFilename;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPictureFilename(string $pictureFilename): self
     {
-        $this->picture = $picture;
+        $this->pictureFilename = $pictureFilename;
 
         return $this;
     }

@@ -10,12 +10,12 @@ use App\Form\AddressType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 class EventType extends AbstractType
@@ -47,27 +47,22 @@ class EventType extends AbstractType
             ->add('hour_end',TimeType::class,[
                 'label'=>'Heure de fin'
             ])
-            ->add('picture', FileType::class, [
-                'label' => 'Photo de l\'évènement (png, jpeg..)',
-                // unmapped means that this field is not associated to any entity property
+            ->add('pictureFilename', FileType::class, [
+                'label' => 'Photo de profil (jpeg,jpg,png)',
                 'mapped' => false,
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
-                'required' => false])
-            ->add('created_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none'
-                ]])
-            ->add('updated_at', DateTimeType::class, [
-                'input' => 'datetime_immutable',
-                'disabled' => true,
-                'label' => false,
-                'attr' => [
-                'style' => 'display:none'
-                ]])
+                'required' => false,
+                'constraints' => [
+                     new File([
+                        'maxSize' => '2m',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                            'image/webp'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez rentrer une image au format JPEG/JPG/PNG',
+                    ])
+                ],
+            ])
             ->add('tags', EntityType::class,[
                 'label'=>'Tag',
                 'class' => Tag::class,

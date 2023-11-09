@@ -24,7 +24,6 @@
 					<th>Nom</th>
 					<th class = "d-none d-lg-table-cell">Description</th>
 					<th>Site web</th>
-					<th>Image</th>
 					<th>Créé le</th>
 					<th>Mise à jour le</th>
 					<th>Actions</th>
@@ -37,7 +36,6 @@
 						<td>{{ organizer.name }}</td>
 						<td class = "d-none d-lg-table-cell">{{ organizer.description }}</td>
 						<td>{{ organizer.website }}</td>
-						<td>{{ organizer.picture }}</td>
 						<td>{{ organizer.createdAt ? organizer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>{{ organizer.updatedAt ? organizer.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 						<td>

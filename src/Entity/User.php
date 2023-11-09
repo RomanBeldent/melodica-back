@@ -73,10 +73,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone_number;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * Undocumented variable
+     * @ORM\Column(type="string", nullable=true)
      * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
-    private $picture;
+    private $pictureFilename;
 
     /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
@@ -213,14 +214,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getPictureFilename(): ?string
     {
-        return $this->picture;
+        return $this->pictureFilename;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPictureFilename(string $pictureFilename): self
     {
-        $this->picture = $picture;
+        $this->pictureFilename = $pictureFilename;
 
         return $this;
     }
@@ -444,4 +445,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 }

@@ -5,9 +5,8 @@ namespace App\Controller\Backoffice;
 use App\Entity\Band;
 use App\Form\BandType;
 use DateTimeImmutable;
-use App\Entity\Address;
 use App\Repository\BandRepository;
-use App\Repository\UserRepository;
+use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,30 +28,6 @@ class BandController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="create", methods={"GET", "POST"})
-     */
-    public function create(Request $request, BandRepository $bandRepository): Response
-    {
-        $band = new Band();
-        $form = $this->createForm(BandType::class, $band);
-
-        
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $bandRepository->add($band, true);
-            $this->addFlash('success', 'Groupe ajouté !');
-            return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
-        }
-        
-        return $this->renderForm('band/create.html.twig', [
-            'band' => $band,
-            'form' => $form,
-        ]);
-    }
-
-    /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
     public function show(Band $band): Response
@@ -63,20 +38,68 @@ class BandController extends AbstractController
     }
 
     /**
+     * @Route("/create", name="create", methods={"GET", "POST"})
+     */
+    public function create(Request $request, BandRepository $bandRepository, FileUploader $fileUploader): Response
+    {
+        $band = new Band();
+        $form = $this->createForm(BandType::class, $band);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // gestion de l'image qu'on va upload en BDD
+            $pictureFile = $form->get('pictureFilename')->getData();
+
+            // gestion de l'image qu'on va upload en BDD
+            // on fait appel à un service upload, qui va slug le nom du fichier
+            // donner un ID unique à notre image
+            // déplacer le fichier dans un dossier public/uploads/xxxxPictures
+
+            if ($pictureFile) {
+                $pictureFilename = $fileUploader->upload($pictureFile);
+                $band->setPictureFilename($pictureFilename);
+            }
+
+            $bandRepository->add($band, true);
+            $this->addFlash('success', 'Groupe ajouté !');
+            return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('band/create.html.twig', [
+            'band' => $band,
+            'form' => $form,
+        ]);
+    }
+
+
+    /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Band $band, BandRepository $bandRepository): Response
+    public function edit(Request $request, Band $band, BandRepository $bandRepository, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(BandType::class, $band);
         $band->setUpdatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // gestion de l'image qu'on va upload en BDD
+            $pictureFile = $form->get('pictureFilename')->getData();
+
+            // gestion de l'image qu'on va upload en BDD
+            // on fait appel à un service upload, qui va slug le nom du fichier
+            // donner un ID unique à notre image
+            // déplacer le fichier dans un dossier public/uploads/xxxxPictures
+
+            if ($pictureFile) {
+                $pictureFilename = $fileUploader->upload($pictureFile);
+                $band->setPictureFilename($pictureFilename);
+            }
+
             $bandRepository->add($band, true);
             $this->addFlash('success', 'Groupe modifié !');
             return $this->redirectToRoute('back_band_list', [], Response::HTTP_SEE_OTHER);
         }
-       
+
         return $this->renderForm('band/edit.html.twig', [
             'band' => $band,
             'form' => $form,
@@ -88,7 +111,7 @@ class BandController extends AbstractController
      */
     public function delete(Request $request, Band $band, BandRepository $bandRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$band->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $band->getId(), $request->request->get('_token'))) {
             $bandRepository->remove($band, true);
         }
         $this->addFlash('success', 'Groupe supprimé !');

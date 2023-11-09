@@ -3,19 +3,18 @@
 namespace App\Controller\Api;
 
 use App\Entity\User;
-use App\Repository\UserRepository;
 use DateTimeImmutable;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Config\Security\FirewallConfig\JwtConfig;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @Route("/api/user", name="api_user_")
@@ -44,10 +43,23 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, JWTTokenManagerInterface $jwtManager): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository): JsonResponse
     {
         $json = $request->getContent();
         $user = $serializer->deserialize($json, User::class, 'json');
+
+        $clearPassword = $user->getPassword();
+        $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
+        $user->setPassword($hashedPassword);
+        $this->addFlash('success', 'Utilisateur ajouté !');
+        $emailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
+
+        if ($emailExist) {
+            $errorEmail = [
+                'message' => 'Cet email existe déjà !'
+            ];
+            return new JsonResponse($errorEmail, Response::HTTP_CONFLICT);
+        }
 
         $errorList = $validator->validate($user);
         if (count($errorList) > 0) {
@@ -56,9 +68,8 @@ class UserController extends AbstractController
 
         $entityManager->persist($user);
         $entityManager->flush();
-        
-        $token = $jwtManager->create($user);
-        return $this->json($token, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
+
+        return $this->json($user, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
     }
 
     /**
