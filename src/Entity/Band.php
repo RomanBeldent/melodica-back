@@ -48,6 +48,7 @@ class Band
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "band_random"})
      */
     private $pictureFilename;
 

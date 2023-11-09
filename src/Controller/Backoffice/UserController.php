@@ -45,9 +45,7 @@ class UserController extends AbstractController
     public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, FileUploader $fileUploader): Response
     {
         $user = new User();
-
         $form = $this->createForm(UserType::class, $user);
-
         
         $form->handleRequest($request);
 

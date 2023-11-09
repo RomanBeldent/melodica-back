@@ -47,6 +47,7 @@ class Organizer
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random"})
      */
     private $pictureFilename;
 
