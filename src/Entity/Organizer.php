@@ -28,14 +28,14 @@ class Organizer
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "user_list", "user_show", "event_list", "event_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "random_all", "user_list", "user_show", "event_list", "event_show"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update", "organizer_random" ,"user_list", "user_show", "event_list", "event_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update",  "random_all","organizer_random" ,"user_list", "user_show", "event_list", "event_show"})
      */
     private $description;
 
@@ -47,13 +47,13 @@ class Organizer
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "random_all"})
      */
     private $pictureFilename;
 
     /**
      * @ORM\Column(type="datetime_immutable")
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random",  "random_all"})
      */
     private $created_at;
 
@@ -71,7 +71,7 @@ class Organizer
     /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="organizers", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "random_all"})
      */
     private $type;
 

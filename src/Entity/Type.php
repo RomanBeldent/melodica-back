@@ -26,7 +26,7 @@ class Type
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-     * @Groups({"type_list", "type_show", "type_list", "type_show", "organizer_list", "organizer_show"})
+     * @Groups({"type_list", "type_show", "type_list", "type_show", "organizer_list", "organizer_show", "random_all"})
      */
     private $name;
 
