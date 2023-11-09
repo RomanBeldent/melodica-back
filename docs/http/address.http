@@ -7,18 +7,16 @@ POST http://localhost:8080/api/address/
 content-type: application/json
 
 {
-    "street": "Test",
-    "zipcode": "Test",
-    "city":"Test",
-    "department":"Test"
+    "street": "21 rue du test",
+    "zipcode": "48000",
+    "city":"Bazinga"
 }
 ### Modification d'une adresse
 PATCH http://localhost:8080/api/address/3
 content-type: application/json
 
 {
-    "street": "24 rue du Matokopata",
-    "city": "Pokomoto"
+    "zipcode": "03000"
 }
 ### Suppression d'une adresse
 DELETE http://localhost:8080/api/address/4

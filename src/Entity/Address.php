@@ -24,28 +24,28 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update", "organizer_list", "organizer_show", "event_list", "event_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update"})
      * @Assert\NotBlank
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update", "organizer_list", "organizer_show", "event_list", "event_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update"})
      * @Assert\NotBlank
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=85)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update", "organizer_list", "organizer_show", "event_list", "event_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update"})
      * @Assert\NotBlank
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update", "organizer_list", "organizer_show", "event_list", "event_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show"})
      */
     private $department;
 

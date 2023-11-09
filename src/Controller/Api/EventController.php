@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Event;
 use DateTimeImmutable;
 use App\Repository\EventRepository;
+use App\Service\SetAddressDepartment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -42,10 +43,12 @@ class EventController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $json = $request->getContent();
         $event = $serializer->deserialize($json, Event::class, 'json');
+
+        $setAddressDepartment->setDepartmentFromZipcode($event);
 
         $errorList = $validator->validate($event);
         if (count($errorList) > 0) {
@@ -60,7 +63,7 @@ class EventController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
-    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
+    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $event = $em->find(Event::class, $id);
         $event->setUpdatedAt(new DateTimeImmutable());
@@ -74,6 +77,8 @@ class EventController extends AbstractController
 
         $json = $request->getContent();
         $serializer->deserialize($json, Event::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $event]);
+
+        $setAddressDepartment->setDepartmentFromZipcode($event);
 
         $errorList = $validator->validate($event);
         if (count($errorList) > 0) {
