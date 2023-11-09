@@ -2,18 +2,19 @@
 
 namespace App\Form;
 
-use App\Entity\Address;
-use App\Entity\Organizer;
 use App\Entity\Type;
 use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Address;
+use App\Entity\Organizer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class OrganizerType extends AbstractType
 {
@@ -34,13 +35,22 @@ class OrganizerType extends AbstractType
                 'attr' => [
                 'placeholder' => 'www.website.com',
             ]])
-            ->add('picture', FileType::class, [
-                'label' => 'Photo du groupe (png, jpeg..)',
-                // unmapped means that this field is not associated to any entity property
+            ->add('pictureFilename', FileType::class, [
+                'label' => 'Photo de profil (jpeg,jpg,png)',
                 'mapped' => false,
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
-                'required' => false])
+                'required' => false,
+                'constraints' => [
+                     new File([
+                        'maxSize' => '2m',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                            'image/webp'
+                        ],
+                        'mimeTypesMessage' => 'Veuillez rentrer une image au format JPEG/JPG/PNG',
+                    ])
+                ],
+            ])
             ->add('type', EntityType::class, [
                 'class' => Type::class,
                 'choice_label' => 'name',

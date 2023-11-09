@@ -31,7 +31,7 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-
+    
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
@@ -60,7 +60,7 @@ class UserController extends AbstractController
             $user->setPassword($hashedPassword);
 
             // gestion de l'image qu'on va upload en BDD
-            $pictureFile = $form->get('picture')->getData();
+            $pictureFile = $form->get('pictureFilename')->getData();
 
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
@@ -100,7 +100,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $newPassword = $form->get('password')->getData();
-            $pictureFile = $form->get('picture')->getData();
+            $pictureFile = $form->get('pictureFilename')->getData();
             
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
@@ -116,7 +116,6 @@ class UserController extends AbstractController
                 //('hashage du mot de passe en clair ' . $newPassword);
                 $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hashedPassword);
-
 
             } else {
                 // on ne fait rien et l'ancien mot qui était en BDD est conservé

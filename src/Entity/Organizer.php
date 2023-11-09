@@ -45,10 +45,9 @@ class Organizer
     private $website;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random"})
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $picture;
+    private $pictureFilename;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -145,14 +144,14 @@ class Organizer
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getPictureFilename(): ?string
     {
-        return $this->picture;
+        return $this->pictureFilename;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPictureFilename(string $pictureFilename): self
     {
-        $this->picture = $picture;
+        $this->pictureFilename = $pictureFilename;
 
         return $this;
     }

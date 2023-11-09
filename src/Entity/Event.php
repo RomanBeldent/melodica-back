@@ -57,10 +57,9 @@ class Event
     private $hour_end;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"event_list", "event_show", "event_create", "event_update", "organizer_list", "organizer_show"})
+     * @ORM\Column(type="string", nullable=true)
      */
-    private $picture;
+    private $pictureFilename;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -185,14 +184,14 @@ class Event
         return $this;
     }
 
-    public function getPicture(): ?string
+    public function getPictureFilename(): ?string
     {
-        return $this->picture;
+        return $this->pictureFilename;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPictureFilename(string $pictureFilename): self
     {
-        $this->picture = $picture;
+        $this->pictureFilename = $pictureFilename;
 
         return $this;
     }

@@ -37,10 +37,10 @@
                 <th>Heure de fin</th>
                 <td>{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ event.picture }}</td>
-            </tr>
+			<tr>
+				<th>Image</th>
+				<td><a href="{{ asset('uploads/pictures/' ~ event.pictureFilename) }}">Voir l'image</a></td>
+			</tr>
             <tr>
                 <th>Créé le</th>
                 <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
