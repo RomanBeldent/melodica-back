@@ -49,6 +49,7 @@ security:
         - { path: ^/api,       roles: PUBLIC_ACCESS }
         - { path: ^/back/user/create, roles: ROLE_ADMIN }
         - { path: ^/back/(organizer|band|address|tag|genre|type|event)/create, roles: ROLE_MANAGER }
+        - { path: ^/back/(organizer|band|address|tag|genre|type|event)/\d+/edit, roles: ROLE_MANAGER }
         - { path: ^/back, roles: ROLE_MANAGER }
 
     role_hierarchy:

@@ -101,6 +101,7 @@ class OrganizerController extends AbstractController
         $json = $request->getContent();
         $serializer->deserialize($json, Organizer::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $organizer]);
 
+        // appel d'un service pour mettre en place le département en fonction des 2 premiers chiffres du zipcode
         $setAddressDepartment->setDepartmentFromZipcode($organizer);
         
         $errorList = $validator->validate($organizer);
