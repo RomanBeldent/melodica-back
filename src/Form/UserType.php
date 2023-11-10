@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\File;
@@ -46,6 +47,12 @@ class UserType extends AbstractType
                 'minMessage' => 'Veuillez rentrer un téléphone valide'
             ])
             ]])
+            ->add('status', ChoiceType::class, [
+                'label' => 'Statut',
+                'choices' => [
+                    'Actif' => true,
+                    'Inactif' => false
+                ]])
             ->add('roles', ChoiceType::class, [
                     'choices' => [
                         'Admin' => "ROLE_ADMIN",

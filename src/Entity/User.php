@@ -37,7 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=50)
      * @Assert\NotBlank
-
      * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show","message_list", "message_show","message_create"})
      */
     private $lastname;
@@ -78,6 +77,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Groups({"user_list", "user_show", "user_create", "user_update"})
      */
     private $picture;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show"})
+     */
+    private $status;
 
     /**
      * @ORM\Column(type="datetime_immutable", options={"default": "CURRENT_TIMESTAMP"})
@@ -122,6 +127,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $receivedMessages;
 
+
+
     public function __construct()
     {
         $this->organizers = new ArrayCollection();
@@ -129,8 +136,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->favorites = new ArrayCollection();
         $this->sentMessages = new ArrayCollection();
         $this->receivedMessages = new ArrayCollection();
+
+        // createdAt par défaut en newDateTimeImmutable sinon on a des erreurs
         if($this->getCreatedAt() === null){
             $this->setCreatedAt(new DateTimeImmutable());
+        }
+
+        // l'utilisateur est par défaut actif
+        if($this->isStatus() === null){
+            $this->setStatus(true);
         }
     }
 
@@ -442,6 +456,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setRecipient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

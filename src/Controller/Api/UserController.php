@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\User;
 use DateTimeImmutable;
 use App\Repository\UserRepository;
+use App\Service\PasswordHasher;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,7 @@ class UserController extends AbstractController
         $clearPassword = $user->getPassword();
         $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
         $user->setPassword($hashedPassword);
+        
         $this->addFlash('success', 'Utilisateur ajouté !');
         $emailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
 
@@ -75,7 +77,7 @@ class UserController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
-    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
+    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request, UserPasswordHasherInterface $passwordHasher): JsonResponse
     {
         $user = $em->find(User::class, $id);
         $user->setUpdatedAt(new DateTimeImmutable());
@@ -89,6 +91,17 @@ class UserController extends AbstractController
 
         $json = $request->getContent();
         $serializer->deserialize($json, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
+
+        $newPassword = $user->getPassword();
+
+        if (!is_null($newPassword)) {
+            //('hashage du mot de passe en clair ' . $newPassword);
+            $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
+            $user->setPassword($hashedPassword);
+
+        } else {
+            // on ne fait rien et l'ancien mot qui était en BDD est conservé
+        }
 
         $errorList = $validator->validate($user);
         if (count($errorList) > 0) {
