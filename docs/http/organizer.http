@@ -2,8 +2,7 @@
 GET http://localhost:8080/api/organizer
 
 ### Détail d'un organisateur
-GET http://localhost:8080/api/organizer/57
-
+GET http://localhost:8080/api/organizer/61
 ### Ajout d'un organisateur
 POST http://localhost:8080/api/organizer/
 content-type: application/json
@@ -20,14 +19,12 @@ content-type: application/json
     }
 }
 ### Modification d'un organisateur
-PATCH http://localhost:8080/api/organizer/58
+PATCH http://localhost:8080/api/organizer/60
 content-type: application/json
 
 {
    "address": {
-    "street": "24 rue de L'issue",
-    "zipcode": "40000",
-    "city": "GitHubCity"
+    "zipcode": "90000"
    }
 }
 

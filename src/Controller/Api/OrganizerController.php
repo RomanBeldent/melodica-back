@@ -91,6 +91,8 @@ class OrganizerController extends AbstractController
     {
         $organizer = $em->find(Organizer::class, $id);
 
+        $address = $organizer->getAddress();
+
         if ($organizer === null) {
             $errorMessage = [
                 'message' => "Organizer not found",
@@ -101,9 +103,12 @@ class OrganizerController extends AbstractController
         $json = $request->getContent();
         $serializer->deserialize($json, Organizer::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $organizer]);
 
+        //todo récupérer l'adresse de organizer
+        $organizer->getAddress()->getId($address);
+        
         // appel d'un service pour mettre en place le département en fonction des 2 premiers chiffres du zipcode
         $setAddressDepartment->setDepartmentFromZipcode($organizer);
-        
+
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
