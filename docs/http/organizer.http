@@ -24,11 +24,12 @@ PATCH http://localhost:8080/api/organizer/58
 content-type: application/json
 
 {
-   "address": {
-    "street": "24 rue de L'issue",
-    "zipcode": "40000",
-    "city": "GitHubCity"
-   }
+      "name": "Le Bar de Basil le Scratcher fou",
+      "address": {
+        "zipcode": "77000",
+        "city": "TestCity",
+        "department": "24"
+    }
 }
 
 ### Suppression d'un organisateur
