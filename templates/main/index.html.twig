@@ -4,18 +4,18 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid col-12">
+
 	<h1 class="mb-2 text-center fw-bold">Bienvenue sur le BackOffice de Mélodica</h1>
-	<h2 class='mb-5' align='center'>Veuillez choisir la catégorie à laquelle vous voulez accéder</h2>
-	<div class="col-6 offset-md-3 row align-items-center">
-		<a href="{{ path('back_user_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Utilisateur</a>
-		<a href="{{ path('back_band_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Groupe</a>
-		<a href="{{ path('back_organizer_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Organisateur</a>
-		<a href="{{ path('back_event_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Événement</a>
-		<a href="{{ path('back_address_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Adresse</a>
-		<a href="{{ path('back_genre_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Genre</a>
-		<a href="{{ path('back_type_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Type</a>
-		<a href="{{ path('back_tag_list') }}" class="mb-3 btn btn-success btn-lg active" role="button" aria-pressed="true">Tag</a>
+	<h2 class='mb-3' align='center'>Veuillez choisir la catégorie à laquelle vous voulez accéder</h2>
+	<div class="col-6 offset-md-3 row align-items-center text-align-center">
+		<a href="{{ path('back_user_list') }}" class="mb-3 p-sm-4 btn btn-success btn-lg active" role="button" aria-pressed="true">Utilisateur</a>
+		<a href="{{ path('back_band_list') }}" class="mb-3 p-sm-4 btn btn-success btn-lg active" role="button" aria-pressed="true">Groupe</a>
+		<a href="{{ path('back_organizer_list') }}" class="mb-3 p-sm-4  btn btn-success btn-lg active" role="button" aria-pressed="true">Organisateur</a>
+		<a href="{{ path('back_event_list') }}" class="mb-3 p-sm-4 btn btn-success btn-lg active" role="button" aria-pressed="true">Événement</a>
+		<a href="{{ path('back_address_list') }}" class="mb-3 p-sm-4 btn btn-success btn-lg active" role="button" aria-pressed="true">Adresse</a>
+		<a href="{{ path('back_genre_list') }}" class="mb-3 p-sm-4 btn btn-success btn-lg active" role="button" aria-pressed="true">Genre</a>
+		<a href="{{ path('back_type_list') }}" class="mb-3 p-sm-4 btn btn-success btn-lg active" role="button" aria-pressed="true">Type</a>
+		<a href="{{ path('back_tag_list') }}" class="mb-3 p-sm-4 btn btn-success btn-lg active" role="button" aria-pressed="true">Tag</a>
 	</div>
-</div>
+
 {% endblock %}
