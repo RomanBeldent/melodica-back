@@ -95,7 +95,6 @@ class AppFixtures extends Fixture
         $hashedPassword = $this->passwordHasher->hashPassword($user, 'admin');
         $user->setPassword($hashedPassword);
         $user->setPhoneNumber('06' . $faker->numberBetween(10000000, 99999999));
-        $user->setCreatedAt(new DateTimeImmutable());
         $user->setRoles(['ROLE_ADMIN']);
         $manager->persist($user);
         $userObjectList[] = $user;
@@ -111,7 +110,6 @@ class AppFixtures extends Fixture
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/200";
             $user->setPicture($posterUrl);
             $user->setPhoneNumber('06' . $faker->numberBetween(10000000, 99999999));
-            $user->setCreatedAt(new DateTimeImmutable());
 
             $userRoles = [['ROLE_USER'], ['ROLE_MANAGER'], ['ROLE_ADMIN']];
             $user->setRoles($faker->randomElement($userRoles));
@@ -159,7 +157,6 @@ class AppFixtures extends Fixture
             $organizer->setDescription($faker->paragraphs(3, true));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
             $organizer->setPicture($posterUrl);
-            $organizer->setCreatedAt(new DateTimeImmutable());
 
             $randomType = $faker->randomElement($typeObjectList);
             $organizer->setType($randomType);
@@ -184,7 +181,6 @@ class AppFixtures extends Fixture
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
             $band->setPicture($posterUrl);
             $band->setSample('https://www.youtube.com/embed/Lgs9QUtWc3M?si=pTFpPLfBIZqLgUxT');
-            $band->setCreatedAt(new DateTimeImmutable());
 
             $randomGenre = $faker->randomElement($genreObjectList);
             $band->addGenre($randomGenre);
@@ -209,7 +205,6 @@ class AppFixtures extends Fixture
             $event->setHourStart($faker->dateTime());
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
             $event->setPicture($posterUrl);
-            $event->setCreatedAt(new DateTimeImmutable());
             $event->addTag($faker->randomElement($tagObjectList));
             $event->addBand($faker->randomElement($bandObjectList));
             $event->setOrganizer($faker->randomElement($organizerObjectList));
@@ -231,7 +226,6 @@ class AppFixtures extends Fixture
             $message->setContent($hashedMessage);
             $message->setSender($faker->randomElement($userObjectList));
             $message->setRecipient($faker->randomElement($userObjectList));
-            $message->setCreatedAt(new DateTimeImmutable());
             
             $manager->persist($message);
             $messageObjectList[] = $message;

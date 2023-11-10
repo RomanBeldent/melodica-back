@@ -28,7 +28,7 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-    
+
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
@@ -46,7 +46,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -98,7 +98,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newPassword = $form->get('password')->getData();
             $pictureFile = $form->get('picture')->getData();
-            
+
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
             // donner un ID unique à notre image
@@ -108,7 +108,7 @@ class UserController extends AbstractController
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
             }
-            
+
             if (!is_null($newPassword)) {
                 //('hashage du mot de passe en clair ' . $newPassword);
                 $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
@@ -129,14 +129,29 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id<\d+>}", name="delete", methods={"POST"})
+     * @Route("/{id<\d+>}", name="deactivate", methods={"POST"})
      */
-    public function delete(Request $request, User $user, UserRepository $userRepository): Response
+    public function deactivate(Request $request, User $user, UserRepository $userRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $userRepository->remove($user, true);
+        if ($this->isCsrfTokenValid('deactivate' . $user->getId(), $request->request->get('_token'))) {
+            $user->setStatus(false);
+            $userRepository->add($user, true);
         }
-        $this->addFlash('success', 'Utilisateur supprimé !');
+        $this->addFlash('success', 'Utilisateur désactivé !');
+        return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/{id<\d+>}", name="activate", methods={"POST"})
+     */
+    public function activate(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        if ($this->isCsrfTokenValid('activate' . $user->getId(), $request->request->get('_token'))) {
+            $user->setStatus(true);
+            $userRepository->add($user, true);
+        }
+        
+        $this->addFlash('success', 'Utilisateur activé !');
         return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
     }
 }

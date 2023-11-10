@@ -93,7 +93,6 @@ class UserController extends AbstractController
         $serializer->deserialize($json, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
 
         $newPassword = $user->getPassword();
-
         if (!is_null($newPassword)) {
             //('hashage du mot de passe en clair ' . $newPassword);
             $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
