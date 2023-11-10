@@ -44,7 +44,7 @@ class BandType extends AbstractType
                 'attr' => [
                 'placeholder' => 'https://www.youtube.com/watch?v=Xq7W5_QnkKo',
             ]])
-            ->add('pictureFilename', FileType::class, [
+            ->add('picture', FileType::class, [
                 'label' => 'Photo de profil (jpeg,jpg,png)',
                 'mapped' => false,
                 'required' => false,

@@ -62,7 +62,7 @@ class Event
      * @ORM\Column(type="string", nullable=true)
      * @Groups({"event_list", "event_show", "event_create", "event_update"})
      */
-    private $pictureFilename;
+    private $picture;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -187,14 +187,14 @@ class Event
         return $this;
     }
 
-    public function getPictureFilename(): ?string
+    public function getPicture(): ?string
     {
-        return $this->pictureFilename;
+        return $this->picture;
     }
 
-    public function setPictureFilename(string $pictureFilename): self
+    public function setPicture(string $picture): self
     {
-        $this->pictureFilename = $pictureFilename;
+        $this->picture = $picture;
 
         return $this;
     }

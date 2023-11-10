@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/organizer
 
 ### Détail d'un organisateur
-GET http://localhost:8080/api/organizer/1
+GET http://localhost:8080/api/organizer/57
 
 ### Ajout d'un organisateur
 POST http://localhost:8080/api/organizer/

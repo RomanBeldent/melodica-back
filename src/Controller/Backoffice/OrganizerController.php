@@ -55,15 +55,15 @@ class OrganizerController extends AbstractController
             $setAddressDepartment->setDepartmentFromZipcode($organizer);
 
             // gestion de l'image qu'on va upload en BDD
-            $pictureFile = $form->get('pictureFilename')->getData();
+            $pictureFile = $form->get('picture')->getData();
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
             // donner un ID unique à notre image
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
-                $pictureFilename = $fileUploader->upload($pictureFile);
-                $organizer->setPictureFilename($pictureFilename);
+                $picture = $fileUploader->upload($pictureFile);
+                $organizer->setPicture($picture);
             }
 
             $organizerRepository->add($organizer, true);
@@ -95,7 +95,7 @@ class OrganizerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $setAddressDepartment->setDepartmentFromZipcode($organizer);
             // gestion de l'image qu'on va upload en BDD
-            $pictureFile = $form->get('pictureFilename')->getData();
+            $pictureFile = $form->get('picture')->getData();
 
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
@@ -103,8 +103,8 @@ class OrganizerController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
-                $pictureFilename = $fileUploader->upload($pictureFile);
-                $organizer->setPictureFilename($pictureFilename);
+                $picture = $fileUploader->upload($pictureFile);
+                $organizer->setPicture($picture);
             }
 
             $organizerRepository->add($organizer, true);

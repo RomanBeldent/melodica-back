@@ -56,7 +56,7 @@ class UserController extends AbstractController
             $user->setPassword($hashedPassword);
 
             // gestion de l'image qu'on va upload en BDD
-            $pictureFile = $form->get('pictureFilename')->getData();
+            $pictureFile = $form->get('picture')->getData();
 
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
@@ -65,8 +65,8 @@ class UserController extends AbstractController
 
             //todo créer une entité image (nullable)
             if ($pictureFile) {
-                $pictureFilename = $fileUploader->upload($pictureFile);
-                $user->setPictureFilename($pictureFilename);
+                $picture = $fileUploader->upload($pictureFile);
+                $user->setPicture($picture);
             }
 
             $userRepository->add($user, true);
@@ -97,7 +97,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $newPassword = $form->get('password')->getData();
-            $pictureFile = $form->get('pictureFilename')->getData();
+            $pictureFile = $form->get('picture')->getData();
             
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
@@ -105,8 +105,8 @@ class UserController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
-                $pictureFilename = $fileUploader->upload($pictureFile);
-                $user->setPictureFilename($pictureFilename);
+                $picture = $fileUploader->upload($pictureFile);
+                $user->setPicture($picture);
             }
             
             if (!is_null($newPassword)) {

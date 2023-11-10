@@ -7,7 +7,7 @@ POST http://localhost:8080/api/band/
 content-type: application/json
 
 {
-    "name": "Tesat xa aa",
+    "name": "Tesat",
     "description": "Test Band APIa",
     "area": 105,
     "sample": null,
@@ -16,7 +16,7 @@ content-type: application/json
         "address": {
             "street": "24 rue du Test Artiste",
             "zipcode": "99000",
-            "city":"ArtisteCity"
+            "city": "ArtisteCity"
         },
     "genres": [1],
     "tags": [1]
@@ -27,7 +27,9 @@ PATCH http://localhost:8080/api/band/1
 content-type: application/json
 
 {
-    "name": "Badidou"
+     "address": {
+        "zipcode": "12000"
+     }
 }
 ### Suppression d'un groupe
 DELETE http://localhost:8080/api/band/1
