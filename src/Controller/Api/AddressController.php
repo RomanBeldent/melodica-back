@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Address;
 use App\Repository\AddressRepository;
+use App\Service\SetAddressDepartment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,36 +42,50 @@ class AddressController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $json = $request->getContent();
         $address = $serializer->deserialize($json, Address::class, 'json');
+
+        // On définit le département en fonction des 2 premiers chiffres du zipcode
+        $setAddressDepartment->setDepartmentFromZipcode($address);
+
         $errorList = $validator->validate($address);
+
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
         }
+
         $entityManager->persist($address);
         $entityManager->flush();
         return $this->json($address, Response::HTTP_CREATED, [], ["groups" => 'address_create']);
     }
+
     /**
      * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
-    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
+    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $address = $em->find(Address::class, $id);
+
         if ($address === null) {
             $errorMessage = [
                 'message' => "Address not found",
             ];
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
+
         $json = $request->getContent();
+
         $serializer->deserialize($json, Address::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $address]);
+
+        $setAddressDepartment->setDepartmentFromZipcode($address);
+
         $errorList = $validator->validate($address);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
         }
+        
         $em->flush();
         return $this->json($address, Response::HTTP_OK, [], ['groups' => 'address_update']);
     }
@@ -90,4 +105,3 @@ class AddressController extends AbstractController
         return $this->json($address, Response::HTTP_OK);
     }
 }
-

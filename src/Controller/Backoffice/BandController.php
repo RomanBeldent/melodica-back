@@ -5,8 +5,9 @@ namespace App\Controller\Backoffice;
 use App\Entity\Band;
 use App\Form\BandType;
 use DateTimeImmutable;
-use App\Repository\BandRepository;
 use App\Service\FileUploader;
+use App\Repository\BandRepository;
+use App\Service\SetAddressDepartment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,14 +41,17 @@ class BandController extends AbstractController
     /**
      * @Route("/create", name="create", methods={"GET", "POST"})
      */
-    public function create(Request $request, BandRepository $bandRepository, FileUploader $fileUploader): Response
+    public function create(Request $request, BandRepository $bandRepository, SetAddressDepartment $setAddressDepartment, FileUploader $fileUploader): Response
     {
         $band = new Band();
         $form = $this->createForm(BandType::class, $band);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // gestion de l'image qu'on va upload en BDD
+
+            // appel du service pour définir les 2 premiers numéro du département en fonction du zipcode
+            $setAddressDepartment->setDepartmentFromZipcode($band);
+            
             $pictureFile = $form->get('pictureFilename')->getData();
 
             // gestion de l'image qu'on va upload en BDD
@@ -71,17 +75,17 @@ class BandController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Band $band, BandRepository $bandRepository, FileUploader $fileUploader): Response
+    public function edit(Request $request, Band $band, BandRepository $bandRepository, FileUploader $fileUploader, SetAddressDepartment $setAddressDepartment): Response
     {
         $form = $this->createForm(BandType::class, $band);
         $band->setUpdatedAt(new DateTimeImmutable());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $setAddressDepartment->setDepartmentFromZipcode($band);
             // gestion de l'image qu'on va upload en BDD
             $pictureFile = $form->get('pictureFilename')->getData();
 

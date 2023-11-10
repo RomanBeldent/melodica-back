@@ -4,6 +4,7 @@ namespace App\Controller\Api;
 
 use App\Entity\Organizer;
 use App\Repository\OrganizerRepository;
+use App\Service\SetAddressDepartment;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -66,10 +67,12 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $json = $request->getContent();
         $organizer = $serializer->deserialize($json, Organizer::class, 'json');
+
+        $setAddressDepartment->setDepartmentFromZipcode($organizer);
 
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
@@ -84,7 +87,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
-    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
+    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $organizer = $em->find(Organizer::class, $id);
 
@@ -98,6 +101,8 @@ class OrganizerController extends AbstractController
         $json = $request->getContent();
         $serializer->deserialize($json, Organizer::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $organizer]);
 
+        $setAddressDepartment->setDepartmentFromZipcode($organizer);
+        
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
