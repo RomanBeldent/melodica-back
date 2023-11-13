@@ -60,7 +60,7 @@ class Event
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"event_list", "event_show", "event_create", "event_update"})
+     * @Groups({"event_list", "event_show", "event_create", "event_update", "organizer_show"})
      */
     private $picture;
 
