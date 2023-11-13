@@ -75,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * Undocumented variable
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user_list", "user_show", "user_create", "user_update","band_list","band_show"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update","band_list","band_show", "organizer_list", "organizer_show"})
      */
     private $picture;
 
