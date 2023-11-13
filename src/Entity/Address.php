@@ -17,7 +17,7 @@ class Address
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"address_list", "address_show", "organizer_show"})
+     * @Groups({"address_list", "address_show", "organizer_show", "organizer_update", "band_show", "band_update", "event_show", "event_update"})
      * @ORM\Column(type="integer")
      */
     private $id;

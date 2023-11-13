@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\OrganizerRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,7 +20,7 @@ class Organizer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show"})
+     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show", "random_all"})
      */
     private $id;
 
