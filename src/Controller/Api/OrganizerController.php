@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\Organizer;
+use App\Entity\Address;
 use App\Repository\OrganizerRepository;
 use App\Service\SetAddressDepartment;
 use Doctrine\ORM\EntityManagerInterface;
@@ -99,6 +100,7 @@ class OrganizerController extends AbstractController
         }
 
         $json = $request->getContent();
+        
         $serializer->deserialize($json, Organizer::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $organizer]);
 
         // appel d'un service pour mettre en place le département en fonction des 2 premiers chiffres du zipcode
@@ -112,6 +114,39 @@ class OrganizerController extends AbstractController
         $em->flush();
         return $this->json($organizer, Response::HTTP_OK, [], ['groups' => 'organizer_update']);
     }
+
+    // /**
+    //  * @Route("/{id<\d+>}/address", name="update", methods={"PATCH"})
+    //  */
+    // public function updateAddressFromOrganizer($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request, SetAddressDepartment $setAddressDepartment): JsonResponse
+    // {
+    //     $organizer = $em->find(Organizer::class, $id);
+    //     $orgAddressId = $organizer->getAddress()->getId();
+
+    //     $address = $em->find(Address::class, $orgAddressId);
+    //     dd($address->getZipcode());
+
+    //     if ($organizer === null) {
+    //         $errorMessage = [
+    //             'message' => "Organizer not found",
+    //         ];
+    //         return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
+    //     }
+
+    //     $json = $request->getContent();
+    //     $serializer->deserialize($json, Address::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $address]);
+
+    //     // appel d'un service pour mettre en place le département en fonction des 2 premiers chiffres du zipcode
+    //     $setAddressDepartment->setDepartmentFromZipcode($organizer);
+        
+    //     $errorList = $validator->validate($organizer);
+    //     if (count($errorList) > 0) {
+    //         return $this->json($errorList, Response::HTTP_BAD_REQUEST);
+    //     }
+
+    //     $em->flush();
+    //     return $this->json($organizer, Response::HTTP_OK, [], ['groups' => 'organizer_update']);
+    // }
 
     /**
      * @Route("/{id<\d+>}"), name="delete", methods={"DELETE"})

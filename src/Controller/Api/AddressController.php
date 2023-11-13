@@ -89,6 +89,7 @@ class AddressController extends AbstractController
         $em->flush();
         return $this->json($address, Response::HTTP_OK, [], ['groups' => 'address_update']);
     }
+
     /**
      * @Route("/{id<\d+>}"), name="delete", methods={"DELETE"})
      */

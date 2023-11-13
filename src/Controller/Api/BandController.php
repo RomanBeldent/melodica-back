@@ -4,7 +4,6 @@ namespace App\Controller\Api;
 
 use App\Entity\Band;
 use DateTimeImmutable;
-use App\Entity\Address;
 use App\Repository\BandRepository;
 use App\Service\SetAddressDepartment;
 use App\Repository\OrganizerRepository;
@@ -33,7 +32,7 @@ class BandController extends AbstractController
         ]);
     }
 
-    
+
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
@@ -42,7 +41,7 @@ class BandController extends AbstractController
         return $this->json([
             'band' => $band], 200, [], ['groups' => 'band_show']);
     }
-    
+
     /**
      * @Route("/random", name="random", methods={"GET"})
      */
@@ -55,15 +54,15 @@ class BandController extends AbstractController
             ];
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
-        
+
         // on mélange les groupes
         shuffle($bands);
- 
+
         $randomBands = [];
         for ($randomBandToAdd = 1; $randomBandToAdd <= 30; $randomBandToAdd++) {
             $randomBands[] = $bands[$randomBandToAdd];
         }
- 
+
         return $this->json([
             'randomBands' => $randomBands], 200, [], ['groups' => 'band_random']);
     }
@@ -87,7 +86,7 @@ class BandController extends AbstractController
             'organizers' => $organizers,
             'bands' => $bands], 200, [], ['groups' => 'random_all']);
     }
-    
+
     /**
      * @Route("/", name="create", methods={"POST"})
      */
@@ -107,7 +106,7 @@ class BandController extends AbstractController
         $entityManager->flush();
         return $this->json($band, Response::HTTP_CREATED, [], ["groups" => 'band_create']);
     }
-    
+
     /**
      * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
@@ -133,10 +132,11 @@ class BandController extends AbstractController
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
         }
-        
+
         $em->flush();
         return $this->json($band, Response::HTTP_OK, [], ['groups' => 'band_update']);
     }
+
 
     /**
      * @Route("/{id<\d+>}"), name="delete", methods={"DELETE"})

@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\OrganizerRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -21,7 +20,7 @@ class Organizer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show"})
+     * @Groups({"organizer_list", "organizer_show", "user_list", "user_show", "random_all"})
      */
     private $id;
 
@@ -35,7 +34,7 @@ class Organizer
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update",  "random_all","organizer_random" ,"user_list", "user_show", "event_list", "event_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update",  "random_all", "organizer_random" ,"user_list", "event_list", "event_show"})
      */
     private $description;
 
@@ -47,7 +46,7 @@ class Organizer
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "random_all"})
+     * @Groups({"user_show", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "random_all"})
      */
     private $picture;
 
