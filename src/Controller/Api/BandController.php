@@ -110,7 +110,7 @@ class BandController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="update", methods={"PATCH"})
      */
-    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request, SetAddressDepartment $setAddressDepartment): JsonResponse
+    public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
         $band = $em->find(Band::class, $id);
 
@@ -124,9 +124,8 @@ class BandController extends AbstractController
         }
 
         $json = $request->getContent();
+        
         $serializer->deserialize($json, Band::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $band]);
-
-        $setAddressDepartment->setDepartmentFromZipcode($band);
 
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {
