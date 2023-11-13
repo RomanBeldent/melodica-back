@@ -30,7 +30,7 @@ class Band
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "user_show", "random_all"})
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "random_all"})
      */
     private $description;
 
@@ -48,7 +48,7 @@ class Band
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "random_all"})
+     * @Groups({"user_show", "band_list", "band_show", "band_create", "band_update", "random_all"})
      */
     private $picture;
 

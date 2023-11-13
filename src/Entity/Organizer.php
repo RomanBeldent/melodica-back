@@ -34,7 +34,7 @@ class Organizer
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update",  "random_all","organizer_random" ,"user_list", "user_show", "event_list", "event_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update",  "random_all", "organizer_random" ,"user_list", "event_list", "event_show"})
      */
     private $description;
 
@@ -46,7 +46,7 @@ class Organizer
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "random_all"})
+     * @Groups({"user_show", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_random", "random_all"})
      */
     private $picture;
 
