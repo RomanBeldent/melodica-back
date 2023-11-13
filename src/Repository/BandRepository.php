@@ -38,6 +38,7 @@ class BandRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+   
 
 //    /**
 //     * @return Band[] Returns an array of Band objects

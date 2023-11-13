@@ -72,19 +72,18 @@ class BandController extends AbstractController
      */
     public function randomAll(BandRepository $bandRepository, OrganizerRepository $organizerRepository): JsonResponse
     {
-        // ou alors option de tout regrouper et définir si c'est un groupe ou un organizer grâce à l'area
-        $randomAll = [];
+        // un tableau de groupes + on limite l'envoie de données
         $bands = $bandRepository->findAll();
         shuffle($bands);
+        $bandsSlice = array_slice($bands,0,12,true);
+        // un tableau d'organisateur + on limite l'envoie de données
         $organizers = $organizerRepository->findAll();
         shuffle($organizers);
+        $organizersSlice = array_slice($organizers,0,12,true);
 
-        array_push($randomAll, $bands);
-        array_push($randomAll, $organizers);
-
-        return $this->json([
-            'organizers' => $organizers,
-            'bands' => $bands], 200, [], ['groups' => 'random_all']);
+         return $this->json([
+            'organizers' => $organizersSlice,
+            'bands' => $bandsSlice], 200, [], ['groups' => 'random_all']);
     }
 
     /**
