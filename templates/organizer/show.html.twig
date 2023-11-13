@@ -36,6 +36,22 @@
 				</td>
 			</tr>
 			<tr>
+				<th>Site web</th>
+				<td>{{ organizer.website }}</td>
+			</tr>
+			<tr>
+				<th>Voie</th>
+				<td>{{ organizer.address.street }}</td>
+			</tr>
+			<tr>
+				<th>Code postal</th>
+				<td>{{ organizer.address.zipcode }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ organizer.address.city }}</td>
+			</tr>
+			<tr>
 				<th>Créé le</th>
 				<td>{{ organizer.createdAt ? organizer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>

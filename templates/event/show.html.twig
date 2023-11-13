@@ -1,58 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event{% endblock %}
+{% block title %}Event
+{% endblock %}
 
 {% block body %}
 	<div class="d-flex justify-content-between m-3">
-    <h2>Événement {{ event.title }}</h2>
-    <a href="{{ path('back_event_list') }}" class='mb-3 btn btn-secondary'>Retour</a>
+		<h2>Événement
+			{{ event.title }}</h2>
+		<a href="{{ path('back_event_list') }}" class='mb-3 btn btn-secondary'>Retour</a>
 	</div>
 	<table class="table table-dark table-striped">
-        <tbody>
-            <tr>
-                <th>#</th>
-                <td>{{ event.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ event.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ event.description }}</td>
-            </tr>
-            <tr>
-                <th>Date de début</th>
-                <td>{{ event.dateStart ? event.dateStart|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Date de fin</th>
-                <td>{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Heure de début</th>
-                <td>{{ event.hourStart ? event.hourStart|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Heure de fin</th>
-                <td>{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
+		<tbody>
+			<tr>
+				<th>#</th>
+				<td>{{ event.id }}</td>
+			</tr>
+			<tr>
+				<th>Titre</th>
+				<td>{{ event.title }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ event.description }}</td>
+			</tr>
+			<tr>
+				<th>Date de début</th>
+				<td>{{ event.dateStart ? event.dateStart|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Date de fin</th>
+				<td>{{ event.dateEnd ? event.dateEnd|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Heure de début</th>
+				<td>{{ event.hourStart ? event.hourStart|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Heure de fin</th>
+				<td>{{ event.hourEnd ? event.hourEnd|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
 			<tr>
 				<th>Image</th>
-				<td><a href="{{ asset('uploads/pictures/' ~ event.picture) }}">Voir l'image</a></td>
+				<td>
+					<a href="{{ asset('uploads/pictures/' ~ event.picture) }}">Voir l'image</a>
+				</td>
 			</tr>
-            <tr>
-                <th>Créé le</th>
-                <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Mis à jour le</th>
-                <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+			<tr>
+				<th>Voie</th>
+				<td>{{ event.address.street }}</td>
+			</tr>
+			<tr>
+				<th>Code postal</th>
+				<td>{{ event.address.zipcode }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ event.address.city }}</td>
+			</tr>
+			<tr>
+				<th>Créé le</th>
+				<td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Mis à jour le</th>
+				<td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('back_event_edit', {'id': event.id}) }}" class='mb-3 btn btn-warning'>Mettre à jour</a>
+	<a href="{{ path('back_event_edit', {'id': event.id}) }}" class='mb-3 btn btn-warning'>Mettre à jour</a>
 
-    {{ include('event/_delete_form.html.twig') }}
+	{{ include('event/_delete_form.html.twig') }}
 {% endblock %}

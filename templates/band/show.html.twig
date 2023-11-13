@@ -33,6 +33,18 @@
 				<th>Image</th>
 				<td><a href="{{ asset('uploads/pictures/' ~ band.picture) }}">Voir l'image</a></td>
 			</tr>
+            			<tr>
+				<th>Voie</th>
+				<td>{{ band.address.street }}</td>
+			</tr>
+			<tr>
+				<th>Code postal</th>
+				<td>{{ band.address.zipcode }}</td>
+			</tr>
+			<tr>
+				<th>Ville</th>
+				<td>{{ band.address.city }}</td>
+			</tr>
             <tr>
                 <th>Créé le</th>
                 <td>{{ band.createdAt ? band.createdAt|date('Y-m-d H:i:s') : '' }}</td>

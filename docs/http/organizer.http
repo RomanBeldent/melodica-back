@@ -2,7 +2,7 @@
 GET http://localhost:8080/api/organizer
 
 ### Détail d'un organisateur
-GET http://localhost:8080/api/organizer/57
+GET http://localhost:8080/api/organizer/61
 
 ### Ajout d'un organisateur
 POST http://localhost:8080/api/organizer/
@@ -24,12 +24,7 @@ PATCH http://localhost:8080/api/organizer/58
 content-type: application/json
 
 {
-      "name": "Le Bar de Basil le Scratcher fou",
-      "address": {
-        "zipcode": "77000",
-        "city": "TestCity",
-        "department": "24"
-    }
+    "zipcode": "40000",
 }
 
 ### Suppression d'un organisateur
