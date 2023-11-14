@@ -64,6 +64,19 @@ class Band
     private $updated_at;
 
     /**
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="bands")
+     * @Groups({"band_list", "band_show", "band_create", "band_update", "random_all"})
+     */
+    private $genres;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Address::class, inversedBy="band", cascade={"persist", "remove"})
+     * @Groups({"band_show", "band_create", "band_update"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $address;
+
+    /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="bands")
      * @Groups({"band_list", "band_show", "band_create", "band_update"})
      */
@@ -80,19 +93,6 @@ class Band
      * @Groups({"band_list", "band_show", "band_create", "band_update", "random_all"})
      */
     private $tags;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="bands")
-     * @Groups({"band_list", "band_show", "band_create", "band_update", "random_all"})
-     */
-    private $genres;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Address::class, inversedBy="band", cascade={"persist", "remove"})
-     * @Groups({"band_create", "band_update"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $address;
 
     /**
      * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="band")

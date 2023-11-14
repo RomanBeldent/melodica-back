@@ -51,19 +51,19 @@ class Address
 
     /**
      * @ORM\OneToOne(targetEntity=Organizer::class, mappedBy="address", cascade={"persist", "remove"})
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update", "address_delete"})
+     * @Groups({"address_list", "address_show", "band_list", "address_create", "address_update", "address_delete"})
      */
     private $organizer;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="address")
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update"})
+     * @Groups({"address_list", "address_show", "band_list", "address_create", "address_update"})
      */
     private $events;
 
     /**
      * @ORM\OneToOne(targetEntity=Band::class, mappedBy="address", cascade={"persist", "remove"})
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "address_create", "address_update"})
+     * @Groups({"address_list", "address_show", "band_list", "address_create", "address_update"})
      */
     private $band;
 

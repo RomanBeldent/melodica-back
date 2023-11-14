@@ -63,12 +63,6 @@ class Organizer
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers", cascade={"persist"})
-     * @Groups({"organizer_list", "organizer_show"})
-     */
-    private $users;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="organizers", cascade={"persist"}))
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "random_all"})
@@ -83,15 +77,21 @@ class Organizer
     private $address;
 
     /**
-     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="organizer")
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers", cascade={"persist"})
+     * @Groups({"organizer_list", "organizer_show"})
      */
-    private $favorites;
+    private $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Event::class, mappedBy="organizer")
      * @Groups({"organizer_list", "organizer_show", "user_list", "user_show"})
      */
     private $events;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="organizer")
+     */
+    private $favorites;
 
     public function __construct()
     {

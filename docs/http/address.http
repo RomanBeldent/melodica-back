@@ -11,20 +11,13 @@ content-type: application/json
     "zipcode": "48000",
     "city":"Bazinga"
 }
-### Modification d'une adresse organisateur
-PATCH http://localhost:8080/api/address/364
-content-type: application/json
-
-{
-    "zipcode": "45000"
-}
 
 ### Modification d'une adresse
-PATCH http://localhost:8080/api//364
+PATCH http://localhost:8080/api/organizer/309
 content-type: application/json
 
 {
-    "zipcode": "45000"
+    "zipcode": "49000"
 }
 
 ### Suppression d'une adresse
