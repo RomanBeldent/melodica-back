@@ -17,28 +17,28 @@ class Address
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"address_list", "address_show", "organizer_show", "organizer_update", "band_show", "band_update", "event_show", "event_update"})
+     * @Groups({"address_list", "address_show", "organizer_show", "organizer_update", "band_show", "band_update", "event_show", "event_update","user_show"})
      * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update","user_show"})
      * @Assert\NotBlank
      */
     private $street;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update","user_show"})
      * @Assert\NotBlank
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=85)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update","user_show"})
      * @Assert\NotBlank
      */
     private $city;

@@ -71,7 +71,7 @@ class Band
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="band", cascade={"persist", "remove"})
-     * @Groups({"band_show", "band_create", "band_update"})
+     * @Groups({"band_show", "band_create", "band_update", "user_show"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
