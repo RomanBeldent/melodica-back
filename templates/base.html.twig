@@ -18,6 +18,7 @@
 								{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 								{% if app.user.picture == not null %}
 									<img src="{{ app.user.picture}}" height="50" alt="Photo de profil">
+									{# {{ asset('http://localhost:8080/uploads/pictures/' ~ app.user.picture) #}
 									{% endif %}
 									<span>{{ app.user.email }}
 										(

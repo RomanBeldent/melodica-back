@@ -28,7 +28,7 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-    
+
     /**
      * @Route("/{id<\d+>}", name="show", methods={"GET"})
      */
@@ -46,7 +46,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-        
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,6 @@ class UserController extends AbstractController
             // donner un ID unique à notre image
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
-            //todo créer une entité image (nullable)
             if ($pictureFile) {
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
@@ -98,19 +97,25 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newPassword = $form->get('password')->getData();
             $pictureFile = $form->get('picture')->getData();
-            
+
             // gestion de l'image qu'on va upload en BDD
             // on fait appel à un service upload, qui va slug le nom du fichier
             // donner un ID unique à notre image
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
+                // on delete l'image si il y en a déjà une
+                if ($user->getPicture() != null) {
+                    $pictureToBeDeleted = $fileUploader->getTargetDirectory() . '/' . $user->getPicture();
+                    unlink($pictureToBeDeleted);
+                }
+                
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
             }
-            
+
             if (!is_null($newPassword)) {
-                //('hashage du mot de passe en clair ' . $newPassword);
+                // ('hashage du mot de passe en clair ' . $newPassword);
                 $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hashedPassword);
 
