@@ -9,18 +9,18 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/api/email", name="api_email_")
+ * @Route("/api/mailer", name="api_mailer_")
  */
 class MailerController extends AbstractController
 {
     /**
-     * @Route("/", name="send", methods={"POST"})
+     * @Route("/", name="send", methods={"GET"})
      */
     public function sendEmail(MailerInterface $mailer): Response
     {
         $email = (new Email())
-            ->from('hello@example.com')
-            ->to('you@example.com')
+            ->from('romanbelschool@gmail.com')
+            ->to('romanbelschool@gmail.com')
             //->cc('cc@example.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
@@ -30,7 +30,7 @@ class MailerController extends AbstractController
             ->html('<p>See Twig integration for better HTML integration!</p>');
 
         $mailer->send($email);
-
-        // ...
+        
+        return $this->json('Email envoyé', Response::HTTP_OK);
     }
 }
