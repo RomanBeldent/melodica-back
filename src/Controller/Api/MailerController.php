@@ -8,9 +8,14 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/api/email", name="api_email_")
+ */
 class MailerController extends AbstractController
 {
-    #[Route('/email')]
+    /**
+     * @Route("/", name="send", methods={"POST"})
+     */
     public function sendEmail(MailerInterface $mailer): Response
     {
         $email = (new Email())
