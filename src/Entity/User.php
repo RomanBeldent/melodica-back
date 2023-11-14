@@ -108,7 +108,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $favorites;
 
     /**
-     * @ORM\Column(type="json", options={"default": "['ROLE_USER']"}))
+     * @ORM\Column(type="json")
      * @Groups({"user_list", "user_show"})
      */
     private $roles = [];
