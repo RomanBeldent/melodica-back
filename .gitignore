@@ -13,6 +13,6 @@
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 
-/docs/http/*.http
+/docs/http/
 
 
