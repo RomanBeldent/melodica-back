@@ -108,6 +108,7 @@ class Band
         $this->favorites = new ArrayCollection();
         $this->setCreatedAt(new DateTimeImmutable());
     }
+    
     public function __toString()
     {
         return $this->name;
