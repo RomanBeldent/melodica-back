@@ -24,7 +24,7 @@ PATCH http://localhost:8080/api/organizer/58
 content-type: application/json
 
 {
-    "zipcode": "40000",
+    "name": "Hello"
 }
 
 ### Suppression d'un organisateur
