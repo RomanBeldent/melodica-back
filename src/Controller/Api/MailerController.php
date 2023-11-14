@@ -21,29 +21,22 @@ class MailerController extends AbstractController
     /**
      * @Route("/", name="send", methods={"POST"})
      */
-    public function sendEmail(Request $request, MailerInterface $mailer, Organizer $organizer, Band $band): Response
+    public function sendEmail(Request $request, MailerInterface $mailer): Response
     {
-        
-        $email = $_SESSION['_sf2_attributes']['_security.last_username'];
-        $_SESSION['email'] = $email;
 
-        $content = $request->request->get('content');
-
-        if ($organizer->getUsers()[0]->getEmail()) {
-            $bandOrOrganizer = $organizer;
-        } else {
-                    $bandOrOrganizer = $band;
-                }
+        $json = json_decode($request->getContent());
+        // dd($json->email);
+        dd($json);
 
         $email = (new Email())
-            ->from($_SESSION['email'])
-            ->to($bandOrOrganizer->getUsers()[0]->getEmail())
+            ->from($json->email)
+            ->to($json->recipientEmail)
             ->subject('Vous avez reçu un message de la part d\'un utilisateur de Mélodica !')
-            ->text($content)
-            ->html('<p>' . nl2br($content) . '</p>');
+            ->text($json->body)
+            ->html('<p>' . nl2br($json->body) . '</p>');
 
         $mailer->send($email);
-        
+
         return $this->json('Email envoyé', Response::HTTP_OK);
     }
 }
