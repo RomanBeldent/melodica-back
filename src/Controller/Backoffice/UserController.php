@@ -105,11 +105,11 @@ class UserController extends AbstractController
 
             if ($pictureFile) {
                 // on delete l'image si il y en a déjà une
-                if ($user->getPicture() != null) {
+                if (!is_null($user->getPicture())) {
                     $pictureToBeDeleted = $fileUploader->getTargetDirectory() . '/' . $user->getPicture();
                     unlink($pictureToBeDeleted);
                 }
-                
+
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
             }
@@ -122,6 +122,7 @@ class UserController extends AbstractController
             } else {
                 // on ne fait rien et l'ancien mot qui était en BDD est conservé
             }
+            
             $userRepository->add($user, true);
             $this->addFlash('success', 'Utilisateur modifié');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
