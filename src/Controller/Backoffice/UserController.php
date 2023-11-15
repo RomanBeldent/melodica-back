@@ -22,10 +22,17 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="list", methods={"GET"})
      */
-    public function list(UserRepository $userRepository): Response
+    public function list(UserRepository $userRepository, Request $request): Response
     {
+        //todo à commenter
+        //modulo nombre de page que je vais avoir
+        $pageNumber = $request->query->get('page', 1);
+        $offSet = ($pageNumber - 1) * 15;
+        $users = $userRepository->findBy([], ['id' => 'ASC'], 15, $offSet);
+
         return $this->render('user/list.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
+            'current_page' => $pageNumber
         ]);
     }
 
@@ -122,7 +129,7 @@ class UserController extends AbstractController
             } else {
                 // on ne fait rien et l'ancien mot qui était en BDD est conservé
             }
-            
+
             $userRepository->add($user, true);
             $this->addFlash('success', 'Utilisateur modifié');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
