@@ -1,1 +1,0 @@
-lien entre 2 users qu'on récupère par date
