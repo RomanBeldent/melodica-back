@@ -45,15 +45,21 @@ class UserController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository): JsonResponse
     {
+        // on récupère la requête json
         $json = $request->getContent();
+        // on deserialize cette dernière qu'on va directement stocker dans l'objet User
         $user = $serializer->deserialize($json, User::class, 'json');
 
+        // on récupère le mdp en clair, on le hash. Voir les commentaires dans Backoffice\UserController.php
         $clearPassword = $user->getPassword();
         $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
         $user->setPassword($hashedPassword);
         $this->addFlash('success', 'Utilisateur ajouté !');
+        // si l'email existe déjà on veut envoyé un message d'erreur
+        // en effet l'email doit être unique donc on va chercher parmis les utilisateurs si l'email existe déjà en BDD
         $emailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
 
+        // si il existe, on envoi une erreur avec une 409, conflict
         if ($emailExist) {
             $errorEmail = [
                 'message' => 'Cet email existe déjà !'
@@ -61,6 +67,7 @@ class UserController extends AbstractController
             return new JsonResponse($errorEmail, Response::HTTP_CONFLICT);
         }
 
+        // si il y a une erreur dans la requête on envoi un erreur 400, bad request
         $errorList = $validator->validate($user);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
@@ -77,7 +84,9 @@ class UserController extends AbstractController
      */
     public function update($id, EntityManagerInterface $em, SerializerInterface $serializer, ValidatorInterface $validator, Request $request): JsonResponse
     {
+        // on récupère l'id de l'user qu'on veut modifier
         $user = $em->find(User::class, $id);
+        // on ajoute la date de modification
         $user->setUpdatedAt(new DateTimeImmutable());
 
         if ($user === null) {
@@ -86,8 +95,9 @@ class UserController extends AbstractController
             ];
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
-
+        // on récupère le contenu de la requête en JSON qu'on va deserializer
         $json = $request->getContent();
+        // on deserialize, c'est un objet de User, et on va vouloir insérer les nvelles data dans l'utilisateur selectionné 
         $serializer->deserialize($json, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
 
         $errorList = $validator->validate($user);
