@@ -85,8 +85,9 @@ class BandController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //
             $setAddressDepartment->setDepartmentFromZipcode($band);
-            // gestion de l'image qu'on va upload en BDD
+            // 
             $pictureFile = $form->get('picture')->getData();
 
             // gestion de l'image qu'on va upload en BDD

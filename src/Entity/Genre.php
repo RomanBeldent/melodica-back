@@ -19,7 +19,7 @@ class Genre
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @Groups({"genre_list", "genre_show"})
+     * @Groups({"genre_list", "genre_show", "band_show"})
      * @ORM\Column(type="integer")
      */
     private $id;

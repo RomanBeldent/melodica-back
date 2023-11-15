@@ -12,7 +12,7 @@ content-type: application/json
     "area": 105,
     "sample": null,
     "picture": null,
-    "users": [1],
+    "users": [60],
         "address": {
             "street": "24 rue du Test Artiste",
             "zipcode": "99000",

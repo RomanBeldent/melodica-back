@@ -20,6 +20,7 @@ class Tag
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"band_show", "event_show"})
      */
     private $id;
 
