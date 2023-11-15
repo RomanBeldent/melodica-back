@@ -2,11 +2,7 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Band;
-use App\Entity\User;
-use App\Entity\Organizer;
 use Symfony\Component\Mime\Email;
-use App\Repository\OrganizerRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +17,7 @@ class MailerController extends AbstractController
     /**
      * @Route("/", name="send", methods={"POST"})
      */
-    public function sendEmail(Request $request, MailerInterface $mailer): Response
+    public function sendMail(Request $request, MailerInterface $mailer): Response
     {
 
         $json = json_decode($request->getContent());
@@ -32,7 +28,7 @@ class MailerController extends AbstractController
             ->from($json->email)
             ->to($json->recipientEmail)
             ->subject('Vous avez reçu un message de la part d\'un utilisateur de Mélodica !')
-            ->text($json->body)
+            // ->text($json->body)
             ->html('<p>' . nl2br($json->body) . '</p>');
 
         $mailer->send($email);
