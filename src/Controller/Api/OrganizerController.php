@@ -72,7 +72,10 @@ class OrganizerController extends AbstractController
     {
         $json = $request->getContent();
         $organizer = $serializer->deserialize($json, Organizer::class, 'json');
-
+        
+        //test json decode
+        // dump($organizer);
+        // dd(json_decode($json));
         $setAddressDepartment->setDepartmentFromZipcode($organizer);
 
         $errorList = $validator->validate($organizer);
@@ -105,6 +108,7 @@ class OrganizerController extends AbstractController
         
         $serializer->deserialize($json, Organizer::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $organizer]);
 
+        
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
