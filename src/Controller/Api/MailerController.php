@@ -28,9 +28,9 @@ class MailerController extends AbstractController
         $email = (new TemplatedEmail())
             ->from($json->email)
             ->to($json->recipientEmail)
-            ->subject('Vous avez reçu un message de la part d\'un utilisateur de Mélodica !')
-            // ->text($json->body)
-            ->htmlTemplate('mailer/body.html.twig');
+            ->subject('Vous avez reçu un message de la part d\'un utilisateur de Mélodica ! ')
+            ->text($json->body . ' Si vous voulez contacter directement cet utilisateur, voici son email: ' . $json->email);
+            // ->htmlTemplate('mailer/body.html.twig');
 
         $mailer->send($email);
 
