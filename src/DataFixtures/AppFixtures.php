@@ -155,6 +155,7 @@ class AppFixtures extends Fixture
             $organizer = new Organizer();
             $organizer->addUser($faker->randomElement($userObjectList));
             $organizer->setName($faker->unique()->company());
+            $organizer->setEmail($faker->email());
             $organizer->setWebsite('https://theuselessweb.com/');
             $organizer->setDescription($faker->paragraphs(3, true));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
@@ -180,6 +181,7 @@ class AppFixtures extends Fixture
             $band->addUser($faker->randomElement($userObjectList));
             $band->setName($faker->unique()->words(2, true));
             $band->setDescription($faker->paragraphs(3, true));
+            $band->setEmail($faker->email());
             $band->setArea($faker->numberBetween(25, 1000));
             $posterUrl = "https://picsum.photos/id/" . mt_rand(0, 1084) . "/1920/1080";
             $band->setPicture($posterUrl);

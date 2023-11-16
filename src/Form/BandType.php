@@ -16,6 +16,7 @@ use Doctrine\DBAL\Types\TextType as TypesTextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -32,6 +33,10 @@ class BandType extends AbstractType
                 'label' => 'Description',
                 'attr' => [
                 'placeholder' => 'On est les Melodica Bangers, et on est pas là pour déconner !!',
+            ]])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'user@gmail.com',   // chaine de caractères présente dans le champ à titre d'exemple
             ]])
             ->add('area', IntegerType::class, [
                 'label' => 'Zone de recherche autour de moi',
