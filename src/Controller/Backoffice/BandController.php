@@ -51,7 +51,7 @@ class BandController extends AbstractController
 
             // appel du service pour définir les 2 premiers numéro du département en fonction du zipcode
             $setAddressDepartment->setDepartmentFromZipcode($band);
-            
+
             $pictureFile = $form->get('picture')->getData();
 
             // gestion de l'image qu'on va upload en BDD
@@ -96,6 +96,8 @@ class BandController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
+                // on delete l'image si il y en a déjà une
+                $fileUploader->delete($band);
                 $picture = $fileUploader->upload($pictureFile);
                 $band->setPicture($picture);
             }

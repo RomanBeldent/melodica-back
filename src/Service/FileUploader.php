@@ -39,6 +39,17 @@ class FileUploader
         return $fileName;
     }
 
+    public function delete($entity)
+    {
+        // on delete l'image si il y en a déjà une
+        if (!is_null($entity->getPicture())) {
+            // on stock dans une variable le chemin et le nom de l'ancienne image
+            $pictureToBeDeleted = $this->getTargetDirectory() . '/' . $entity->getPicture();
+            // l'image est supprimé grâce à la fonction php unlink
+            unlink($pictureToBeDeleted);
+        }
+    }
+
     public function getTargetDirectory(): string
     {
         return $this->targetDirectory;
