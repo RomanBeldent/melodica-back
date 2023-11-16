@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -24,12 +25,12 @@ class MailerController extends AbstractController
         // dd($json->email);
         // dd($json);
 
-        $email = (new Email())
+        $email = (new TemplatedEmail())
             ->from($json->email)
             ->to($json->recipientEmail)
             ->subject('Vous avez reçu un message de la part d\'un utilisateur de Mélodica !')
             // ->text($json->body)
-            ->html('<p>' . nl2br($json->body) . '</p>');
+            ->htmlTemplate('mailer/body.html.twig');
 
         $mailer->send($email);
 
