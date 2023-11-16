@@ -1,5 +1,19 @@
+{% apply inline_css(source('@email/reset.css')) %}
+{% apply inline_css(source('@email/email.css')) %}
 
+<img src="{{ email.image('@images/melodica-logo.png') }}"alt="Logo">
 
-<h1><code> Vous avez reçu un mail de {{ email.from[0].address }} </code></h1>
+<div>
+	<h1>
+		<code>
+			Vous avez reçu un mail de
+			<span class="email">{{ email.from[0].address }}</span>
+		</code>
+	</h1>
+	<p>
+		<code>{{ body }}</code>
+	</p>
+</div>
 
-<p><code>{{ body }}</code></p>
+{% endapply %}
+{% endapply %}
