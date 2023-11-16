@@ -20,17 +20,19 @@ class MailerController extends AbstractController
      */
     public function sendMail(Request $request, MailerInterface $mailer): Response
     {
-
+        // on décode le json avec la fonction PHP
+        // ce json est la requête qu'envoi l'utilisateur depuis le front
+        // on récupère l'email de l'utilisateur connecté, le contenu du message qu'il veut envoyer à l'orga ou au groupe, et l'id du destinataire
         $json = json_decode($request->getContent());
-        // dd($json->email);
-        // dd($json);
         
         $email = (new TemplatedEmail())
             ->from($json->email)
+            // email du destinataire (band{id} ou organizer{id})
             ->to($json->recipientEmail)
             ->subject('Vous avez reçu un message de la part d\'un utilisateur de Mélodica !')
-            // ->textTemplate('mailer/body.html.twig');
+            // import du template
             ->htmlTemplate('mailer/body.html.twig')
+            // le contenu du message envoyé par l'utilisateur
             ->context(['body'=>$json->body]);
 
         $mailer->send($email);

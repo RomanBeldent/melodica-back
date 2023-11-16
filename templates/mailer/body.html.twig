@@ -1,12 +1,16 @@
+{# on importe un reset CSS avec twig et en configurant le twig.yaml #}
+{# dans le yaml on définit une annotation (@email) et on vient choisir le fichier que l'on souhaite #}
 {% apply inline_css(source('@email/reset.css')) %}
+{# import du CSS pour les emails #}
 {% apply inline_css(source('@email/email.css')) %}
-
+{# c'est exactement pareil pour l'image, on va modifier le twig.yaml et on lui donne l'annotation (@images) #}
 <img src="{{ email.image('@images/melodica-logo.png') }}"alt="Logo">
 
 <div>
 	<h1>
 		<code>
 			Vous avez reçu un mail de
+			{# email.from est un tableau car il peut contenir plusieurs email, on récupère le tout premier pour l'instant #}
 			<span class="email">{{ email.from[0].address }}</span>
 		</code>
 	</h1>
