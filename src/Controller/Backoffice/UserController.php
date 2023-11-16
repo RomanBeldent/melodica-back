@@ -25,6 +25,7 @@ class UserController extends AbstractController
     public function list(UserRepository $userRepository): Response
     {
         // affichage de la liste des utilisateurs
+        // pour plus de détails se référer à l'API user controller
         return $this->render('user/list.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
@@ -36,6 +37,7 @@ class UserController extends AbstractController
     public function show(User $user): Response
     {
         // affichage d'un utilisateur spécifique par son ID
+        // pour plus de détails se référer à l'API user controller
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
