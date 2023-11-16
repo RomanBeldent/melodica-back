@@ -96,8 +96,9 @@ class BandController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
-                // on delete l'image si il y en a déjà une
+                // on delete l'image si il y en a déjà une (cf App\Backoffice\UserController)
                 $fileUploader->delete($band);
+                // upload de l'image grâce au service FileUploader (cf App\Backoffice\UserController)
                 $picture = $fileUploader->upload($pictureFile);
                 $band->setPicture($picture);
             }
