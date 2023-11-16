@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\User;
 use DateTimeImmutable;
 use App\Repository\UserRepository;
+use App\Service\EmailExists;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,7 +61,7 @@ class UserController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher, UserRepository $userRepository, EmailExists $emailExists): JsonResponse
     {
         // on récupère la requête json
         $json = $request->getContent();
@@ -71,19 +72,8 @@ class UserController extends AbstractController
         $clearPassword = $user->getPassword();
         $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
         $user->setPassword($hashedPassword);
-        // si l'email existe déjà on veut envoyé un message d'erreur
-        // en effet l'email doit être unique donc on va chercher parmis les utilisateurs si l'email existe déjà en BDD
-        //todo service find email exists
-        $emailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
-
-        // si il existe, on envoi une erreur avec une 409, conflict
-        if ($emailExist) {
-            $errorEmail = [
-                'message' => 'Cet email existe déjà !'
-            ];
-            return new JsonResponse($errorEmail, Response::HTTP_CONFLICT);
-        }
-
+        // appel du service d'email déjà existant (se référer à App\Service\EmailExists.php)
+        $emailExists->EmailAlreadyExists($userRepository, $user);
         // si il y a une erreur dans la requête on envoi un erreur 400, bad request
         $errorList = $validator->validate($user);
         if (count($errorList) > 0) {

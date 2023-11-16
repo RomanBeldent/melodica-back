@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use App\Repository\BandRepository;
 use App\Service\SetAddressDepartment;
 use App\Repository\OrganizerRepository;
+use App\Service\EmailExists;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,24 +94,15 @@ class BandController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment, BandRepository $bandRepository): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment, BandRepository $bandRepository, EmailExists $emailExists): JsonResponse
     {
         $json = $request->getContent();
         $band = $serializer->deserialize($json, Band::class, 'json');
 
-        $setAddressDepartment->setDepartmentFromZipcode($band);
-        // si l'email existe déjà on veut envoyé un message d'erreur
-        // en effet l'email doit être unique donc on va chercher parmis les utilisateurs si l'email existe déjà en BDD
-        //todo service find email exists
-        $emailExist = $bandRepository->findOneBy(['email' => $band->getEmail()]);
+        $setAddressDepartment->setDepartmentFromZipcode($band);        
+        // appel du service d'email déjà existant (se référer à App\Service\EmailExists.php)
+        $emailExists->EmailAlreadyExists($bandRepository, $band);
 
-        // si il existe, on envoi une erreur avec une 409, conflict
-        if ($emailExist) {
-            $errorEmail = [
-                'message' => 'Cet email existe déjà !'
-            ];
-            return new JsonResponse($errorEmail, Response::HTTP_CONFLICT);
-        }
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
