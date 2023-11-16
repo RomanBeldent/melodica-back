@@ -7,7 +7,7 @@ POST http://localhost:8080/api/band/
 content-type: application/json
 
 {
-    "name": "Tesat",
+    "name": "Artetetz",
     "description": "Test Band APIa",
     "area": 105,
     "sample": null,

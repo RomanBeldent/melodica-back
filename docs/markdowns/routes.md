@@ -115,6 +115,13 @@
 | /api/type/{id} | DELETE    | Api\Type   | delete | id = \d+   | delete a type      |
 
 
+### Mailer
+
+| url          | Verb HTTP | Controller | Method   | constraint | comment                             |
+| ------------ | --------- | ---------- | -------- | ---------- | ----------------------------------- |
+| /api/mailer/ | POST      | Api\Mailer | sendMail |            | mailer sender to chat between users |
+
+
 ## BackOffice
 
 ### User
