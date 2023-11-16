@@ -1,7 +1,0 @@
-POST http://localhost:8080/api/mailer/
-
-{
-    "email" : "rojobaga@laposte.net",
-    "recipientEmail":"jordan.jacquot@oclock.school",
-    "body":"tu es la plus belle romano"
-}
