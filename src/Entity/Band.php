@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=BandRepository::class)
+ * @UniqueEntity("email", message = "Cet email existe déjà")
  */
 class Band
 {
@@ -33,6 +34,14 @@ class Band
      * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "random_all"})
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @NotBlank
+     * @Assert\Email
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="integer")
@@ -98,11 +107,6 @@ class Band
      * @ORM\OneToMany(targetEntity=Favorite::class, mappedBy="band")
      */
     private $favorites;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
 
     public function __construct()
     {

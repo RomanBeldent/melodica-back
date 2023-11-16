@@ -71,9 +71,9 @@ class UserController extends AbstractController
         $clearPassword = $user->getPassword();
         $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
         $user->setPassword($hashedPassword);
-        $this->addFlash('success', 'Utilisateur ajouté !');
         // si l'email existe déjà on veut envoyé un message d'erreur
         // en effet l'email doit être unique donc on va chercher parmis les utilisateurs si l'email existe déjà en BDD
+        //todo service find email exists
         $emailExist = $userRepository->findOneBy(['email' => $user->getEmail()]);
 
         // si il existe, on envoi une erreur avec une 409, conflict
@@ -93,6 +93,7 @@ class UserController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
 
+        $this->addFlash('success', 'Utilisateur ajouté !');
         return $this->json($user, Response::HTTP_CREATED, [], ["groups" => 'user_create']);
     }
 
