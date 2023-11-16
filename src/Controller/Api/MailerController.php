@@ -22,7 +22,7 @@ class MailerController extends AbstractController
 
         $json = json_decode($request->getContent());
         // dd($json->email);
-        dd($json);
+        // dd($json);
 
         $email = (new Email())
             ->from($json->email)
