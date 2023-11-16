@@ -24,13 +24,14 @@ class MailerController extends AbstractController
         $json = json_decode($request->getContent());
         // dd($json->email);
         // dd($json);
-
+        
         $email = (new TemplatedEmail())
             ->from($json->email)
             ->to($json->recipientEmail)
             ->subject('Vous avez reçu un message de la part d\'un utilisateur de Mélodica !')
-            // ->text($json->body)
-            ->htmlTemplate('mailer/body.html.twig');
+            // ->textTemplate('mailer/body.html.twig');
+            ->htmlTemplate('mailer/body.html.twig')
+            ->context(['body'=>$json->body]);
 
         $mailer->send($email);
 
