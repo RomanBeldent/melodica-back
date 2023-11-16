@@ -9,10 +9,11 @@ POST http://localhost:8080/api/organizer/
 content-type: application/json
 
 {
-    "name": "Adresse test",
+    "name": "Adressae test",
     "description": "Description",
-    "users": [51],
-    "type":  8,
+    "email": "test@gmail.com",
+    "users": [108],
+    "type":  9,
     "address": {
       "street": "24 rue du test POST",
       "zipcode": "43000",

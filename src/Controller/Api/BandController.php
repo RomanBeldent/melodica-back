@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use App\Repository\BandRepository;
 use App\Service\SetAddressDepartment;
 use App\Repository\OrganizerRepository;
+use App\Service\EmailExists;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -93,12 +94,14 @@ class BandController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment, BandRepository $bandRepository, EmailExists $emailExists): JsonResponse
     {
         $json = $request->getContent();
         $band = $serializer->deserialize($json, Band::class, 'json');
 
-        $setAddressDepartment->setDepartmentFromZipcode($band);
+        $setAddressDepartment->setDepartmentFromZipcode($band);        
+        // appel du service d'email déjà existant (se référer à App\Service\EmailExists.php)
+        $emailExists->EmailAlreadyExists($bandRepository, $band);
 
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {

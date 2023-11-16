@@ -46,7 +46,7 @@ class EventController extends AbstractController
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
         $event->setCreatedAt(new DateTimeImmutable());
-      
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -62,6 +62,7 @@ class EventController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
+
                 $picture = $fileUploader->upload($pictureFile);
                 $event->setPicture($picture);
             }
@@ -96,10 +97,15 @@ class EventController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
+                // on delete l'image si il y en a déjà une
+                if (!is_null($event->getPicture())) {
+                    $pictureToBeDeleted = $fileUploader->getTargetDirectory() . '/' . $event->getPicture();
+                    unlink($pictureToBeDeleted);
+                }
                 $picture = $fileUploader->upload($pictureFile);
                 $event->setPicture($picture);
             }
-            
+
             $eventRepository->add($event, true);
             $this->addFlash('success', 'Événement ajouté !');
             return $this->redirectToRoute('back_event_list', [], Response::HTTP_SEE_OTHER);

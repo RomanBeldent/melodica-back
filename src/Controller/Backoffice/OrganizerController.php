@@ -62,6 +62,7 @@ class OrganizerController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
+
                 $picture = $fileUploader->upload($pictureFile);
                 $organizer->setPicture($picture);
             }
@@ -103,6 +104,7 @@ class OrganizerController extends AbstractController
             // déplacer le fichier dans un dossier public/uploads/xxxxPictures
 
             if ($pictureFile) {
+                $fileUploader->delete($organizer);
                 $picture = $fileUploader->upload($pictureFile);
                 $organizer->setPicture($picture);
             }

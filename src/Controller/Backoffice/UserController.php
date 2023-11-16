@@ -80,7 +80,7 @@ class UserController extends AbstractController
                 $user->setPicture($picture);
             }
 
-            // add correspond à persist + flush, le true est une validation
+            // add correspond à persist + flush avec l'entityManager, le true est une validation
             $userRepository->add($user, true);
             $this->addFlash('success', 'Utilisateur ajouté !');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
@@ -113,14 +113,9 @@ class UserController extends AbstractController
             $pictureFile = $form->get('picture')->getData();
 
             if ($pictureFile) {
-                // on delete l'image si il y en a déjà une
-                if (!is_null($user->getPicture())) {
-                    // on stock dans une variable le chemin et le nom de l'ancienne image
-                    $pictureToBeDeleted = $fileUploader->getTargetDirectory() . '/' . $user->getPicture();
-                    // l'image est supprimé grâce à la fonction php unlink
-                    unlink($pictureToBeDeleted);
-                }
-                
+                // on delete l'image si il y en a déjà une grâce à l'appel du service FileUploader
+                $fileUploader->delete($user);
+                // on appelle la méthode upload du service FileUploader
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
             }

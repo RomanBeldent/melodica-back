@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use App\Entity\Organizer;
 use App\Service\SetAddressDepartment;
 use App\Repository\OrganizerRepository;
+use App\Service\EmailExists;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,7 +69,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
+    public function create(Request $request, OrganizerRepository $organizerRepository, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment, EmailExists $emailExists): JsonResponse
     {
         $json = $request->getContent();
         $organizer = $serializer->deserialize($json, Organizer::class, 'json');
@@ -77,6 +78,8 @@ class OrganizerController extends AbstractController
         // dump($organizer);
         // dd(json_decode($json));
         $setAddressDepartment->setDepartmentFromZipcode($organizer);
+
+        $emailExists->EmailAlreadyExists($organizerRepository, $organizer);
 
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
