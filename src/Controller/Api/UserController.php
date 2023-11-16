@@ -28,8 +28,8 @@ class UserController extends AbstractController
     public function list(UserRepository $userRepository): JsonResponse
     {
         // doc: https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
-        // grâce à Doctrine, on peut récupérer facilement une liste de données, ou même une donnée précise (méthode show)
-        // avec la méthode findAll qui est directement intégré dans l'ORM doctrine
+        // grâce à Doctrine (ORM), on peut récupérer facilement une liste de données, ou même une donnée précise (méthode show)
+        // avec la méthode findAll qui est directement intégré dans Doctrine
         // il va chercher dans le répertoire utilisateur qui est relié à l'entité User (anciennement appelé Objet)
         // tous les utilisateurs dans notre BDD (DATABASE_URL dans .env.local)
         // vu que nous sommes dans un controller API: 
@@ -49,7 +49,7 @@ class UserController extends AbstractController
     public function show(User $user): JsonResponse
     {
         // la méthode show va chercher les datas de l'utilisateur correspondant à l'ID dans l'url
-        // grâce à la magie de doctrine on peut directement allé chercher dans l'entité User 
+        // grâce à doctrine on peut directement allé chercher dans l'entité User 
         // il va nous retrouver l'ID qu'on a rentré en paramètre de route en annotations (@Route("{id<\d+>}))
         // cette annotation veut dire qu'on attend un chiffre positif à tout prix (regex)
         // on peut aussi le rentrer de cette manière {id}, mais ça peut créer des conflits si on utilise un string au lieu d'un integer
@@ -80,6 +80,7 @@ class UserController extends AbstractController
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);
         }
 
+        // alternative à la méthode "add" avec le userRepository (se référer à App\Backoffice\UserController method create)
         $entityManager->persist($user);
         $entityManager->flush();
 

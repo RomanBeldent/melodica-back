@@ -80,7 +80,7 @@ class UserController extends AbstractController
                 $user->setPicture($picture);
             }
 
-            // add correspond à persist + flush, le true est une validation
+            // add correspond à persist + flush avec l'entityManager, le true est une validation
             $userRepository->add($user, true);
             $this->addFlash('success', 'Utilisateur ajouté !');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
