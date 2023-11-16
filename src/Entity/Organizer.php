@@ -81,7 +81,7 @@ class Organizer
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="organizer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update","user_show","random_all"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "user_show", "random_all"})
      */
     private $address;
 
