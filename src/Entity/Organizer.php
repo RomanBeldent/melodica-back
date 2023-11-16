@@ -14,6 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass=OrganizerRepository::class)
  * @UniqueEntity("name", message = "Ce nom de groupe ou d'artiste existe déjà")
+ * @UniqueEntity("email", message = "Cet email existe déjà")
  */
 class Organizer
 {
@@ -38,6 +39,14 @@ class Organizer
      * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update", "organizer_update",  "random_all", "organizer_random" ,"user_list", "event_list", "event_show"})
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     * @Assert\Email
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -288,6 +297,18 @@ class Organizer
                 $event->setOrganizer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

@@ -11,6 +11,7 @@ content-type: application/json
 {
     "name": "Adresse test",
     "description": "Description",
+    "email": "test@gmail.com",
     "users": [51],
     "type":  8,
     "address": {

@@ -68,7 +68,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
+    public function create(Request $request, OrganizerRepository $organizerRepository, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
     {
         $json = $request->getContent();
         $organizer = $serializer->deserialize($json, Organizer::class, 'json');
@@ -77,7 +77,18 @@ class OrganizerController extends AbstractController
         // dump($organizer);
         // dd(json_decode($json));
         $setAddressDepartment->setDepartmentFromZipcode($organizer);
+        // si l'email existe déjà on veut envoyé un message d'erreur
+        // en effet l'email doit être unique donc on va chercher parmis les utilisateurs si l'email existe déjà en BDD
+        //todo service find email exists
+        $emailExist = $organizerRepository->findOneBy(['email' => $organizer->getEmail()]);
 
+        // si il existe, on envoi une erreur avec une 409, conflict
+        if ($emailExist) {
+            $errorEmail = [
+                'message' => 'Cet email existe déjà !'
+            ];
+            return new JsonResponse($errorEmail, Response::HTTP_CONFLICT);
+        }
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);

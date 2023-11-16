@@ -13,6 +13,7 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -28,6 +29,10 @@ class OrganizerType extends AbstractType
                 'label' => 'Description',
                 'attr' => [
                 'placeholder' => 'En 2018, j\'ai ouvert mon bar avec mon meilleur ami..',
+            ]])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => 'user@gmail.com',   // chaine de caractères présente dans le champ à titre d'exemple
             ]])
             ->add('website', TextType::class, [
                 'label' => 'Site internet',

@@ -1,39 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Band{% endblock %}
+{% block title %}Band
+{% endblock %}
 
 {% block body %}
 	<div class="d-flex justify-content-between m-3">
-    <h2>Groupe {{ band.name }}</h2>
-    <a href="{{ path('back_band_list') }}" class='mb-3 btn btn-secondary'>Retour</a>
+		<h2>Groupe
+			{{ band.name }}</h2>
+		<a href="{{ path('back_band_list') }}" class='mb-3 btn btn-secondary'>Retour</a>
 	</div>
 	<table class="table table-dark table-striped">
-        <tbody>
-            <tr>
-                <th>#</th>
-                <td>{{ band.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ band.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ band.description }}</td>
-            </tr>
-            <tr>
-                <th>Zone</th>
-                <td>{{ band.area }}</td>
-            </tr>
-            <tr>
-                <th>Echantillon</th>
-                <td>{{ band.sample }}</td>
-            </tr>
+		<tbody>
+			<tr>
+				<th>#</th>
+				<td>{{ band.id }}</td>
+			</tr>
+			<tr>
+				<th>Nom</th>
+				<td>{{ band.name }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ band.description }}</td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td>{{ organizer.email }}</td>
+			</tr>
+			<tr>
+				<th>Zone</th>
+				<td>{{ band.area }}</td>
+			</tr>
+			<tr>
+				<th>Echantillon</th>
+				<td>{{ band.sample }}</td>
+			</tr>
 			<tr>
 				<th>Image</th>
-				<td><a href="{{ asset('uploads/pictures/' ~ band.picture) }}">Voir l'image</a></td>
+				<td>
+					<a href="{{ asset('uploads/pictures/' ~ band.picture) }}">Voir l'image</a>
+				</td>
 			</tr>
-            			<tr>
+			<tr>
 				<th>Voie</th>
 				<td>{{ band.address.street }}</td>
 			</tr>
@@ -45,18 +53,18 @@
 				<th>Ville</th>
 				<td>{{ band.address.city }}</td>
 			</tr>
-            <tr>
-                <th>Créé le</th>
-                <td>{{ band.createdAt ? band.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Mis à jour le</th>
-                <td>{{ band.updatedAt ? band.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+			<tr>
+				<th>Créé le</th>
+				<td>{{ band.createdAt ? band.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Mis à jour le</th>
+				<td>{{ band.updatedAt ? band.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-<a href="{{ path('back_band_edit', {'id': band.id}) }}" class='mb-3 btn btn-warning'>Mettre à jour</a>
+	<a href="{{ path('back_band_edit', {'id': band.id}) }}" class='mb-3 btn btn-warning'>Mettre à jour</a>
 
-    {{ include('band/_delete_form.html.twig') }}
+	{{ include('band/_delete_form.html.twig') }}
 {% endblock %}
