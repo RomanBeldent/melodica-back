@@ -23,9 +23,9 @@
 					<th>#</th>
 					<th>Nom</th>
 					<th class = "d-none d-lg-table-cell">Description</th>
+					<th>Email</th>
 					<th>Zone</th>
 					<th class = "d-none d-lg-table-cell">Echantillon</th>
-
 					<th>Créé le</th>
 					<th>Mis à jour le</th>
 					<th>Actions</th>
@@ -37,6 +37,7 @@
 						<td>{{ band.id }}</td>
 						<td>{{ band.name }}</td>
 						<td class = "d-none d-lg-table-cell">{{ band.description }}</td>
+						<td>{{ band.email }}</td>
 						<td>{{ band.area }}</td>
 						<td class = "d-none d-lg-table-cell">{{ band.sample }}</td>
 						<td>{{ band.createdAt ? band.createdAt|date('Y-m-d H:i:s') : '' }}</td>

@@ -53,7 +53,7 @@ class GenreController extends AbstractController
 
         $entityManager->persist($genre);
         $entityManager->flush();
-        return $this->json($genre, Response::HTTP_CREATED, [], ["groups" => 'genre_create']);
+        return $this->json($genre, Response::HTTP_CREATED, [], ["mailer envoyé"]);
     }
 
     /**

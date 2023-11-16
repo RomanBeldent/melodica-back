@@ -17,12 +17,19 @@ class FileUploader
         $this->slugger = $slugger;
     }
 
+    // doc : https://symfony.com/doc/5.4/controller/upload_file.html
     public function upload(UploadedFile $file): string
     {
+        // on récupère le nom de l'image pur et dur, sans extension
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // on "slug" le fichier, afin d'avoir un nom de fichier propre
+        // il faut que tous les fichiers aient une norme afin de pouvoir correctement les gérer
         $safeFilename = $this->slugger->slug($originalFilename);
+        // on donne un identifiant unique à chaque fichier uploadé
+        // fichier avec nommé aux normes, on ajoute - id unique et . pour finir avec l'extension
         $fileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-
+        // on déplace à le fichier à l'endroit souhaité
+        // le dossier a été définit dans "services.yaml"
         try {
             $file->move($this->getTargetDirectory(), $fileName);
         } catch (FileException $e) {
@@ -36,7 +43,9 @@ class FileUploader
     {
         // on delete l'image si il y en a déjà une
         if (!is_null($entity->getPicture())) {
+            // on stock dans une variable le chemin et le nom de l'ancienne image
             $pictureToBeDeleted = $this->getTargetDirectory() . '/' . $entity->getPicture();
+            // l'image est supprimé grâce à la fonction php unlink
             unlink($pictureToBeDeleted);
         }
     }

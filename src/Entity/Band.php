@@ -2,15 +2,19 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BandRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=BandRepository::class)
+ * @UniqueEntity("email", message = "Cet email existe déjà")
  */
 class Band
 {
@@ -33,6 +37,14 @@ class Band
      * @Groups({"band_list", "band_show", "band_create", "band_update", "event_list", "event_show", "user_list", "random_all"})
      */
     private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @NotBlank
+     * @Assert\Email
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="integer")
@@ -71,7 +83,7 @@ class Band
 
     /**
      * @ORM\OneToOne(targetEntity=Address::class, inversedBy="band", cascade={"persist", "remove"})
-     * @Groups({"band_show", "band_create", "band_update", "user_show"})
+     * @Groups({"band_show", "band_create", "band_update", "user_show","random_all"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $address;
@@ -108,6 +120,7 @@ class Band
         $this->favorites = new ArrayCollection();
         $this->setCreatedAt(new DateTimeImmutable());
     }
+    
     public function __toString()
     {
         return $this->name;
@@ -347,4 +360,16 @@ class Band
 
     //     return $this;
     // }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
 }

@@ -22,8 +22,8 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom',
-                'required' => true
+                'label' => 'Prénom',  
+                'required' => true   // ne peut pas être vide
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
@@ -31,19 +31,19 @@ class UserType extends AbstractType
             ])
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
-                'widget' => 'single_text',
+                'widget' => 'single_text',   // on pourra mettre la date dans un seul champ
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'placeholder' => 'user@gmail.com',
+                    'placeholder' => 'user@gmail.com',   // chaine de caractères présente dans le champ à titre d'exemple
             ]])
             ->add('password', PasswordType::class)
             ->add('phone_number', TextType::class, [
                 'label' => 'Numéro de téléphone',
                 'constraints' => [
             new Length([
-                'min' => 10,
-                'minMessage' => 'Veuillez rentrer un téléphone valide'
+                'min' => 10,    // le numéro de téléphone doit faire au moins 10 caractères
+                'minMessage' => 'Veuillez rentrer un téléphone valide'    // si il fait moins de 10 caractères alors on envoie un message d'erreur à l'utilisateur
             ])
             ]])
             ->add('roles', ChoiceType::class, [
@@ -52,8 +52,8 @@ class UserType extends AbstractType
                         'Moderator' => "ROLE_MANAGER",
                         'User' => "ROLE_USER",
                     ],
-                    'multiple' => true,
-                    'expanded' => true,
+                    'multiple' => true,    // on peut sélectionner plusieurs choix
+                    'expanded' => true,    // si multiple = true alors cela nous donnera un champ sous forme de checkbox
             ])
              ->add('picture', FileType::class, [
                 'label' => 'Photo de profil (jpeg,jpg,png)',

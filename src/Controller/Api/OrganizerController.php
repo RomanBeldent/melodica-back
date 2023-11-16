@@ -6,6 +6,7 @@ use DateTimeImmutable;
 use App\Entity\Organizer;
 use App\Service\SetAddressDepartment;
 use App\Repository\OrganizerRepository;
+use App\Service\EmailExists;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,12 +69,17 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
+    public function create(Request $request, OrganizerRepository $organizerRepository, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment, EmailExists $emailExists): JsonResponse
     {
         $json = $request->getContent();
         $organizer = $serializer->deserialize($json, Organizer::class, 'json');
-
+        
+        //test json decode
+        // dump($organizer);
+        // dd(json_decode($json));
         $setAddressDepartment->setDepartmentFromZipcode($organizer);
+
+        $emailExists->EmailAlreadyExists($organizerRepository, $organizer);
 
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
@@ -105,6 +111,7 @@ class OrganizerController extends AbstractController
         
         $serializer->deserialize($json, Organizer::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $organizer]);
 
+        
         $errorList = $validator->validate($organizer);
         if (count($errorList) > 0) {
             return $this->json($errorList, Response::HTTP_BAD_REQUEST);

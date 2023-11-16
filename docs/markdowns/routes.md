@@ -39,14 +39,16 @@
 
 ### Band
 
-| url              | Verb HTTP | Controller | Method | constraint | comment            |
-| ---------------- | --------- | ---------- | ------ | ---------- | ------------------ |
-| /api/band/       | GET       | Api\Band   | list   |            | band list          |
-| /api/band/{id}   | GET       | Api\Band   | show   | id = \d+   | show specific band |
-| /api/band/random | GET       | Api\Band   | random |            | get a random band  |
-| /api/band/       | POST      | Api\Band   | create |            | create a new band  |
-| /api/band/{id}   | PATCH     | Api\Band   | edit   | id = \d+   | update a band      |
-| /api/band/{id}   | DELETE    | Api\Band   | delete | id = \d+   | delete a band      |
+| url                 | Verb HTTP | Controller | Method    | constraint | comment                         |
+| ------------------- | --------- | ---------- | --------- | ---------- | ------------------------------- |
+| /api/band/          | GET       | Api\Band   | list      |            | band list                       |
+| /api/band/{id}      | GET       | Api\Band   | show      | id = \d+   | show specific band              |
+| /api/band/random    | GET       | Api\Band   | random    |            | get a random band               |
+| /api/band/randomAll | GET       | Api\Band   | randomAll |            | get random bands AND organizers |
+| /api/band/          | POST      | Api\Band   | create    |            | create a new band               |
+| /api/band/{id}      | PATCH     | Api\Band   | edit      | id = \d+   | update a band                   |
+| /api/band/{id}      | DELETE    | Api\Band   | delete    | id = \d+   | delete a band                   |
+
 
 ### Organizer
 
@@ -70,6 +72,18 @@
 | /api/event/{id}   | PATCH     | Api\Event  | edit   | id = \d+   | update a event      |
 | /api/event/{id}   | DELETE    | Api\Event  | delete | id = \d+   | delete a event      |
 
+### Address
+
+| url                    | Verb HTTP | Controller  | Method    | constraint | comment                             |
+| ---------------------- | --------- | ----------- | --------- | ---------- | ----------------------------------- |
+| /api/address/          | GET       | Api\Address | list      |            | address list                        |
+| /api/address/{id}      | GET       | Api\Address | show      | id = \d+   | show specific address               |
+| /api/address/random    | GET       | Api\Address | random    |            | get a random address                |
+| /api/address/randomAll | GET       | Api\Address | randomAll |            | get random addresses AND organizers |
+| /api/address/          | POST      | Api\Address | create    |            | create a new address                |
+| /api/address/{id}      | PATCH     | Api\Address | edit      | id = \d+   | update a address                    |
+| /api/address/{id}      | DELETE    | Api\Address | delete    | id = \d+   | delete a address                    |
+
 ### Genre
 
 | url             | Verb HTTP | Controller | Method | constraint | comment             |
@@ -90,15 +104,22 @@
 | /api/tag/{id} | PATCH     | Api\Tag    | edit   | id = \d+   | update a tag      |
 | /api/tag/{id} | DELETE    | Api\Tag    | delete | id = \d+   | delete a tag      |
 
-### Tag
+### Type
 
-| url               | Verb HTTP | Controller  | Method | constraint | comment               |
-| ----------------- | --------- | ----------- | ------ | ---------- | --------------------- |
-| /api/address/     | GET       | Api\Address | list   |            | address list          |
-| /api/address/{id} | GET       | Api\Address | show   | id = \d+   | show specific address |
-| /api/address/     | POST      | Api\Address | create |            | create a new address  |
-| /api/address/{id} | PATCH     | Api\Address | edit   | id = \d+   | update a address      |
-| /api/address/{id} | DELETE    | Api\Address | delete | id = \d+   | delete a address      |
+| url            | Verb HTTP | Controller | Method | constraint | comment            |
+| -------------- | --------- | ---------- | ------ | ---------- | ------------------ |
+| /api/type/     | GET       | Api\Type   | list   |            | type list          |
+| /api/type/{id} | GET       | Api\Type   | show   | id = \d+   | show specific type |
+| /api/type/     | POST      | Api\Type   | create |            | create a new type  |
+| /api/type/{id} | PATCH     | Api\Type   | edit   | id = \d+   | update a type      |
+| /api/type/{id} | DELETE    | Api\Type   | delete | id = \d+   | delete a type      |
+
+
+### Mailer
+
+| url          | Verb HTTP | Controller | Method   | constraint | comment                             |
+| ------------ | --------- | ---------- | -------- | ---------- | ----------------------------------- |
+| /api/mailer/ | POST      | Api\Mailer | sendMail |            | mailer sender to chat between users |
 
 
 ## BackOffice
@@ -152,6 +173,18 @@
 | /back/event/create    | POST      | Back\Event | create |            | event create : manage form  |
 | /back/event/{id}      | DELETE    | Back\Event | delete | id = \d+   | event delete                |
 
+### Address
+
+| url                     | Verb HTTP | Controller   | Method | constraint | comment                       |
+| ----------------------- | --------- | ------------ | ------ | ---------- | ----------------------------- |
+| /back/address/          | GET       | Back\Address | list   |            | address list                  |
+| /back/address/{id}      | GET       | Back\Address | read   | id = \d+   | address read                  |
+| /back/address/{id}/edit | GET       | Back\Address | edit   | id = \d+   | address edit : display form   |
+| /back/address/{id}/edit | PATCH     | Back\Address | edit   | id = \d+   | address edit : manage form    |
+| /back/address/create    | GET       | Back\Address | create |            | address create : display form |
+| /back/address/create    | POST      | Back\Address | create |            | address create : manage form  |
+| /back/address/{id}      | DELETE    | Back\Address | delete | id = \d+   | address delete                |
+
 ### Genre
 
 | url                   | Verb HTTP | Controller | Method | constraint | comment                     |
@@ -175,3 +208,15 @@
 | /back/tag/create    | GET       | Back\Tag   | create |            | tag create : display form |
 | /back/tag/create    | POST      | Back\Tag   | create |            | tag create : manage form  |
 | /back/tag/{id}      | DELETE    | Back\Tag   | delete | id = \d+   | tag delete                |
+
+### Type
+
+| url                  | Verb HTTP | Controller | Method | constraint | comment                    |
+| -------------------- | --------- | ---------- | ------ | ---------- | -------------------------- |
+| /back/type/          | GET       | Back\Type  | list   |            | type list                  |
+| /back/type/{id}      | GET       | Back\Type  | read   | id = \d+   | type read                  |
+| /back/type/{id}/edit | GET       | Back\Type  | edit   | id = \d+   | type edit : display form   |
+| /back/type/{id}/edit | PATCH     | Back\Type  | edit   | id = \d+   | type edit : manage form    |
+| /back/type/create    | GET       | Back\Type  | create |            | type create : display form |
+| /back/type/create    | POST      | Back\Type  | create |            | type create : manage form  |
+| /back/type/{id}      | DELETE    | Back\Type  | delete | id = \d+   | type delete                |

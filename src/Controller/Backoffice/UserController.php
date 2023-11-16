@@ -24,6 +24,8 @@ class UserController extends AbstractController
      */
     public function list(UserRepository $userRepository): Response
     {
+        // affichage de la liste des utilisateurs
+        // pour plus de détails se référer à l'API user controller
         return $this->render('user/list.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
@@ -34,6 +36,8 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
+        // affichage d'un utilisateur spécifique par son ID
+        // pour plus de détails se référer à l'API user controller
         return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
@@ -44,30 +48,39 @@ class UserController extends AbstractController
      */
     public function create(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, FileUploader $fileUploader): Response
     {
+        // on instancie un nouvel objet User
         $user = new User();
+        // création d'un formulaire UserType qui se base sur l'objet créé et le formulaire "UserType"
         $form = $this->createForm(UserType::class, $user);
-
+        // on récuère les requêtes, càd les données envoyés dans le formulaire
         $form->handleRequest($request);
-
+        // si le formulaire est soumis et qu'il valide, on lui passe des requêtes customisés
         if ($form->isSubmitted() && $form->isValid()) {
-            //password hashing
+            // on va se servir d'un service pour hasher le mdp
+            // on récupère le password en clair de la request
             $clearPassword = $user->getPassword();
+            // on stocke dans une variable le password hashé
             $hashedPassword = $passwordHasher->hashPassword($user, $clearPassword);
+            // on l'assigne à l'objet user->setPassword qui a été envoyé dans request
             $user->setPassword($hashedPassword);
 
             // gestion de l'image qu'on va upload en BDD
+            // dans le formulaire on veut récupérer les datas envoyé
+            // on va avoir besoin notamment du nom de base de l'image (originalName), avec son extension
             $pictureFile = $form->get('picture')->getData();
-
-            // gestion de l'image qu'on va upload en BDD
-            // on fait appel à un service upload, qui va slug le nom du fichier
-            // donner un ID unique à notre image
-            // déplacer le fichier dans un dossier public/uploads/xxxxPictures
-
+            // on fait appel à un service upload (FileUploader), qui va :
+            // 1 récupérer le nom du fichier sans l'extension
+            // 2 slug le nom du fichier
+            // 3 donner un ID unique à notre image
+            // 4 déplacer le fichier dans un dossier public/uploads/xxxxPictures
             if ($pictureFile) {
+                // appel du service upload (se référer à App\Service\FileUploader pour plus de détails)
                 $picture = $fileUploader->upload($pictureFile);
+                // on envoi le nom de l'image en BDD afin de pouvoir la récupérer dans le dossier public/uploads/pictures
                 $user->setPicture($picture);
             }
 
+            // add correspond à persist + flush avec l'entityManager, le true est une validation
             $userRepository->add($user, true);
             $this->addFlash('success', 'Utilisateur ajouté !');
             return $this->redirectToRoute('back_user_list', [], Response::HTTP_SEE_OTHER);
@@ -86,6 +99,7 @@ class UserController extends AbstractController
     public function edit(UserPasswordHasherInterface $passwordHasher, Request $request, User $user, UserRepository $userRepository, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(UserType::class, $user);
+        // vu qu'on fait une update, on ajoute un dateTimeImmutable pour avoir l'heure actuelle de la modif
         $user->setUpdatedAt(new DateTimeImmutable());
 
         // on démappe le champ mdp car on a une gestion spécifique à faire
@@ -98,14 +112,10 @@ class UserController extends AbstractController
             $newPassword = $form->get('password')->getData();
             $pictureFile = $form->get('picture')->getData();
 
-            // gestion de l'image qu'on va upload en BDD
-            // on fait appel à un service upload, qui va slug le nom du fichier
-            // donner un ID unique à notre image
-            // déplacer le fichier dans un dossier public/uploads/xxxxPictures
-
             if ($pictureFile) {
                 // on delete l'image si il y en a déjà une
                 $fileUploader->delete($user);
+
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
             }
@@ -135,7 +145,12 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
+        // doc: https://symfony.com/doc/current/security/csrf.html
+        // TWIG génère un token CSRF stocké dans un champ "hidden"
+        // on récupère le token CSRF envoyé par TWIG (template/user/_delete_form.html.twig)
+        // on vérifie grâce à la fonction isCsrfTokenValid la validité du token
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            // si tout est ok on supprime
             $userRepository->remove($user, true);
         }
         $this->addFlash('success', 'Utilisateur supprimé !');

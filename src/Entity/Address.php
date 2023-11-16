@@ -31,14 +31,14 @@ class Address
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update","user_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update","user_show","random_all"})
      * @Assert\NotBlank
      */
     private $zipcode;
 
     /**
      * @ORM\Column(type="string", length=85)
-     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update","user_show"})
+     * @Groups({"address_list", "address_show", "band_list", "band_show", "band_create", "band_update", "address_create", "address_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "event_list", "event_show", "event_create", "event_update","user_show","random_all"})
      * @Assert\NotBlank
      */
     private $city;

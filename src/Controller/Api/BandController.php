@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use App\Repository\BandRepository;
 use App\Service\SetAddressDepartment;
 use App\Repository\OrganizerRepository;
+use App\Service\EmailExists;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,22 +48,25 @@ class BandController extends AbstractController
      */
     public function random(BandRepository $bandRepository): JsonResponse
     {
+        // récupération de tous les bands existant via fonction findAll
         $bands = $bandRepository->findAll();
+        // si on ne récupère aucun band alors on envoie un message comme quoi il n'y a pas de band dans la Bdd
         if (count($bands) === 0) {
             $errorMessage = [
                 'message' => "No bands in database",
             ];
+        // on retourne la réponse en json
             return new JsonResponse($errorMessage, Response::HTTP_NOT_FOUND);
         }
 
         // on mélange les groupes
         shuffle($bands);
-
+        // on boucle sur le tableau randomBands qui contient les bands stockés dans $bands
         $randomBands = [];
         for ($randomBandToAdd = 1; $randomBandToAdd <= 30; $randomBandToAdd++) {
             $randomBands[] = $bands[$randomBandToAdd];
         }
-
+        // on retourne les données générées en json pour pouvoir l'envoyer au front
         return $this->json([
             'randomBands' => $randomBands], 200, [], ['groups' => 'band_random']);
     }
@@ -75,12 +79,13 @@ class BandController extends AbstractController
         // un tableau de groupes + on limite l'envoie de données
         $bands = $bandRepository->findAll();
         shuffle($bands);
+        // on veut pouvoir n'afficher que les 12 premiers résultats
         $bandsSlice = array_slice($bands,0,12,true);
         // un tableau d'organisateur + on limite l'envoie de données
         $organizers = $organizerRepository->findAll();
         shuffle($organizers);
         $organizersSlice = array_slice($organizers,0,12,true);
-
+        // on envoie nos données en json pour le front
          return $this->json([
             'organizers' => $organizersSlice,
             'bands' => $bandsSlice], 200, [], ['groups' => 'random_all']);
@@ -89,12 +94,14 @@ class BandController extends AbstractController
     /**
      * @Route("/", name="create", methods={"POST"})
      */
-    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, ValidatorInterface $validator, SetAddressDepartment $setAddressDepartment, BandRepository $bandRepository, EmailExists $emailExists): JsonResponse
     {
         $json = $request->getContent();
         $band = $serializer->deserialize($json, Band::class, 'json');
 
-        $setAddressDepartment->setDepartmentFromZipcode($band);
+        $setAddressDepartment->setDepartmentFromZipcode($band);        
+        // appel du service d'email déjà existant (se référer à App\Service\EmailExists.php)
+        $emailExists->EmailAlreadyExists($bandRepository, $band);
 
         $errorList = $validator->validate($band);
         if (count($errorList) > 0) {
