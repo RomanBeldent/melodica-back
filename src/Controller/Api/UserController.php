@@ -26,6 +26,17 @@ class UserController extends AbstractController
      */
     public function list(UserRepository $userRepository): JsonResponse
     {
+        // doc: https://symfony.com/doc/current/doctrine.html#fetching-objects-from-the-database
+        // grâce à Doctrine, on peut récupérer facilement une liste de données, ou même une donnée précise (méthode show)
+        // avec la méthode findAll qui est directement intégré dans l'ORM doctrine
+        // il va chercher dans le répertoire utilisateur qui est relié à l'entité User (anciennement appelé Objet)
+        // tous les utilisateurs dans notre BDD (DATABASE_URL dans .env.local)
+        // vu que nous sommes dans un controller API: 
+        // 1. on retourne du json avec les datas de tous les users
+        // 2. on lui assigne un code HTTP 200 OK
+        // 3. pour finir on assigne un groupe qui va nous servir à choisir ce que l'on veut afficher comme données dans le retour json
+        // ces groupes sont définit dans les entités avec des annotations -> ex: @Groups({"user_list"})
+        // ces données serviront au FRONT et il est très facilement possible de choisir et modifier ce que l'on veut envoyer
         return $this->json([
             'users' => $userRepository->findAll()], 200, [], ['groups' => 'user_list'
         ]);
@@ -36,6 +47,12 @@ class UserController extends AbstractController
      */
     public function show(User $user): JsonResponse
     {
+        // la méthode show va chercher les datas de l'utilisateur correspondant à l'ID dans l'url
+        // grâce à la magie de doctrine on peut directement allé chercher dans l'entité User 
+        // il va nous retrouver l'ID qu'on a rentré en paramètre de route en annotations (@Route("{id<\d+>}))
+        // cette annotation veut dire qu'on attend un chiffre positif à tout prix (regex)
+        // on peut aussi le rentrer de cette manière {id}, mais ça peut créer des conflits si on utilise un string au lieu d'un integer
+        // de cette façon on peut avoir une route user/integer, et une route user/string sans conflit
         return $this->json([
             'user' => $user], 200, [], ['groups' => 'user_show']);
     }

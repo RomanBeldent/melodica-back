@@ -14,10 +14,10 @@ class LoginController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
+        // si mauvais mot de passe ou mauvais email, on envoi un message d'erreur
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
+        // récupération du dernier mail rentré
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('login/index.html.twig', [
             'last_username' => $lastUsername,

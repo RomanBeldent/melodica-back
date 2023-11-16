@@ -148,7 +148,12 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
+        // doc: https://symfony.com/doc/current/security/csrf.html
+        // TWIG génère un token CSRF stocké dans un champ "hidden"
+        // on récupère le token CSRF envoyé par TWIG (template/user/_delete_form.html.twig)
+        // on vérifie grâce à la fonction isCsrfTokenValid la validité du token
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            // si tout est ok on supprime
             $userRepository->remove($user, true);
         }
         $this->addFlash('success', 'Utilisateur supprimé !');
