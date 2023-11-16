@@ -44,7 +44,7 @@ class Organizer
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Email
-     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "band_list", "band_show", "band_create", "band_update"})
+     * @Groups({"user_list", "user_show", "user_create", "user_update", "organizer_list", "organizer_show", "organizer_create", "organizer_update", "band_list", "band_show", "band_create", "band_update"})
      */
     private $email;
 
@@ -87,7 +87,7 @@ class Organizer
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="organizers", cascade={"persist"})
-     * @Groups({"organizer_list", "organizer_show"})
+     * @Groups({"organizer_list", "organizer_show", "organizer_create", "organizer_update"})
      */
     private $users;
 

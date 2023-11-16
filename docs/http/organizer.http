@@ -9,9 +9,9 @@ POST http://localhost:8080/api/organizer/
 content-type: application/json
 
 {
-    "name": "Adressae test",
+    "name": "Adressaae test",
     "description": "Description",
-    "email": "test@gmail.com",
+    "email": "testa@gmail.com",
     "users": [108],
     "type":  9,
     "address": {
