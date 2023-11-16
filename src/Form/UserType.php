@@ -57,17 +57,17 @@ class UserType extends AbstractType
             ])
              ->add('picture', FileType::class, [
                 'label' => 'Photo de profil (jpeg,jpg,png)',
-                'mapped' => false,
+                'mapped' => false,          
                 'required' => false,
                 'constraints' => [
                      new File([
-                        'maxSize' => '2m',
-                        'mimeTypes' => [
+                        'maxSize' => '2m',  // poids maximum du fichier uploadé
+                        'mimeTypes' => [    // les extensions acceptées
                             'image/png',
                             'image/jpeg',
                             'image/webp'
                         ],
-                        'mimeTypesMessage' => 'Veuillez rentrer une image au format JPEG/JPG/PNG',
+                        'mimeTypesMessage' => 'Veuillez rentrer une image au format JPEG/JPG/PNG',  // si une autre extension a été upload on envoie ce message 
                 ])
             ],
         ])
