@@ -14,7 +14,7 @@
 | created_at   | timestamp_immutable |              | NOT NULL, DEFAULT CURRENT_TIMESTAMP | creation date           |
 | updated_at   | timestamp_immutable |              | NULL, DEFAULT CURRENT_TIMESTAMP     | last update             |
 
-# Organizer
+## Organizer
 
 | Table_name     | Data type | Field Length | Constraint                          | Description                                            |
 | -------------- | --------- | ------------ | ----------------------------------- | ------------------------------------------------------ |
@@ -26,7 +26,7 @@
 | created_at     | timestamp |              | NOT NULL, DEFAULT CURRENT_TIMESTAMP | creation date                                          |
 | updated_at     | timestamp |              | NULL, DEFAULT CURRENT_TIMESTAMP     | last update                                            |
 
-# Band
+## Band
 
 | Table_name  | Data type | Field Length | Constraint                          | Description                                                  |
 | ----------- | --------- | ------------ | ----------------------------------- | ------------------------------------------------------------ |
@@ -39,7 +39,7 @@
 | created_at  | timestamp |              | NOT NULL, DEFAULT CURRENT_TIMESTAMP | creation date                                                |
 | updated_at  | timestamp |              | NULL, DEFAULT CURRENT_TIMESTAMP     | last update                                                  |
 
-# Event
+## Event
 
 | Table_name  | Data type | Field Length | Constraint                          | Description             |
 | ----------- | --------- | ------------ | ----------------------------------- | ----------------------- |
@@ -54,7 +54,7 @@
 | created_at  | timestamp |              | NOT NULL, DEFAULT CURRENT_TIMESTAMP | creation date           |
 | updated_at  | timestamp |              | NULL, DEFAULT CURRENT_TIMESTAMP     | last update             |
 
-# Address
+## Address
 
 | Table_name | Data type | Field Length | Constraint | Description                                       |
 | ---------- | --------- | ------------ | ---------- | ------------------------------------------------- |
@@ -64,21 +64,21 @@
 | department | int       | 10           | NOT NULL   | event department 2 (first numbers of zipcode)     |
 
 
-# Genre
+## Genre
 
 | Table_name | Data type | Field Length | Constraint                   | Description |
 | ---------- | --------- | ------------ | ---------------------------- | ----------- |
 | genre_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | genre ID    |
 | name       | varchar   | 50           | NOT NULL                     | genre name  |
 
-# Type
+## Type
 
 | Table_name | Data type | Field Length | Constraint                   | Description                              |
 | ---------- | --------- | ------------ | ---------------------------- | ---------------------------------------- |
 | genre_code | int       | 10           | PRIMAREY KEY, AUTO_INCREMENT | genre ID                                 |
 | name       | varchar   | 50           | NOT NULL                     | type of the organizer (bar, festival...) |
 
-# Tag
+## Tag
 
 
 | Table_name | Data type | Field Length | Constraint                   | Description |
