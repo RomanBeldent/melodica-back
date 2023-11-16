@@ -12,15 +12,15 @@ content-type: application/json
     "area": 105,
     "email": "test@gmail.com",
     "sample": null,
-    "picture": null,
-    "users": [60],
+    "picture": "ezfez.jpeg",
+    "users": [108],
         "address": {
             "street": "24 rue du Test Artiste",
             "zipcode": "99000",
             "city": "ArtisteCity"
         },
-    "genres": [1],
-    "tags": [1]
+    "genres": [17],
+    "tags": [11]
 }
 
 ### Modification d'un groupe
