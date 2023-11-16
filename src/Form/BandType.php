@@ -60,9 +60,11 @@ class BandType extends AbstractType
                     ])
                 ],
             ])
+            // grâce à AddressType on aura un champ pour chaque propriété d'address
             ->add('address', AddressType::class, [
                 'label' => 'Adresse'
             ])
+            // on gère les users associé au groupe , il peut y en avoir un ou plusieurs
             ->add('users', EntityType::class, [
                 'class' => User::class,
                 'label' => 'Utilisateur(s)',

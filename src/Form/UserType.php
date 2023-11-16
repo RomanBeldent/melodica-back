@@ -42,8 +42,8 @@ class UserType extends AbstractType
                 'label' => 'Numéro de téléphone',
                 'constraints' => [
             new Length([
-                'min' => 10,
-                'minMessage' => 'Veuillez rentrer un téléphone valide'
+                'min' => 10,    // le numéro de téléphone doit faire au moins 10 caractères
+                'minMessage' => 'Veuillez rentrer un téléphone valide'    // si il fait moins de 10 caractères alors on envoie un message d'erreur à l'utilisateur
             ])
             ]])
             ->add('roles', ChoiceType::class, [
@@ -52,8 +52,8 @@ class UserType extends AbstractType
                         'Moderator' => "ROLE_MANAGER",
                         'User' => "ROLE_USER",
                     ],
-                    'multiple' => true,
-                    'expanded' => true,
+                    'multiple' => true,    // on peut sélectionner plusieurs choix
+                    'expanded' => true,    // si multiple = true alors cela nous donnera un champ sous forme de checkbox
             ])
              ->add('picture', FileType::class, [
                 'label' => 'Photo de profil (jpeg,jpg,png)',
