@@ -96,10 +96,7 @@ class BandController extends AbstractController
 
             if ($pictureFile) {
                 // on delete l'image si il y en a déjà une
-                if (!is_null($band->getPicture())) {
-                    $pictureToBeDeleted = $fileUploader->getTargetDirectory() . '/' . $band->getPicture();
-                    unlink($pictureToBeDeleted);
-                }
+                $fileUploader->delete($band);
                 $picture = $fileUploader->upload($pictureFile);
                 $band->setPicture($picture);
             }

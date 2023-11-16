@@ -21,7 +21,7 @@ class FileUploader
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
-        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+        $fileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
 
         try {
             $file->move($this->getTargetDirectory(), $fileName);
@@ -30,6 +30,15 @@ class FileUploader
         }
 
         return $fileName;
+    }
+
+    public function delete($entity)
+    {
+        // on delete l'image si il y en a déjà une
+        if (!is_null($entity->getPicture())) {
+            $pictureToBeDeleted = $this->getTargetDirectory() . '/' . $entity->getPicture();
+            unlink($pictureToBeDeleted);
+        }
     }
 
     public function getTargetDirectory(): string

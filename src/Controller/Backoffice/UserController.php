@@ -105,11 +105,7 @@ class UserController extends AbstractController
 
             if ($pictureFile) {
                 // on delete l'image si il y en a déjà une
-                if (!is_null($user->getPicture())) {
-                    $pictureToBeDeleted = $fileUploader->getTargetDirectory() . '/' . $user->getPicture();
-                    unlink($pictureToBeDeleted);
-                }
-
+                $fileUploader->delete($user);
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
             }
