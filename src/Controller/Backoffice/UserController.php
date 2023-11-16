@@ -113,9 +113,9 @@ class UserController extends AbstractController
             $pictureFile = $form->get('picture')->getData();
 
             if ($pictureFile) {
-                // on delete l'image si il y en a déjà une
+                // on delete l'image si il y en a déjà une grâce à l'appel du service FileUploader
                 $fileUploader->delete($user);
-
+                // on appelle la méthode upload du service FileUploader
                 $picture = $fileUploader->upload($pictureFile);
                 $user->setPicture($picture);
             }
