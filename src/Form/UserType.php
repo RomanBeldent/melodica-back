@@ -22,8 +22,8 @@ class UserType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom',
-                'required' => true
+                'label' => 'Prénom',  
+                'required' => true   // ne peut pas être vide
             ])
             ->add('lastname', TextType::class, [
                 'label' => 'Nom',
@@ -31,11 +31,11 @@ class UserType extends AbstractType
             ])
             ->add('birthday', BirthdayType::class, [
                 'label' => 'Date de naissance',
-                'widget' => 'single_text',
+                'widget' => 'single_text',   // on pourra mettre la date dans un seul champ
             ])
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'placeholder' => 'user@gmail.com',
+                    'placeholder' => 'user@gmail.com',   // chaine de caractères présente dans le champ à titre d'exemple
             ]])
             ->add('password', PasswordType::class)
             ->add('phone_number', TextType::class, [

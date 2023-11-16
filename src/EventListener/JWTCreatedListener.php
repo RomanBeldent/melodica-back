@@ -8,7 +8,8 @@ use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
 class JWTCreatedListener
 {
-
+// ici on gère l'envoie de donnée via le token JWT qui contiendra notamment ici
+// l'id de l'utilisateur, le prénom , le nom , l'email et sa photo de profil
     public function onJWTCreated(JWTCreatedEvent $event)
     {
 

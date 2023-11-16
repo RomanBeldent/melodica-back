@@ -49,7 +49,7 @@ class BandController extends AbstractController
     {
         // récupération de tous les bands existant via fonction findAll
         $bands = $bandRepository->findAll();
-        // si on ne récupère aucun band alors on envoie un message comme quoireprésenteil n'y a pas de band dans la Bdd
+        // si on ne récupère aucun band alors on envoie un message comme quoi il n'y a pas de band dans la Bdd
         if (count($bands) === 0) {
             $errorMessage = [
                 'message' => "No bands in database",
