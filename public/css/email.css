@@ -1,0 +1,21 @@
+h1 {
+    font-size: 26px;
+}
+
+div {
+    font-family: "Arial", sans-serif;
+    padding: 16px;
+}
+
+p {
+    font-size: 22px;
+    padding-left: 30px;
+    padding-top: 40px;
+    width: 50%;
+}
+
+img {
+    width: 600px;
+    height: 170px;
+    margin-bottom: 26px;
+}
